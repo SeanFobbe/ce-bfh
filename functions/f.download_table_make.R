@@ -34,8 +34,11 @@ f.download_table_make <- function(sleep.min = 0,
 
     
     ## Run Extraction
-    result.list <- lapply(url.all, f.extract_meta_bfh)
-    result.dt <- rbindlist(result.list)
+    list.result <- lapply(url.all,
+                          f.extract_meta_bfh,
+                          sleep.min = sleep.min,
+                          sleep.max = sleep.max)
+    dt.result <- rbindlist(result.list)
 
 
 url.all
@@ -54,6 +57,21 @@ url.all
 
 
 
+f.linkextract <- function(URL){
+    tryCatch({
+        
+        temp <- rvest::read_html(URL)
+        temp <- rvest::html_nodes(temp, "a")
+        rvest::html_attr(temp, 'href')
+
+    },
+        error = function(cond) {
+            return(NA)}
+        )
+}
+
+
+
 
 
 f.extract_meta_bfh <- function(url,
@@ -61,52 +79,59 @@ f.extract_meta_bfh <- function(url,
                                sleep.max = 1,
                                verbose = TRUE){
 
-    html <- rvest::read_html(url)
-    
-    release <- rvest::html_nodes(html, "[data-label='Veröffentlichung am']")
-    release <- rvest::html_text(release, trim = TRUE)
-
-
-    slg <- rvest::html_nodes(html, "[data-label='V/NV']")
-    slg <- rvest::html_text(slg, trim = TRUE)
-
-    spruchkoerper_db <- rvest::html_nodes(html, "[data-label='Senat']")
-    spruchkoerper_db <- rvest::html_text(spruchkoerper_db, trim = TRUE)
-
-    datum <- rvest::html_nodes(html, "[data-label='Entscheidung am']")
-    datum <- rvest::html_text(datum, trim = TRUE)
-
-
-    az <- rvest::html_nodes(html, "[data-label='Aktenzeichen']")
-    az <- rvest::html_text(az, trim = TRUE)
-
-    titel <- rvest::html_nodes(html, "[data-label='Titel']")
-    titel <- rvest::html_text(titel, trim = TRUE)
-
-    url_html <- rvest::html_nodes(html, "[data-label='Titel']")
-    url_html <- rvest::html_nodes(url_html, "a")
-    url_html <- rvest::html_attr(url_html, name = "href")
-    url_html <- paste0("https://www.bundesfinanzhof.de/", url_html)
-    
-
-    dt.return <- data.table::data.table(release = release,
-                                        slg = slg,
-                                        spruchkoerper_db = spruchkoerper_db,
-                                        datum = datum,
-                                        az = az,
-                                        titel = titel,
-                                        url_html = url_html)
-
-    if(verbose == TRUE){
+    tryCatch({
         
-        message(paste("Page", url, "completed."))
+        html <- rvest::read_html(url)
+        
+        release <- rvest::html_nodes(html, "[data-label='Veröffentlichung am']")
+        release <- rvest::html_text(release, trim = TRUE)
 
-    }
 
-    
-    Sys.sleep(runif(1, sleep.min, sleep.max))
+        slg <- rvest::html_nodes(html, "[data-label='V/NV']")
+        slg <- rvest::html_text(slg, trim = TRUE)
 
-    return(dt.return)
+        spruchkoerper_db <- rvest::html_nodes(html, "[data-label='Senat']")
+        spruchkoerper_db <- rvest::html_text(spruchkoerper_db, trim = TRUE)
+
+        datum <- rvest::html_nodes(html, "[data-label='Entscheidung am']")
+        datum <- rvest::html_text(datum, trim = TRUE)
+
+
+        az <- rvest::html_nodes(html, "[data-label='Aktenzeichen']")
+        az <- rvest::html_text(az, trim = TRUE)
+
+        titel <- rvest::html_nodes(html, "[data-label='Titel']")
+        titel <- rvest::html_text(titel, trim = TRUE)
+
+        url_html <- rvest::html_nodes(html, "[data-label='Titel']")
+        url_html <- rvest::html_nodes(url_html, "a")
+        url_html <- rvest::html_attr(url_html, name = "href")
+        url_html <- paste0("https://www.bundesfinanzhof.de/", url_html)
+        
+
+        dt.return <- data.table::data.table(release = release,
+                                            slg = slg,
+                                            spruchkoerper_db = spruchkoerper_db,
+                                            datum = datum,
+                                            az = az,
+                                            titel = titel,
+                                            url_html = url_html)
+
+        if(verbose == TRUE){
+            
+            message(paste("Page", url, "completed."))
+
+        }
+
+        
+        Sys.sleep(runif(1, sleep.min, sleep.max))
+
+        return(dt.return)
+
+    },
+    error = function(cond) {
+        return(NA)}
+    )
 
 }
 
