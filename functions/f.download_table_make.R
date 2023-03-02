@@ -7,8 +7,8 @@
 
 
 
-f.download_table_make <- function(sleep.min = 0,
-                                  sleep.max = 1,
+f.download_table_make <- function(sleep.min = 0.5,
+                                  sleep.max = 2,
                                   debug.toggle = FALSE,
                                   debug.pages = 20){
 
@@ -38,18 +38,22 @@ f.download_table_make <- function(sleep.min = 0,
                           f.extract_meta_bfh,
                           sleep.min = sleep.min,
                           sleep.max = sleep.max)
-    dt.result <- rbindlist(result.list)
+    dt.return <- rbindlist(result.list)
 
-
-url.all
 
     
-    release <- as.Date(release, format = "%d.%m.%Y")
 
-    datum <- as.Date(datum, format = "%d.%m.%Y")
+    ## Clean Results
+    
+    dt.return$release <- as.Date(dt.return$release, format = "%d.%m.%Y")
 
-    bfh_id <- gsub(".*\\/(STR.*)\\/", "\\1", url_html)
+    dt.return$datum <- as.Date(dt.return$datum, format = "%d.%m.%Y")
 
+    dt.return$bfh_id <- gsub(".*\\/(STR.*)\\/", "\\1", dt.return$url_html)
+
+
+
+    return(dt.return)
 
 
     
@@ -75,8 +79,8 @@ f.linkextract <- function(URL){
 
 
 f.extract_meta_bfh <- function(url,
-                               sleep.min = 0,
-                               sleep.max = 1,
+                               sleep.min = 0.5,
+                               sleep.max = 2,
                                verbose = TRUE){
 
     tryCatch({
