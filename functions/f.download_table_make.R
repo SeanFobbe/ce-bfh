@@ -1,9 +1,7 @@
 
 
 
-
-# notes: offsets beyond 10000 all error? also on browser?
-
+#' Note: offsets of 10000 and more yield errors. Need to reverse list direction to acquire additional decisions.
 
 
 
@@ -12,39 +10,65 @@ f.download_table_make <- function(sleep.min = 0.5,
                                   debug.toggle = FALSE,
                                   debug.pages = 20){
 
+
+
+    ## Calculate Offsets
+    
     offset.url <- f.linkextract("https://www.bundesfinanzhof.de/de/entscheidungen/entscheidungen-online/")
     offset.url <- grep("search-form", offset.url, value = TRUE)
     
     offset.raw <- gsub(".*Boffset%5D=([0-9]+)#search-form.*", "\\1", offset.url)        
     offset.max <- max(as.integer(offset.raw))
-    offset.all <- seq(0, offset.max, 10)
-
+    
+    offset.descending <- seq(0, 9900, 10)
+    offset.ascending <- seq(0, offset.max - 10000 + 50, 10)
+    
 
     if(debug.toggle == TRUE){
 
-    offset.all <- sort(sample(offset.all, debug.pages))
+        offset.descending <- sort(sample(offset.descending, debug.pages))
         
     }
-    
-    
-    url.all <- paste0("https://www.bundesfinanzhof.de/de/entscheidungen/entscheidungen-online/?tx_eossearch_eossearch[offset]=",
-                      offset.all,
-                      "#search-form")
-
 
 
     
-    ## Run Extraction
-    list.result <- lapply(url.all,
-                          f.extract_meta_bfh,
-                          sleep.min = sleep.min,
-                          sleep.max = sleep.max)
+    ## Create URLs
     
-    dt.result <- data.table::rbindlist(list.result)
+    url.descending <- paste0("https://www.bundesfinanzhof.de/de/entscheidungen/entscheidungen-online/?tx_eossearch_eossearch[offset]=",
+                             offset.descending,
+                             "#search-form")
 
-    dt.return <- unique(dt.result)
+
+    url.ascending <- paste0("https://www.bundesfinanzhof.de/de/entscheidungen/entscheidungen-online/?tx_eossearch_eossearch%5BdateRange%5D%5Bend%5D=02.03.2023&tx_eossearch_eossearch%5BdateRange%5D%5Bstart%5D=01.01.2010&tx_eossearch_eossearch%5Boffset%5D=",
+                            offset.ascending,                          "&tx_eossearch_eossearch%5BsearchTerms%5D%5Baktenzeichen%5D=&tx_eossearch_eossearch%5BsearchTerms%5D%5Becli%5D=&tx_eossearch_eossearch%5BsearchTerms%5D%5Bnorm%5D=&tx_eossearch_eossearch%5BsearchTerms%5D%5BsearchTerm%5D=&tx_eossearch_eossearch%5BsearchTerms%5D%5Bsorting%5D=publishingDateAsc&tx_eossearch_eossearch%5B__referrer%5D%5B%40action%5D=index&tx_eossearch_eossearch%5B__referrer%5D%5B%40controller%5D=Standard&tx_eossearch_eossearch%5B__referrer%5D%5B%40extension%5D=&tx_eossearch_eossearch%5B__referrer%5D%5B%40request%5D=%7B%22%40extension%22%3Anull%2C%22%40controller%22%3A%22Standard%22%2C%22%40action%22%3A%22index%22%7D1716fe92177ae4bddcb343e9b5aa7abccc8ba164&tx_eossearch_eossearch%5B__referrer%5D%5Barguments%5D=YTowOnt91322d93bbcf98b6ec3afd3d809b3d4993a5b1aa1&tx_eossearch_eossearch%5B__trustedProperties%5D=%7B%22searchTerms%22%3A%7B%22aktenzeichen%22%3A1%2C%22ecli%22%3A1%2C%22norm%22%3A1%2C%22searchTerm%22%3A1%2C%22sorting%22%3A1%7D%2C%22dateRange%22%3A%7B%22start%22%3A1%2C%22end%22%3A1%7D%7D3fb8b123566ceaf4e15c2270602193b86fb9f80c&cHash=2b3bc2a63c3ca7f099e90e5c9762ebe7#search-form")
+
+
+    
+    ## Run Extraction: Descending
+    list.descending <- lapply(url.descending,
+                              f.extract_meta_bfh,
+                              sleep.min = sleep.min,
+                              sleep.max = sleep.max)
+    
+    dt.descending <- data.table::rbindlist(list.descending)
+
+
+    ## Run Extraction: Ascending
+    list.ascending <- lapply(url.ascending,
+                             f.extract_meta_bfh,
+                             sleep.min = sleep.min,
+                             sleep.max = sleep.max)
+    
+    dt.ascending <- data.table::rbindlist(list.ascending)
+
+
+    ## Combine Results
+    dt.return <- rbind(dt.descending,
+                       dt.ascending)
+    
+    
+    dt.return <- unique(dt.return)
     dt.return <- dt.return[!is.na(datum)]
-
 
     return(dt.return)
 
