@@ -1,0 +1,7 @@
+services:
+  ce-bfh:
+    container_name: ce-bfh
+    image: ce-bfh:4.2.2
+    tty: true
+    volumes:
+      - .:/ce-bfh:z
