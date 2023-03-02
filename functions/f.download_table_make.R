@@ -32,6 +32,7 @@ f.download_table_make <- function(sleep.min = 0.5,
                       "#search-form")
 
 
+
     
     ## Run Extraction
     list.result <- lapply(url.all,
@@ -39,9 +40,10 @@ f.download_table_make <- function(sleep.min = 0.5,
                           sleep.min = sleep.min,
                           sleep.max = sleep.max)
     
-    dt.return <- data.table::rbindlist(list.result)
+    dt.result <- data.table::rbindlist(list.result)
 
-
+    dt.return <- unique(dt.result)
+    dt.return <- dt.return[!is.na(datum)]
 
 
     return(dt.return)
