@@ -2,9 +2,8 @@
 
 
 
-#' === Packages ===
-#' rvest
-#' 
+# notes: offsets beyond 10000 all error? also on browser?
+
 
 
 
@@ -32,12 +31,14 @@ f.download_table_make <- function(sleep.min = 0,
                       offset.all,
                       "#search-form")
 
+
     
-    result.list <- lapply(url.all, f.extract_meta_bfh)
+    ## Run Extraction
+    result.list <- lapply(url.all[1:4], f.extract_meta_bfh)
     result.dt <- rbindlist(result.list)
 
 
-
+url.all
 
     
     release <- as.Date(release, format = "%d.%m.%Y")
@@ -58,7 +59,7 @@ f.download_table_make <- function(sleep.min = 0,
 f.extract_meta_bfh <- function(url,
                                sleep.min = 0,
                                sleep.max = 1,
-                               verbose = FALSE){
+                               verbose = TRUE){
 
     html <- rvest::read_html(url)
     
