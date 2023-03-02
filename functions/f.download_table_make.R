@@ -20,7 +20,7 @@ f.download_table_make <- function(sleep.min = 0.5,
     offset.all <- seq(0, offset.max, 10)
 
 
-    if(debug == debug.toggle){
+    if(debug.toggle == TRUE){
 
     offset.all <- sort(sample(offset.all, debug.pages))
         
@@ -38,7 +38,8 @@ f.download_table_make <- function(sleep.min = 0.5,
                           f.extract_meta_bfh,
                           sleep.min = sleep.min,
                           sleep.max = sleep.max)
-    dt.return <- rbindlist(result.list)
+    
+    dt.return <- data.table::rbindlist(list.result)
 
 
 
