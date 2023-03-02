@@ -9,9 +9,12 @@
 
 f.linkextract <- function(URL){
     tryCatch({
-        rvest::read_html(URL) %>%
-            rvest::html_nodes("a")%>%
-            rvest::html_attr('href')},
+        
+        temp <- rvest::read_html(URL)
+        temp <- rvest::html_nodes(temp, "a")
+        rvest::html_attr(temp, 'href')
+
+    },
         error = function(cond) {
             return(NA)}
         )
