@@ -9,7 +9,7 @@
 
 f.download_table_make <- function(sleep.min = 0,
                                   sleep.max = 1,
-                                  debug = FALSE,
+                                  debug.toggle = FALSE,
                                   debug.pages = 20){
 
     offset.url <- f.linkextract("https://www.bundesfinanzhof.de/de/entscheidungen/entscheidungen-online/")
@@ -20,7 +20,7 @@ f.download_table_make <- function(sleep.min = 0,
     offset.all <- seq(0, offset.max, 10)
 
 
-    if(debug == TRUE){
+    if(debug == debug.toggle){
 
     offset.all <- sort(sample(offset.all, debug.pages))
         
@@ -34,7 +34,7 @@ f.download_table_make <- function(sleep.min = 0,
 
     
     ## Run Extraction
-    result.list <- lapply(url.all[1:4], f.extract_meta_bfh)
+    result.list <- lapply(url.all, f.extract_meta_bfh)
     result.dt <- rbindlist(result.list)
 
 
