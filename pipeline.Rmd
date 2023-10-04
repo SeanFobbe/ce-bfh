@@ -348,7 +348,18 @@ tar_target(dt.download.manifest.raw,
 ```
 
 
-### Datenbankseiten als HTML abrufen
+### Download-Manifest finalisieren
+
+Bei der Finalisierung werden einige Korrekturen und Tests vorgenommen.
+
+```{targets tar.download.manifest.final}
+tar_target(dt.download.manifest.final,
+           f.download_manifest_finalize(dt.download.manifest.raw))
+```
+
+
+
+### Entscheidungen als HTML abrufen
 
 
 <!-- Note: switch source to final download manifest later -->
@@ -356,8 +367,8 @@ tar_target(dt.download.manifest.raw,
 
 ```{targets tar.download.html}
 tar_target(files.html,
-                f.download(url = dt.download.manifest.raw$url_html,
-                           filename = basename(dt.download.manifest.raw$url_html),
+                f.download(url = dt.download.manifest.final$url_html,
+                           filename = paste0(dt.download.manifest.raw$bfh_id, ".html)",
                            dir = "files/html",
                            sleep.min = 0.2,
                            sleep.max = 0.5,
