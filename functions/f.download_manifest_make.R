@@ -124,7 +124,7 @@ f.extract_meta_bfh <- function(url,
         url_html <- rvest::html_nodes(html, "[data-label='Titel']")
         url_html <- rvest::html_nodes(url_html, "a")
         url_html <- rvest::html_attr(url_html, name = "href")
-        url_html <- paste0("https://www.bundesfinanzhof.de/", url_html)
+        url_html <- paste0("https://www.bundesfinanzhof.de", url_html)
         
 
         dt.return <- data.table::data.table(release = release,
