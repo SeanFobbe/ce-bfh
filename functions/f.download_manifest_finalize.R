@@ -12,15 +12,19 @@
 f.download_manifest_finalize <- function(x){
 
 
-    ## Clean Results
+    ## Copy table
+
+    dt.final <- x
+
+    ## Clean Dates
+    dt.final$veroeffentlichung <- as.Date(dt.final$veroeffentlichung, format = "%d.%m.%Y")
+    dt.final$datum <- as.Date(dt.final$datum, format = "%d.%m.%Y")
+
+    ## Create BFH ID
+    dt.final$bfh_id <- basename(dt.final$url_html)
+
+
     
-    dt.return$release <- as.Date(dt.return$release, format = "%d.%m.%Y")
-
-    dt.return$datum <- as.Date(dt.return$datum, format = "%d.%m.%Y")
-
-    dt.return$bfh_id <- gsub(".*\\/(STR.*)\\/", "\\1", dt.return$url_html)
-
-
 
     ## Tests
     test_that("Class is correct.", {
@@ -28,16 +32,34 @@ f.download_manifest_finalize <- function(x){
     })
    
     test_that("BFH IDs are unique.", {
-        expect_equal(uniqueN(bfh_id),  x[,.N])
+        expect_equal(uniqueN(dt.final$bfh_id),  x[,.N])
     })
 
     test_that("Dates are in ISO format.", {
-        expect_equal(uniqueN(bfh_id),  x[,.N])
+        expect_true(all(grepl("[0-9]{4}-[0-9]{2}-[0-9]{2}", dt.final$veroeffentlichung)))
+        expect_true(all(grepl("[0-9]{4}-[0-9]{2}-[0-9]{2}", dt.final$datum)))
     })
 
+    ## test_that("Docket numbers are schema-compliant.", {
+    ##     test.docket <- grep("[IVX]{1,5} +[RSB] +[0-9]+/[0-9]+",
+    ##                         dt.final$az,
+    ##                         invert = TRUE,
+    ##                         value = TRUE)
+    ##     expect_length(test.docket, 0)
+    ## })
+
+    ## print(test.docket)
+
+    ## if (length(regex.test) != 0){
+
+    ##     warning("Folgende Aktenzeichen sind fehlerhaft:")
+    ##     warning(test.docket)
+    ## }
+
+    
     
 
-    return(dt.return)
+    return(dt.final)
 
 
 }
