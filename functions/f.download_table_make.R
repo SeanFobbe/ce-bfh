@@ -145,5 +145,7 @@ f.extract_meta_bfh <- function(url,
 
 
 
+## DEBUGGING
 
 
+# test <- f.download_table_make()
