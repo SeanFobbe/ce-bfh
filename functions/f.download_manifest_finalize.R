@@ -3,7 +3,7 @@
 
 
 
-f.download_table_finalize <- function(x){
+f.download_manifest_finalize <- function(x){
 
 
         
