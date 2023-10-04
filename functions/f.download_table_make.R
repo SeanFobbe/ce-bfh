@@ -13,7 +13,7 @@
 
 
 
-f.download_table_make <- function(sleep.min = 0.5,
+f.download_manifest_make <- function(sleep.min = 0.5,
                                   sleep.max = 2,
                                   verbose = FALSE,
                                   debug.toggle = FALSE,
@@ -159,4 +159,4 @@ f.extract_meta_bfh <- function(url,
 ## DEBUGGING
 
 
-# test <- f.download_table_make(verbose = TRUE)
+# test <- f.download_manifest_make(verbose = TRUE)
