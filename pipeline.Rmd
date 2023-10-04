@@ -344,9 +344,10 @@ tar_target(download.manifest.raw,
                                     sleep.max = 2,
                                     verbose = FALSE,
                                     debug.toggle = config$debug$toggle,
-                                    debug.pages = config$debug$pages),
-           format = "file")
+                                    debug.pages = config$debug$pages))
 ```
+
+
 
 
 
