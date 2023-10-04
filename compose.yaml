@@ -1,7 +1,11 @@
+version: "3.7"
+
 services:
   ce-bfh:
     container_name: ce-bfh
     image: ce-bfh:4.2.2
     tty: true
+    tmpfs: /tmp
     volumes:
-      - .:/ce-bfh:z
+      - .:/ce-bfh
+      - ./etc/gitconfig:/etc/gitconfig
