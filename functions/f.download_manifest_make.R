@@ -101,8 +101,8 @@ f.extract_meta_bfh <- function(url,
         
         html <- rvest::read_html(url)
         
-        release <- rvest::html_nodes(html, "[data-label='Veröffentlichung am']")
-        release <- rvest::html_text(release, trim = TRUE)
+        veroeffentlichung <- rvest::html_nodes(html, "[data-label='Veröffentlichung am']")
+        veroeffentlichung <- rvest::html_text(veroeffentlichung, trim = TRUE)
 
 
         slg <- rvest::html_nodes(html, "[data-label='V/NV']")
@@ -127,7 +127,7 @@ f.extract_meta_bfh <- function(url,
         url_html <- paste0("https://www.bundesfinanzhof.de", url_html)
         
 
-        dt.return <- data.table::data.table(release = release,
+        dt.return <- data.table::data.table(veroeffentlichung = veroeffentlichung,
                                             slg = slg,
                                             spruchkoerper_db = spruchkoerper_db,
                                             datum = datum,
