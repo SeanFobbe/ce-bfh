@@ -15,7 +15,7 @@ RUN pip install -r requirements-python.txt
 
 # R layer
 COPY etc/requirements-R.txt .
-RUN Rscript install.packages(readLines(requirements-R.txt))
+RUN Rscript install.packages(readLines("requirements-R.txt"))
 
 
 
