@@ -1,4 +1,12 @@
-
+#' f.download_manifest_make
+#'
+#' Create raw download manifest for Bundesfinanzhof (BFH) decisions.
+#'
+#' @param sleep.min Numeric. Minimum time to sleep between requests.
+#' @param sleep.max Numeric. Maximum time to sleep between requests.
+#' @param verbose Logical. Whether to print a message after each request. Defaults to FALSE.
+#' @param debug.toggle Logical. Whether to collect only a random subset of decisions.
+#' @param debug.pages Integer. The number of pages to collect. Each page contains 10 decisions.
 
 
 #' Note: offsets of 10000 and more yield errors. Need to reverse list direction to acquire additional decisions.
