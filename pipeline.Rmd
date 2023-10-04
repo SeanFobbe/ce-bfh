@@ -339,7 +339,7 @@ Das Download-Manifest wird aus den Metadaten der Datenbank des BFH erstellt und 
 
 
 ```{targets tar.download.manifest.raw}
-tar_target(download.manifest.raw,
+tar_target(dt.download.manifest.raw,
            f.download_manifest_make(sleep.min = 0.5,
                                     sleep.max = 2,
                                     verbose = FALSE,
@@ -347,6 +347,29 @@ tar_target(download.manifest.raw,
                                     debug.pages = config$debug$pages))
 ```
 
+
+### Datenbankseiten als HTML abrufen
+
+
+<!-- Note: switch source to final download manifest later -->
+
+
+```{targets tar.download.html}
+tar_target(files.html,
+                f.download(url = dt.download.manifest.raw$url_html,
+                           filename = basename(dt.download.manifest.raw$url_html),
+                           dir = "files/html",
+                           sleep.min = 0.2,
+                           sleep.max = 0.5,
+                           retries = 3,
+                           retry.sleep.min = 2,
+                           retry.sleep.max = 5,
+                           timeout = config$download$timeout,
+                           debug.toggle = FALSE,
+                           debug.files = 500),
+                format = "file")
+
+```
 
 
 
