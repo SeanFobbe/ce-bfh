@@ -557,81 +557,81 @@ kable(table.size,
 
 
 
-## PDF-Dateien (MB)
+<!-- ## PDF-Dateien (MB) -->
 
-```{r}
-tar_load(files.pdf)
-pdf.MB <- file.size(files.pdf) / 10^6
-sum(pdf.MB)
-```
-
-
-## TXT-Dateien (MB)
+<!-- ```{r} -->
+<!-- tar_load(files.pdf) -->
+<!-- pdf.MB <- file.size(files.pdf) / 10^6 -->
+<!-- sum(pdf.MB) -->
+<!-- ``` -->
 
 
-```{r}
-tar_load(files.txt)
-txt.MB <- file.size(files.txt) / 10^6
-sum(txt.MB)
-```
+<!-- ## TXT-Dateien (MB) -->
 
 
+<!-- ```{r} -->
+<!-- tar_load(files.txt) -->
+<!-- txt.MB <- file.size(files.txt) / 10^6 -->
+<!-- sum(txt.MB) -->
+<!-- ``` -->
 
 
 
 
 
-# Kryptographische Signaturen
-
-## Signaturen laden
-
-```{r}
-tar_load(hashes)
-```
 
 
-## Leerzeichen hinzufügen um bei SHA3-512 Zeilenumbruch zu ermöglichen
+<!-- # Kryptographische Signaturen -->
 
-Hierbei handelt es sich lediglich um eine optische Notwendigkeit. Die normale 128 Zeichen lange Zeichenfolge von SHA3-512-Signaturen wird ansonsten nicht umgebrochen und verschwindet über die Seitengrenze. Das Leerzeichen erlaubt den automatischen Zeilenumbruch und damit einen für Menschen sinnvoll lesbaren Abdruck im Codebook. Diese Variante wird nur zur Anzeige verwendet und danach verworfen.
+<!-- ## Signaturen laden -->
 
-```{r}
-hashes$sha3.512 <- paste(substr(hashes$sha3.512, 1, 64),
-                              substr(hashes$sha3.512, 65, 128))
-```
-
+<!-- ```{r} -->
+<!-- tar_load(hashes) -->
+<!-- ``` -->
 
 
-## In Bericht anzeigen
+<!-- ## Leerzeichen hinzufügen um bei SHA3-512 Zeilenumbruch zu ermöglichen -->
 
-```{r}
+<!-- Hierbei handelt es sich lediglich um eine optische Notwendigkeit. Die normale 128 Zeichen lange Zeichenfolge von SHA3-512-Signaturen wird ansonsten nicht umgebrochen und verschwindet über die Seitengrenze. Das Leerzeichen erlaubt den automatischen Zeilenumbruch und damit einen für Menschen sinnvoll lesbaren Abdruck im Codebook. Diese Variante wird nur zur Anzeige verwendet und danach verworfen. -->
 
-kable(hashes[,.(index,filename)],
-      format = "latex",
-      align = c("p{1cm}",
-                "p{13cm}"),
-      booktabs = TRUE,
-      longtable = TRUE)
-
-kable(hashes[,.(index,sha2.256)],
-      format = "latex",
-      align = c("c",
-                "p{13cm}"),
-      booktabs = TRUE,
-      longtable = TRUE)
+<!-- ```{r} -->
+<!-- hashes$sha3.512 <- paste(substr(hashes$sha3.512, 1, 64), -->
+<!--                               substr(hashes$sha3.512, 65, 128)) -->
+<!-- ``` -->
 
 
-```
 
-\newpage
+<!-- ## In Bericht anzeigen -->
 
-```{r}
-kable(hashes[,.(index,sha3.512)],
-      format = "latex",
-      align = c("c",
-                "p{13cm}"),
-      booktabs = TRUE,
-      longtable = TRUE)
-```
+<!-- ```{r} -->
+
+<!-- kable(hashes[,.(index,filename)], -->
+<!--       format = "latex", -->
+<!--       align = c("p{1cm}", -->
+<!--                 "p{13cm}"), -->
+<!--       booktabs = TRUE, -->
+<!--       longtable = TRUE) -->
+
+<!-- kable(hashes[,.(index,sha2.256)], -->
+<!--       format = "latex", -->
+<!--       align = c("c", -->
+<!--                 "p{13cm}"), -->
+<!--       booktabs = TRUE, -->
+<!--       longtable = TRUE) -->
+
+
+<!-- ``` -->
+
+<!-- \newpage -->
+
+<!-- ```{r} -->
+<!-- kable(hashes[,.(index,sha3.512)], -->
+<!--       format = "latex", -->
+<!--       align = c("c", -->
+<!--                 "p{13cm}"), -->
+<!--       booktabs = TRUE, -->
+<!--       longtable = TRUE) -->
+<!-- ``` -->
 
 
 
