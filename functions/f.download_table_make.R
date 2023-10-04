@@ -7,6 +7,7 @@
 
 f.download_table_make <- function(sleep.min = 0.5,
                                   sleep.max = 2,
+                                  verbose = FALSE,
                                   debug.toggle = FALSE,
                                   debug.pages = 20){
 
@@ -47,6 +48,7 @@ f.download_table_make <- function(sleep.min = 0.5,
     ## Run Extraction: Descending
     list.descending <- lapply(url.descending,
                               f.extract_meta_bfh,
+                              verbose = verbose,
                               sleep.min = sleep.min,
                               sleep.max = sleep.max)
     
@@ -56,6 +58,7 @@ f.download_table_make <- function(sleep.min = 0.5,
     ## Run Extraction: Ascending
     list.ascending <- lapply(url.ascending,
                              f.extract_meta_bfh,
+                             verbose = verbose,
                              sleep.min = sleep.min,
                              sleep.max = sleep.max)
     
@@ -148,4 +151,4 @@ f.extract_meta_bfh <- function(url,
 ## DEBUGGING
 
 
-# test <- f.download_table_make()
+# test <- f.download_table_make(verbose = TRUE)
