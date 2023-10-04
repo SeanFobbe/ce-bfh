@@ -329,6 +329,25 @@ list(
 ```
 
 
+## Download Targets
+
+
+### Download-Manifest erstellen
+
+Das Download-Manifest wird aus den Metadaten der Datenbank des BFH erstellt und enthält die Links zu den Unterseiten der einzelnen Entscheidungen, sowie die zugehörigen Metadaten aus der Datenbank in Tabellenform.
+
+
+
+```{targets tar.download.manifest.raw}
+tar_target(download.manifest.raw,
+           f.download_manifest_make(sleep.min = 0.5,
+                                    sleep.max = 2,
+                                    verbose = FALSE,
+                                    debug.toggle = config$debug$toggle,
+                                    debug.pages = config$debug$pages),
+           format = "file")
+```
+
 
 
 
