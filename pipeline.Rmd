@@ -368,7 +368,7 @@ tar_target(dt.download.manifest.final,
 ```{targets tar.download.html}
 tar_target(files.html,
                 f.download(url = dt.download.manifest.final$url_html,
-                           filename = paste0(dt.download.manifest.raw$bfh_id, ".html)",
+                           filename = paste0(dt.download.manifest.final$bfh_id, ".html)",
                            dir = "files/html",
                            sleep.min = 0.2,
                            sleep.max = 0.5,
