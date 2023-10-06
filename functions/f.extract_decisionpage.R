@@ -1,5 +1,3 @@
-
-
 #' f.extract_decisionpage
 #'
 #' Vectorize extraction of Bundesfinanzhof (BFH) decision pages.
