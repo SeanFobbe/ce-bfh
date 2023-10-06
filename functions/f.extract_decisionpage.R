@@ -54,6 +54,7 @@ f.extract_decisionpage_single <- function(html){
 
     text <- rvest::html_nodes(html, "[class='m-decisions']") # gesamte Entscheidung
     text <- rvest::html_text(text, trim = TRUE)
+    text <- paste0(text, collapse = " ")
 
     leitsaetze <- rvest::html_nodes(html, "[class='m-decisions']")[1] # leitsätze
     leitsaetze <- rvest::html_text(leitsaetze)
