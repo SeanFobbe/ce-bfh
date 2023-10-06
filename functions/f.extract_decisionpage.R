@@ -6,19 +6,12 @@
 #'
 #' @return A data.table containing all relevant metadata and content.
 
-f.extract_decisionpage <- function(html){
+f.extract_decisionpage <- function(x){
 
-
-
-    list.result <- lapply(html, f.extract_decisionpage_single)
+    list.result <- lapply(x, f.extract_decisionpage_single)
     dt.return <- data.table::rbindlist(list.result)
-
-
     
     return(dt.return)
-
-    
-
 }
 
 
@@ -26,7 +19,7 @@ f.extract_decisionpage <- function(html){
 #'
 #' Extract all metadata and content from a page containing a single Bundesfinanzhof (BFH) decision.
 #'
-#' @param html A URL to a remote HTML file or path to a local HTML file.
+#' @param x Path to a local HTML file or a URL to a remote HTML file.
 #'
 #' @return A data.table containing all relevant metadata and content.
 
@@ -34,12 +27,15 @@ f.extract_decisionpage <- function(html){
 
 
 
-f.extract_decisionpage_single <- function(html){
+f.extract_decisionpage_single <- function(x){
     
-    html <- rvest::read_html(html)
+    bfh_id <- gsub("\\.html", "", basename(x))
+    
+    html <- rvest::read_html(x)
     
     ecli <- rvest::html_nodes(html, "[class='ecli highlighted']")
     ecli <- rvest::html_text(ecli, trim = TRUE)
+    ecli <- ifelse(length(ecli) == 0, NA, ecli)
     
     normen <- rvest::html_nodes(html, "[class='norms']")
     normen <- rvest::html_text(normen, trim = TRUE)
@@ -60,7 +56,8 @@ f.extract_decisionpage_single <- function(html){
     text_leitsatz <- rvest::html_text(text_leitsatz)
     
 
-    dt.return <- data.table::data.table(ecli = ecli,
+    dt.return <- data.table::data.table(bfh_id = bfh_id,
+                                        ecli = ecli,
                                         normen = normen,
                                         vorinstanz = vorinstanz,
                                         url_pdf = url.pdf,
