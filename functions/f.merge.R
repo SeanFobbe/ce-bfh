@@ -53,7 +53,7 @@ f.merge <- function(dt.download.manifest.final,
     
     ## Create var "doc_id"
     dt$doc_id <- paste0("BFH_",
-                        slg,
+                        dt$slg,
                         "_",
                         dt$datum,
                         "_",
