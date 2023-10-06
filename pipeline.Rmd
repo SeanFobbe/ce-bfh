@@ -362,8 +362,6 @@ tar_target(dt.download.manifest.final,
 ### Entscheidungen als HTML abrufen
 
 
-<!-- Note: switch source to final download manifest later -->
-
 
 ```{targets tar.download.html}
 tar_target(files.html,
