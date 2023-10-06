@@ -7,7 +7,7 @@ f.extract_decisionpage <- function(html){
 
 
 
-    list.result <- lapply(url, f.extract_decisionpage_single)
+    list.result <- lapply(html, f.extract_decisionpage_single)
     dt.return <- data.table::rbindlist(list.result)
 
 
