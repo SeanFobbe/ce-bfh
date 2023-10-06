@@ -393,6 +393,20 @@ tar_target(dt.decisionpage,
 ```
 
 
+## Enhance Targets
+
+
+
+### Download Manifest und Decision Data zusammenfügen
+
+```{targets tar.enhance.intermediate}
+tar_target(dt.intermediate,
+           f.merge(dt.download.manifest.final = dt.download.manifest.final,
+                   dt.decisionpage = dt.decisionpage))
+```
+
+
+
 
 
 
