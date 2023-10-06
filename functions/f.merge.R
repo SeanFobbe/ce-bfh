@@ -16,9 +16,29 @@ f.merge <- function(dt.download.manifest.final,
                 dt.decisionpage,
                 by = "bfh_id")
 
-    spruchkoerper_az <- gsub("([IVX])+.+", "\\1", dt$spruchkoerper_db)
+    dt$spruchkoerper_az <- gsub("([IVXGrS]+).+", "\\1", dt$az)
+
+    registerzeichen <- gsub("[IVXGrS]+ ([A-Za-z-]+).*", "\\1", dt$az)
+    registerzeichen <- gsub("GrS.*", "GrS", registerzeichen)
+    dt$registerzeichen <- gsub("ER-S.*", "ER-S", registerzeichen)    
+    
+    dt$eingangsnummer <- as.integer(gsub("[IVXGrS]+ *[A-Za-z-]+ *([0-9]+)[-,/].*",
+                                         "\\1",
+                                         dt$az))
+
+
+
+    
+    dt$az[is.na(dt$eingangsnummer)]
+
+    summary(as.integer(dt$eingangsnummer))
     
 
+    pkh <- grepl("PKH", dt$az, ignore.case = TRUE)
+    adv <- grepl("AdV", dt$az, ignore.case = TRUE)
+    
+
+    
     doc_id <- paste0("BFH_",
                      dt$datum,
                      
