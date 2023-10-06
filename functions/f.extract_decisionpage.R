@@ -56,8 +56,8 @@ f.extract_decisionpage_single <- function(html){
     text <- rvest::html_text(text, trim = TRUE)
     text <- paste0(text, collapse = " ")
 
-    leitsaetze <- rvest::html_nodes(html, "[class='m-decisions']")[1] # leitsätze
-    leitsaetze <- rvest::html_text(leitsaetze)
+    text_leitsatz <- rvest::html_nodes(html, "[class='m-decisions']")[1] # leitsätze
+    text_leitsatz <- rvest::html_text(text_leitsatz)
     
 
     dt.return <- data.table::data.table(ecli = ecli,
@@ -65,7 +65,7 @@ f.extract_decisionpage_single <- function(html){
                                         vorinstanz = vorinstanz,
                                         url_pdf = url.pdf,
                                         text = text,
-                                        leitsaetze = leitsaetze)
+                                        text_leitsatz = text_leitsatz)
 
     return(dt.return)
     
