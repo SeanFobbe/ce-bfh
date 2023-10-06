@@ -3,7 +3,7 @@
 
 
 
-f.extract_decisionpage <- function(url){
+f.extract_decisionpage <- function(html){
 
 
 
@@ -19,12 +19,19 @@ f.extract_decisionpage <- function(url){
 }
 
 
+#' f.extract_decisionpage_single
+#'
+#' Extract all metadata and content from a page containing a single Bundesfinanzhof (BFH) decision.
+#'
+#' @param html A URL to a remote HTML file or path to a local HTML file.
+#'
+#' @return A data.table containing all relevant metadata and content
 
 
 
 
 
-f.extract_decisionpage_single <- function(url){
+f.extract_decisionpage_single <- function(html){
 
     
     html <- rvest::read_html(url)
