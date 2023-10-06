@@ -34,7 +34,7 @@ f.extract_decisionpage <- function(html){
 f.extract_decisionpage_single <- function(html){
 
     
-    html <- rvest::read_html(url)
+    html <- rvest::read_html(html)
     
     ecli <- rvest::html_nodes(html, "[class='ecli highlighted']")
     ecli <- rvest::html_text(ecli, trim = TRUE)
