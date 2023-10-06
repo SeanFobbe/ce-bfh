@@ -26,21 +26,27 @@ f.merge <- function(dt.download.manifest.final,
                                          "\\1",
                                          dt$az))
 
+    dt$eingangsjahr_az <- as.integer(gsub(".*/([0-9]+).*",
+                                         "\\1",
+                                         dt$az)) 
 
-
-    
-    dt$az[is.na(dt$eingangsnummer)]
-
-    summary(as.integer(dt$eingangsnummer))
-    
-
-    pkh <- grepl("PKH", dt$az, ignore.case = TRUE)
-    adv <- grepl("AdV", dt$az, ignore.case = TRUE)
-    
+    dt$pkh <- grepl("PKH", dt$az, ignore.case = TRUE)
+    dt$adv <- grepl("AdV", dt$az, ignore.case = TRUE)
 
     
     doc_id <- paste0("BFH_",
                      dt$datum,
+                     "_",
+                     dt$spruchkorper_az,
+                     "_",
+                     dt$registerzeichen,
+                     "_",
+                     dt$eingangsnummer,
+                     "_",
+                     dt$eingangsjahr_az)
+                     
+                     
+                    
                      
 
 }
