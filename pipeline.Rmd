@@ -382,6 +382,20 @@ tar_target(files.html,
 
 ```
 
+### HTML-Seiten parsen
+
+Die HTML-Seiten werden lokal geparsed, um eine höhere Geschwindigkeit und Robustheit zu erreichen.
+
+
+```{targets tar.download.html.parse}
+tar_target(dt.decisionpage,
+           f.extract_decisionpage(files.html))
+```
+
+
+
+
+
 
 
 
