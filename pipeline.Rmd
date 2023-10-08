@@ -340,7 +340,7 @@ Das Download-Manifest wird aus den Metadaten der Datenbank des BFH erstellt und 
 
 ```{targets tar.download.manifest.raw}
 tar_target(dt.download.manifest.raw,
-           f.download_manifest_make(sleep.min = 0.5,
+           f.download_manifest_make(sleep.min = 1,
                                     sleep.max = 2,
                                     verbose = FALSE,
                                     debug.toggle = config$debug$toggle,
