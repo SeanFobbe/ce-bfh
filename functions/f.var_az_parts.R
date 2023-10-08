@@ -12,32 +12,35 @@
 
 f.var_az_parts <- function(dt.intermediate){
 
-    dt <- dt.intermediate
 
     ## Create var "spruchkoerper_az"
-    dt$spruchkoerper_az <- gsub("([IVXGrS]+).+", "\\1", dt$az)
+    spruchkoerper_az  <-  gsub("([IVXGrS]+).+", "\\1", dt.intermediate$az)
 
     ## Create var "registerzeichen"
-    registerzeichen <- gsub("[IVXGrS]+ ([A-Za-z-]+).*", "\\1", dt$az)
+    registerzeichen <- gsub("[IVXGrS]+ ([A-Za-z-]+).*", "\\1", dt.intermediate$az)
     registerzeichen <- gsub("GrS.*", "GrS", registerzeichen)
-    dt$registerzeichen <- gsub("ER-S.*", "ER-S", registerzeichen)    
+    registerzeichen <- gsub("ER-S.*", "ER-S", registerzeichen)    
 
     ## Create var "eingangsnummer"
-    dt$eingangsnummer <- as.integer(gsub("[IVXGrS]+ *[A-Za-z-]+ *([0-9]+)[-,/].*",
+    eingangsnummer <- as.integer(gsub("[IVXGrS]+ *[A-Za-z-]+ *([0-9]+)[-,/].*",
                                          "\\1",
-                                         dt$az))
+                                         dt.intermediate$az))
 
     ## Create var "eingangsjahr_az"
-    dt$eingangsjahr_az <- as.integer(gsub(".*/([0-9]+).*",
+    eingangsjahr_az <- as.integer(gsub(".*/([0-9]+).*",
                                          "\\1",
-                                         dt$az))
+                                         dt.intermediate$az))
 
     ## Create var "eingangsjahr_iso"
-    dt$eingangsjahr_iso <- f.year.iso(dt$eingangsjahr_az)
+    eingangsjahr_iso <- f.year.iso(dt.intermediate$eingangsjahr_az)
 
 
     ## Return Value
-    dt.final <- dt
+    dt.final <- data.table(spruchkoerper_az,
+                           registerzeichen,
+                           eingangsnummer
+                           eingangsjahr_az,
+                           eingangsjahr_iso)
 
     
     ## Tests
@@ -52,22 +55,22 @@ f.var_az_parts <- function(dt.intermediate){
                       0)
     })
 
-    test_that("var eingangsjahr_iso contains only expected values.", {
-        expect_true(all(dt.final$eingangsjahr_iso >= 2000))
-        expect_true(all(dt.final$entscheidungsjahr <= year(Sys.Date()))) 
-    })
-
-    test_that("var eingangsjahr_az contains only expected values.", {
-        expect_true(all(dt.final$eingangsjahr_az >= 0))
-        expect_true(all(dt.final$eingangsjahr_az <= as.integer(format(Sys.Date(), "%y"))))
-    })
-    
     test_that("var eingangsnummer contains only expected values.", {
         expect_true(all(dt.final$eingangsnummer > 0))
         expect_true(all(dt.final$eingangsnummer < 1e5))
     })
    
- 
+    
+    test_that("var eingangsjahr_az contains only expected values.", {
+        expect_true(all(dt.final$eingangsjahr_az >= 0))
+        expect_true(all(dt.final$eingangsjahr_az <= as.integer(format(Sys.Date(), "%y"))))
+    })
+    
+
+     test_that("var eingangsjahr_iso contains only expected values.", {
+        expect_true(all(dt.final$eingangsjahr_iso >= 2000))
+        expect_true(all(dt.final$entscheidungsjahr <= year(Sys.Date()))) 
+    })
 
     return(dt.final)
     
