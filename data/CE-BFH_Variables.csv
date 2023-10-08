@@ -1,7 +1,9 @@
 varname,type,explanation
 doc\_id,String,(Nur CSV) Dateiname der extrahierten TXT-Datei.
 text,String,(Nur CSV) Volltext der Entscheidung. Die einzige editorische Änderung gegenüber den TXT-Dateien ist die Zusammenfügung von über Zeilengrenzen gebrochenen Wörtern.
-url,String,(Nur CSV) Link zum Volltext der Entscheidung in der Datenbank.
+text_leitsatz,String,
+url\_pdf,String,(Nur CSV) Link zum Volltext der Entscheidung in der Datenbank.
+url\_html,String,
 gericht,String,Name des Gerichts. Es ist nur der Wert \enquote{BFH} vergeben. Dies ist der ECLI-Code für \enquote{Bundesfinanzhof}. Diese Variable dient vor allem zur einfachen und transparenten Verbindung der Daten mit anderen Datensätzen.
 datum,Date,Datum der Entscheidung im Format YYYY-MM-DD (ISO-8601).
 entscheidungsjahr,Integer,(Nur CSV) Jahr der Entscheidung im Format YYYY (ISO-8601).
@@ -27,3 +29,12 @@ version,Date,(Nur CSV-Datei) Die Versionsnummer des Datensatzes im Format YYYY-M
 doi\_concept,String,(Nur CSV-Datei) Der Digital Object Identifier (DOI) des Gesamtkonzeptes des Datensatzes. Dieser ist langzeit-stabil (persistent). Über diese DOI kann via www.doi.org immer die \textbf{aktuellste Version} des Datensatzes abgerufen werden. Prinzip F1 der FAIR-Data Prinzipien (\enquote{data are assigned globally unique and persistent identifiers}) empfiehlt die Dokumentation jeder Messung mit einem persistenten Identifikator. Selbst wenn die CSV-Dateien ohne Kontext weitergegeben werden kann ihre Herkunft so immer zweifelsfrei und maschinenlesbar bestimmt werden.
 doi\_version,String,(Nur CSV-Datei) Der Digital Object Identifier (DOI) der \textbf{konkreten Version} des Datensatzes. Dieser ist langzeit-stabil (persistent). Über diese DOI kann via www.doi.org immer diese konkrete Version des Datensatzes abgerufen werden. Prinzip F1 der FAIR-Data Prinzipien (\enquote{data are assigned globally unique and persistent identifiers}) empfiehlt die Dokumentation jeder Messung mit einem persistenten Identifikator. Selbst wenn die CSV-Dateien ohne Kontext weitergegeben werden kann ihre Herkunft so immer zweifelsfrei und maschinenlesbar bestimmt werden.
 lizenz,String,Die Lizenz für den Gesamtdatensatz. In diesem Datensatz immer \enquote{Creative Commons Zero 1.0 Universal}.
+bfh\_id,String,
+veroeffentlichung,Datum,
+veroeffentlichungsjahr,Integer,
+slg,String,
+titel,String,
+normen,String,
+vorinstanz,String,
+adv,Logical,Ob es sich um eine ??? (AdV)-Entscheidung handelt. Entweder TRUE oder FALSE.
+pkh,Logical,Ob es sich um eine Prozesskostenhilfe (PKH)-Entscheidung handelt. Entweder TRUE oder FALSE.
