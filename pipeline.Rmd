@@ -324,7 +324,7 @@ list(
            "data/AZ-BRD_1-0-1_DE_Registerzeichen_Datensatz.csv",
            format = "file"),
      tar_target(az.brd,
-                fread(file.az.brd))
+                fread(file.az.brd, header = TRUE))
      )
 ```
 
