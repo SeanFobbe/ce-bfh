@@ -52,7 +52,8 @@ f.finalize <- function(dt.intermediate,
                               "_",
                               dt$bfh_id)
 
-setdiff(varnames, names(dt.final))
+    ## setdiff(varnames, names(dt.final))
+    ## setdiff(names(dt.final),varnames)
     
 
     ## Unit Test: Check variables and set column order
@@ -111,10 +112,10 @@ setdiff(varnames, names(dt.final))
 
 ## DEBUGGING CODE
 
-library(data.table)
-library(testthat)
-tar_load(dt.intermediate)
-vars.additional  <- tar_read(vars_additional)
+## library(data.table)
+## library(testthat)
+## tar_load(dt.intermediate)
+## vars.additional  <- tar_read(vars_additional)
 
-variables.codebook <- fread("data/CE-BFH_Variables.csv")
-varnames  <-  variables.codebook$varname
+## variables.codebook <- fread("data/CE-BFH_Variables.csv")
+## varnames  <-  variables.codebook$varname
