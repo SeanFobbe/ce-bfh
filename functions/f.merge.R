@@ -30,7 +30,7 @@ f.merge <- function(dt.download.manifest.final,
     dt$adv <- grepl("AdV", dt$az, ignore.case = TRUE)
 
     ## Assign temporary doc_id (will be changed by f.final) otherwise lingstats will not work
-    dt$doc_id <- bfh_id
+    dt$doc_id <- dt$bfh_id
     
     ## Order by Date
     dt.final <- dt[order(datum)]
