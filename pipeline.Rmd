@@ -385,39 +385,39 @@ tar_target(files.html,
 
 
 
-```{targets tar.download.pdf}
-tar_target(files.pdf,
-                f.download(url = dt.intermediate$url_pdf,
-                           filename = paste0(dt.intermediate$doc_id, ".pdf"),
-                           dir = "files/pdf",
-                           sleep.min = 0.2,
-                           sleep.max = 0.5,
-                           retries = 3,
-                           retry.sleep.min = 2,
-                           retry.sleep.max = 5,
-                           timeout = config$download$timeout,
-                           debug.toggle = FALSE,
-                           debug.files = 500),
-                format = "file")
+<!-- ```{targets tar.download.pdf} -->
+<!-- tar_target(files.pdf, -->
+<!--                 f.download(url = dt.final$url_pdf, -->
+<!--                            filename = paste0(dt.final$doc_id, ".pdf"), -->
+<!--                            dir = "files/pdf", -->
+<!--                            sleep.min = 0.2, -->
+<!--                            sleep.max = 0.5, -->
+<!--                            retries = 3, -->
+<!--                            retry.sleep.min = 2, -->
+<!--                            retry.sleep.max = 5, -->
+<!--                            timeout = config$download$timeout, -->
+<!--                            debug.toggle = FALSE, -->
+<!--                            debug.files = 500), -->
+<!--                 format = "file") -->
 
-```
-
-
+<!-- ``` -->
 
 
-## Convert Targets
 
 
-```{targets tar.convert}
+<!-- ## Convert Targets -->
 
-tar_target(files.txt,
-                f.tar_pdf_extract(x = files.pdf,
-                                  outputdir = "files/txt",
-								  multicore = config$parallel$extractPDF,
-                                  cores = fullCores),
-                format = "file")
+
+<!-- ```{targets tar.convert} -->
+
+<!-- tar_target(files.txt, -->
+<!--                 f.tar_pdf_extract(x = files.pdf, -->
+<!--                                   outputdir = "files/txt", -->
+<!-- 								  multicore = config$parallel$extractPDF, -->
+<!--                                   cores = fullCores), -->
+<!--                 format = "file") -->
 					
-```					
+<!-- ```		 -->			
 
 
 
@@ -444,7 +444,7 @@ tar_target(dt.intermediate,
                    dt.decisionpage = dt.decisionpage))
 ```
 
-```{targets tar.enhance.intermediate}
+```{targets tar.enhance.az.parts}
 tar_target(var_az_parts,
            f.var_az_parts(dt.intermediate))
 ```
@@ -452,8 +452,94 @@ tar_target(var_az_parts,
 
 
 
+### Variable erstellen: \enquote{verfahrensart}
+
+Die Variable \enquote{verfahrensart} wird aus den Registerzeichen berechnet.
+
+```{targets tar.enhance.verfahrensart}
+tar_target(var_verfahrensart,
+                f.var_verfahrensart(vaz_az_parts$registerzeichen,
+                                    az.brd = az.brd,
+                                    gericht = "BFH"))
+```
 
 
+
+### Variablen erstellen: \enquote{zeichen, token, typen, saetze}
+
+Berechnung klassischer linguistischer Kennzahlen.
+
+
+
+```{targets tar.enhance.lingstats}
+tar_target(var_lingstats,
+                f.lingstats(dt.intermediate,
+                            multicore = config$parallel$lingsummarize,
+                            cores = fullCores,
+                            germanvars = TRUE))
+```
+
+
+
+### Konstanten erstellen
+
+Konstanten die dem Datensatz wichtige Herkunftsinformationen hinzufügen. Darunter sind die Versionsnummer, die Version DOI, die Concept DOI und die Lizenz.
+
+
+
+```{targets tar.enhance.constants}
+tar_target(var_constants,
+           data.frame(version = as.character(datestamp),
+                      doi_concept = config$doi$data$concept,
+                      doi_version = config$doi$data$version,
+                      lizenz = as.character(config$license$data))[rep(1,
+                                                                      nrow(dt.bgh.datecleaned)),])
+```
+
+
+
+### Zusätzliche Variablen zusammenführen
+
+```{targets tar.enhance.unify}
+tar_target(vars_additional,
+           data.table(verfahrensart = var_verfahrensart,
+                      var_az_parts,
+                      var_lingstats,
+                      var_constants))
+
+```
+
+
+
+
+
+<!-- ### Finalen Datensatz erstellen -->
+
+<!-- Die Verbesserungen der vorherigen Schritte werden in dieser Funktion zusammengefügt um den finalen Datenatz herzustellen. -->
+
+
+<!-- ```{targets tar.enhance.final} -->
+<!-- tar_target(dt.final, -->
+<!--            f.finalize(x = dt.intermediate, -->
+<!--                       vars.additional = vars_additional, -->
+<!--                       varnames = variables.codebook$varname)) -->
+
+<!-- ``` -->
+
+
+
+
+<!-- ### Variante erstellen: Nur Metadaten -->
+
+<!-- Hier wird die Text-Variable entfernt, um eine deutlich platzsparendere Variante des Datensatzes zu erstellen. Enthalten sind nur noch die Metadaten. -->
+
+
+
+<!-- ```{targets tar.enhance.meta} -->
+<!-- tar_target(dt.meta, -->
+<!--                 dt.final[, !"text"]) -->
+
+<!-- ``` -->
 
 
 
