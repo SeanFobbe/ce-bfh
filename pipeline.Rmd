@@ -458,7 +458,7 @@ Die Variable \enquote{verfahrensart} wird aus den Registerzeichen berechnet.
 
 ```{targets tar.enhance.verfahrensart}
 tar_target(var_verfahrensart,
-                f.var_verfahrensart(vaz_az_parts$registerzeichen,
+                f.var_verfahrensart(var_az_parts$registerzeichen,
                                     az.brd = az.brd,
                                     gericht = "BFH"))
 ```
