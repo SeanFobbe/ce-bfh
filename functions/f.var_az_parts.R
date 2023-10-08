@@ -38,7 +38,7 @@ f.var_az_parts <- function(dt.intermediate){
     ## Return Value
     dt.final <- data.table(spruchkoerper_az,
                            registerzeichen,
-                           eingangsnummer
+                           eingangsnummer,
                            eingangsjahr_az,
                            eingangsjahr_iso)
 
