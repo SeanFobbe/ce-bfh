@@ -24,8 +24,7 @@ f.download_manifest_finalize <- function(x){
     dt.final$bfh_id <- basename(dt.final$url_html)
 
 
-    
-
+ 
     ## Tests
     test_that("Class is correct.", {
         expect_s3_class(dt.final, "data.table")
