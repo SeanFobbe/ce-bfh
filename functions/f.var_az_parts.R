@@ -14,22 +14,22 @@ f.var_az_parts <- function(dt.intermediate){
 
 
     ## Create var "spruchkoerper_az"
-    spruchkoerper_az  <-  gsub("([IVXGrS]+).+", "\\1", dt.intermediate$az)
+    spruchkoerper_az  <-  gsub("([IVXGrS]+).+", "\\1", dt.intermediate$aktenzeichen)
 
     ## Create var "registerzeichen"
-    registerzeichen <- gsub("[IVXGrS]+ ([A-Za-z-]+).*", "\\1", dt.intermediate$az)
+    registerzeichen <- gsub("[IVXGrS]+ ([A-Za-z-]+).*", "\\1", dt.intermediate$aktenzeichen)
     registerzeichen <- gsub("GrS.*", "GrS", registerzeichen)
     registerzeichen <- gsub("ER-S.*", "ER-S", registerzeichen)    
 
     ## Create var "eingangsnummer"
     eingangsnummer <- as.integer(gsub("[IVXGrS]+ *[A-Za-z-]+ *([0-9]+)[-,/].*",
                                          "\\1",
-                                         dt.intermediate$az))
+                                         dt.intermediate$aktenzeichen))
 
     ## Create var "eingangsjahr_az"
     eingangsjahr_az <- as.integer(gsub(".*/([0-9]+).*",
                                          "\\1",
-                                         dt.intermediate$az))
+                                         dt.intermediate$aktenzeichen))
 
     ## Create var "eingangsjahr_iso"
     eingangsjahr_iso <- f.year.iso(eingangsjahr_az)
