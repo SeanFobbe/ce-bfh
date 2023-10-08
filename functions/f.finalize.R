@@ -17,13 +17,16 @@ f.finalize <- function(dt.intermediate,
     })
 
     ## Bind additional vars
-    dt <- cbind(dt.intermediate,
-                vars.additional)
-    
+    dt.final <- cbind(dt.intermediate,
+                      vars.additional)
+
+    ## Create var "gericht"
+
+    dt.final$gericht <- "BFH"
     
     ## Create var "doc_id"
-    dt$doc_id <- paste0("BFH_",
-                        dt$slg,
+    dt.final$doc_id <- paste0("BFH_",
+                        dt$bfhe,
                         "_",
                         dt$datum,
                         "_",
@@ -37,6 +40,8 @@ f.finalize <- function(dt.intermediate,
                         "_",
                         dt$bfh_id)
 
+setdiff(varnames, names(dt.final))
+    
 
     ## Unit Test: Check variables and set column order
     
@@ -70,10 +75,10 @@ f.finalize <- function(dt.intermediate,
 
 ## DEBUGGING CODE
 
-## library(data.table)
-## library(testthat)
-## tar_load(dt.intermediate)
-## vars.additional  <- tar_read(vars_additional)
+library(data.table)
+library(testthat)
+tar_load(dt.intermediate)
+vars.additional  <- tar_read(vars_additional)
 
-## variables.codebook <- fread("data/CE-BFH_Variables.csv")
-## varnames  <-  variables.codebook$varname
+variables.codebook <- fread("data/CE-BFH_Variables.csv")
+varnames  <-  variables.codebook$varname
