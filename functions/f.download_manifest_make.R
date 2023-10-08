@@ -105,8 +105,8 @@ f.extract_meta_bfh <- function(url,
         veroeffentlichung <- rvest::html_text(veroeffentlichung, trim = TRUE)
 
 
-        slg <- rvest::html_nodes(html, "[data-label='V/NV']")
-        slg <- rvest::html_text(slg, trim = TRUE)
+        bfhe <- rvest::html_nodes(html, "[data-label='V/NV']")
+        bfhe <- rvest::html_text(slg, trim = TRUE)
 
         spruchkoerper_db <- rvest::html_nodes(html, "[data-label='Senat']")
         spruchkoerper_db <- rvest::html_text(spruchkoerper_db, trim = TRUE)
@@ -115,8 +115,8 @@ f.extract_meta_bfh <- function(url,
         datum <- rvest::html_text(datum, trim = TRUE)
 
 
-        az <- rvest::html_nodes(html, "[data-label='Aktenzeichen']")
-        az <- rvest::html_text(az, trim = TRUE)
+        aktenzeichen <- rvest::html_nodes(html, "[data-label='Aktenzeichen']")
+        aktenzeichen <- rvest::html_text(aktenzeichen, trim = TRUE)
 
         titel <- rvest::html_nodes(html, "[data-label='Titel']")
         titel <- rvest::html_text(titel, trim = TRUE)
@@ -128,10 +128,10 @@ f.extract_meta_bfh <- function(url,
         
 
         dt.return <- data.table::data.table(veroeffentlichung = veroeffentlichung,
-                                            slg = slg,
+                                            bfhe = bfhe,
                                             spruchkoerper_db = spruchkoerper_db,
                                             datum = datum,
-                                            az = az,
+                                            aktenzeichen = aktenzeichen,
                                             titel = titel,
                                             url_html = url_html)
 
