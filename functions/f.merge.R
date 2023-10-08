@@ -17,17 +17,6 @@ f.merge <- function(dt.download.manifest.final,
                 dt.decisionpage,
                 by = "bfh_id")
 
-    ## Create var "entscheidungsjahr"
-    dt$entscheidungsjahr <- year(dt$datum)
-
-    ## Create var "veroeffentlichungsjahr"
-    dt$veroeffentlichungsjahr <- year(dt$veroeffentlichung)
-
-    ## Create var "pkh"
-    dt$pkh <- grepl("PKH", dt$az, ignore.case = TRUE)
-
-    ## Create var "adv"
-    dt$adv <- grepl("AdV", dt$az, ignore.case = TRUE)
 
     ## Assign temporary doc_id (will be changed by f.final) otherwise lingstats will not work
     dt$doc_id <- dt$bfh_id
@@ -45,29 +34,11 @@ f.merge <- function(dt.download.manifest.final,
         expect_equal(sum(duplicated(dt.final$bf_id)),  0)
     })
 
-
     test_that("Dates are in ISO format.", {
         expect_true(all(grepl("[0-9]{4}-[0-9]{2}-[0-9]{2}", dt.final$veroeffentlichung)))
         expect_true(all(grepl("[0-9]{4}-[0-9]{2}-[0-9]{2}", dt.final$datum)))
     })
 
-    test_that("var entscheidungsjahr contains only expected values.", {
-        expect_true(all(dt.final$entscheidungsjahr >= 2010))
-        expect_true(all(dt.final$entscheidungsjahr <= year(Sys.Date())))    
-    })
-
-    test_that("var veroeffentlichungsjahr contains only expected values.", {
-        expect_true(all(dt.final$entscheidungsjahr >= 2010))
-        expect_true(all(dt.final$entscheidungsjahr <= year(Sys.Date())))    
-    })
-    
-    test_that("var pkh contains only expected values.", {
-      expect_type(dt.final$adv, "logical")   
-    })
-    
-    test_that("var adv contains only expected values.", {
-      expect_type(dt.final$adv, "logical")   
-    })
 
 
     return(dt.final)
