@@ -32,7 +32,7 @@ f.var_az_parts <- function(dt.intermediate){
                                          dt.intermediate$az))
 
     ## Create var "eingangsjahr_iso"
-    eingangsjahr_iso <- f.year.iso(dt.intermediate$eingangsjahr_az)
+    eingangsjahr_iso <- f.year.iso(eingangsjahr_az)
 
 
     ## Return Value
