@@ -29,6 +29,8 @@ f.merge <- function(dt.download.manifest.final,
     ## Create var "adv"
     dt$adv <- grepl("AdV", dt$az, ignore.case = TRUE)
 
+    ## Assign temporary doc_id (will be changed by f.final)
+    dt$doc_id <- bfh_id
     
     ## Order by Date
     dt.final <- dt[order(datum)]
