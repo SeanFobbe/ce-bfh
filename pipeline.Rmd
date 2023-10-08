@@ -301,15 +301,15 @@ tar_target(changelog,
 Die Variablen des Datensatzes, inklusive ihrer Erläuterung.
 
 
-<!-- ```{targets tar.file.var} -->
-<!-- list( -->
-<!--     tar_target(file.variables.codebook, -->
-<!--                "data/CE-BFH_Variables.csv", -->
-<!--                format = "file"), -->
-<!--     tar_target(variables.codebook, -->
-<!--                fread(file.variables.codebook)) -->
-<!-- ) -->
-<!-- ``` -->
+```{targets tar.file.var}
+list(
+    tar_target(file.variables.codebook,
+               "data/CE-BFH_Variables.csv",
+               format = "file"),
+    tar_target(variables.codebook,
+               fread(file.variables.codebook))
+)
+```
 
 
 
