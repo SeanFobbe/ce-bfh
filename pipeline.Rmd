@@ -617,6 +617,88 @@ tar_target(lingstats.summary,
 
 
 
+## ZIP Targets
+
+Diese Abschnitt der Pipeline erstellt ZIP-Archive für alle zentralen Rechenergebnisse und speichert diese im Ordner \enquote{output}.
+
+
+
+
+
+
+### ZIP erstellen: Source Code
+
+
+```{targets tar.zip.source}
+tar_target(zip.source,
+                f.tar_zip(files.source,
+                              filename = paste0(prefix.files,
+                                                "_Source_Code.zip"),
+                              dir = "output",
+                              mode = "mirror"),
+                format = "file")
+```
+
+
+
+
+
+
+<!-- ### ZIP erstellen: Analyse-Dateien -->
+
+<!-- ```{targets tar.zip.analysis} -->
+<!-- tar_target(zip.analysis, -->
+<!--            f.tar_zip("analysis/", -->
+<!--                      filename = paste(prefix.files, -->
+<!--                                       "DE_Analyse.zip", -->
+<!--                                       sep = "_"), -->
+<!--                      dir = "output", -->
+<!--                      mode = "cherry-pick", -->
+<!--                      report.codebook,    # manually enforced dependency relationship -->
+<!--                      report.robustness), # manually enforced dependency relationship -->
+<!--            format = "file") -->
+<!-- ``` -->
+
+
+
+
+### ZIP erstellen: PDF-Dateien (alle Entscheidungen)
+
+
+```{targets tar.zip.pdf.all}
+
+tar_target(zip.pdf.all,
+           f.tar_zip(x = files.pdf,
+                     filename = paste(prefix.files,
+                                      "DE_PDF_Datensatz.zip",
+                                      sep = "_"),
+                     dir = "output",
+                     mode = "cherry-pick"),
+           format = "file")
+
+
+```
+
+
+
+### ZIP erstellen: PDF-Dateien (nur V-Entscheidungen)
+
+```{targets tar.zip.pdf.leit}
+
+tar_target(zip.pdf.leitsatz,
+           f.tar_zip(x = grep("BFH_V", files.pdf, value = TRUE),
+                     filename = paste(prefix.files,
+                                      "DE_PDF_V-Entscheidungen_BFHE.zip",
+                                      sep = "_"),
+                     dir = "output",
+                     mode = "cherry-pick"),
+           format = "file")
+```
+
+
+
+
+
 
 
 
