@@ -17,7 +17,7 @@ f.finalize <- function(dt.intermediate,
 
     ## Unit Test
     test_that("Arguments have correct classes", {
-        expect_s3_class(x, "data.table")
+        expect_s3_class(dt.intermediate, "data.table")
         expect_s3_class(vars.additional, "data.table")
         expect_type(varnames, "character")
     })
