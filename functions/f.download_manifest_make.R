@@ -36,6 +36,7 @@ f.download_manifest_make <- function(sleep.min = 0.5,
     if(debug.toggle == TRUE){
 
         offset.descending <- sort(sample(offset.descending, debug.pages))
+        offset.ascending <- sort(sample(offset.ascending, 10))
         
     }
 
