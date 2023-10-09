@@ -27,16 +27,16 @@ f.finalize <- function(dt.intermediate,
                       vars.additional)
 
     ## Create var "entscheidungsjahr"
-    dt$entscheidungsjahr <- year(dt$datum)
+    dt.final$entscheidungsjahr <- year(dt.final$datum)
 
     ## Create var "veroeffentlichungsjahr"
-    dt$veroeffentlichungsjahr <- year(dt$veroeffentlichung)
+    dt.final$veroeffentlichungsjahr <- year(dt.final$veroeffentlichung)
 
     ## Create var "pkh"
-    dt$pkh <- grepl("PKH", dt$aktenzeichen, ignore.case = TRUE)
+    dt.final$pkh <- grepl("PKH", dt.final$aktenzeichen, ignore.case = TRUE)
 
     ## Create var "adv"
-    dt$adv <- grepl("AdV", dt$aktenzeichen, ignore.case = TRUE)
+    dt.final$adv <- grepl("AdV", dt.final$aktenzeichen, ignore.case = TRUE)
 
     
     ## Create var "gericht"
@@ -44,36 +44,47 @@ f.finalize <- function(dt.intermediate,
     
     ## Create var "doc_id"
     dt.final$doc_id <- paste0("BFH_",
-                              dt$bfhe,
+                              dt.final$bfhe,
                               "_",
-                              dt$datum,
+                              dt.final$datum,
                               "_",
-                              dt$spruchkoerper_az,
+                              dt.final$spruchkoerper_az,
                               "_",
-                              dt$registerzeichen,
+                              dt.final$registerzeichen,
                               "_",
-                              dt$eingangsnummer,
+                              dt.final$eingangsnummer,
                               "_",
-                              dt$eingangsjahr_az,
+                              dt.final$eingangsjahr_az,
                               "_",
-                              dt$bfh_id)
+                              dt.final$bfh_id)
+
+
+    
+
+    ## Test: Check variables
+    
+    varnames <- gsub("\\\\", "", varnames) # Remove LaTeX escape characters
+
+    test_that("Variables in data set are identical to those documented in Codebook", {
+        expect_setequal(names(dt.final), varnames)
+    })
+
+    ## Set Column Order
+    data.table::setcolorder(dt.final, varnames)
 
     ## setdiff(varnames, names(dt.final))
     ## setdiff(names(dt.final),varnames)
     
 
-    ## Unit Test: Check variables and set column order
     
-    varnames <- gsub("\\\\", "", varnames) # Remove LaTeX escape characters
-    data.table::setcolorder(dt.final, varnames)
+    ## TESTING ##
 
-
-    
-    ## Tests
+    ## Classes
     test_that("Class is correct.", {
         expect_s3_class(dt.final, "data.table")
     })
-    
+
+    ## Uniqueness of IDs
     test_that("BFH IDs are unique.", {
         expect_equal(sum(duplicated(dt.final$bf_id)),  0)
     })
@@ -82,12 +93,61 @@ f.finalize <- function(dt.intermediate,
         expect_equal(sum(duplicated(dt.final$doc_id)),  0)
     })
 
+    ## Dates
     test_that("Dates are in ISO format.", {
         expect_true(all(grepl("[0-9]{4}-[0-9]{2}-[0-9]{2}", dt.final$veroeffentlichung)))
         expect_true(all(grepl("[0-9]{4}-[0-9]{2}-[0-9]{2}", dt.final$datum)))
     })
+
+
+    ## URLs
+    test_that("URLs are valid", {
+        expect_true(all(grepl("https://.+\\.de", dt.final$url_pdf)))
+        expect_true(all(grepl("https://.+\\.de", dt.final$url_html)))
+    })
+    
+    ## Sets
+    test_that("var spruchkoerper_az contains only expected values.", {
+        expect_length(setdiff(dt.final$spruchkoerper_az,
+                              c(as.character(as.roman(1:12)), "GrS")),
+                      0)
+    })
+
+    test_that("var registerzeichen contains only expected values.", {
+        expect_length(setdiff(dt.final$registerzeichen,
+                              c("S", "R", "B", "E", "ER-S", "K", "GrS")),
+                      0)
+    })
+
+    test_that("var bfhe contains only expected values.", {
+        expect_length(setdiff(dt.final$bfhe,
+                              c("V", "NV")),
+                      0)
+    })
     
 
+    ## Linguistic Variables
+    test_that("var zeichen contains only expected values.", {
+        expect_true(all(dt.final$zeichen >= 0))
+        expect_true(all(dt.final$zeichen < 1e6))   
+    })
+
+    test_that("var tokens contains only expected values.", {
+        expect_true(all(dt.final$tokens >= 0))
+        expect_true(all(dt.final$tokens < 1e5))   
+    })
+
+    test_that("var typen contains only expected values.", {
+        expect_true(all(dt.final$typen >= 0))
+        expect_true(all(dt.final$typen < 1e4))   
+    })
+    
+    test_that("var saetze contains only expected values.", {
+        expect_true(all(dt.final$saetze >= 0))
+        expect_true(all(dt.final$saetze < 1e3))   
+    })
+
+    ## Years
     test_that("var entscheidungsjahr contains only expected values.", {
         expect_true(all(dt.final$entscheidungsjahr >= 2010))
         expect_true(all(dt.final$entscheidungsjahr <= year(Sys.Date())))    
@@ -97,7 +157,8 @@ f.finalize <- function(dt.intermediate,
         expect_true(all(dt.final$entscheidungsjahr >= 2010))
         expect_true(all(dt.final$entscheidungsjahr <= year(Sys.Date())))    
     })
-    
+
+    ## Logical
     test_that("var pkh contains only expected values.", {
       expect_type(dt.final$adv, "logical")   
     })
@@ -107,7 +168,7 @@ f.finalize <- function(dt.intermediate,
     })
     
 
-    
+
 
     return(dt.final)
     
