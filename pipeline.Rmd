@@ -685,7 +685,7 @@ tar_target(zip.pdf.all,
 
 ```{targets tar.zip.pdf.leit}
 
-tar_target(zip.pdf.leitsatz,
+tar_target(zip.pdf.bfhe,
            f.tar_zip(x = grep("BFH_V", files.pdf, value = TRUE),
                      filename = paste(prefix.files,
                                       "DE_PDF_V-Entscheidungen_BFHE.zip",
@@ -743,47 +743,47 @@ tar_target(zip.csv.meta,
 
 ### Zu hashende ZIP-Archive definieren
 
+TODO: ADD ANALYIS ARCHIVE
+
 
 ```{targets tar.hashes.all}
 tar_target(zip.all,
            c(zip.pdf.all,
-             zip.pdf.leitsatz,
-             zip.pdf.benannt,
-			 zip.pdf.platzhalter,
+             zip.pdf.bfhe,
              zip.txt,
-			 zip.citations.az,
              zip.csv.final,
              zip.csv.meta,
-             zip.analysis,
              zip.source))
 ```
 
-### Kryptographische Hashes berechnen
 
 
-```{targets tar.hashes.calc}
-tar_target(hashes,
-           f.tar_multihashes(c(zip.all,
-                               report.codebook[1],
-                               report.robustness[1]),
-                             multicore = config$parallel$multihashes,
-                             cores = fullCores))
-```
+<!-- ### Kryptographische Hashes berechnen -->
+
+
+<!-- ```{targets tar.hashes.calc} -->
+<!-- tar_target(hashes, -->
+<!--            f.tar_multihashes(c(zip.all, -->
+<!--                                report.codebook[1], -->
+<!--                                report.robustness[1]), -->
+<!--                              multicore = config$parallel$multihashes, -->
+<!--                              cores = fullCores)) -->
+<!-- ``` -->
 
 
 
-### CSV schreiben: Kryptographische Hashes
+<!-- ### CSV schreiben: Kryptographische Hashes -->
 
 
-```{targets tar.hashes.csv}
-tar_target(csv.hashes,
-           f.tar_fwrite(x = hashes,
-                        filename = file.path("output",
-                                             paste0(prefix.files,
-                                                    "_KryptographischeHashes.csv"))
-                        )
-           )
-```
+<!-- ```{targets tar.hashes.csv} -->
+<!-- tar_target(csv.hashes, -->
+<!--            f.tar_fwrite(x = hashes, -->
+<!--                         filename = file.path("output", -->
+<!--                                              paste0(prefix.files, -->
+<!--                                                     "_KryptographischeHashes.csv")) -->
+<!--                         ) -->
+<!--            ) -->
+<!-- ``` -->
 
 
 
