@@ -7,8 +7,6 @@ url\_html,String,
 gericht,String,Name des Gerichts. Es ist nur der Wert \enquote{BFH} vergeben. Dies ist der ECLI-Code für \enquote{Bundesfinanzhof}. Diese Variable dient vor allem zur einfachen und transparenten Verbindung der Daten mit anderen Datensätzen.
 datum,Date,Datum der Entscheidung im Format YYYY-MM-DD (ISO-8601).
 entscheidungsjahr,Integer,(Nur CSV) Jahr der Entscheidung im Format YYYY (ISO-8601).
-entscheidung\_typ,String,"(Nur CSV-Datei) Der Typ der Entscheidung. Es sind die Werte \enquote{B} (Beschluss), \enquote{U} (Urteil) und \enquote{V} (Verfügung) vergeben. Wurde durch \emph{regular expressions} aus der Variable \enquote{text} berechnet."
-leitsatz,String,"Ob es sich um eine Leitsatzentscheidung handelt. Wenn ja ist der Wert \enquote{LE}, ansonsten \enquote{NA}. Wurde für jede Entscheidung bejaht, die in der Variable \enquote{bemerkung} die Zeichenfolge \enquote{Leitsatz} enthält."
 spruchkoerper\_db,String,Der Spruchkörper wie er in der amtlichen Datenbank des Bundesgerichtshofs eingetragen ist. Gekürzt auf eine für Dateinamen angemessene Länge und konvertiert in arabische Zahlen. Die übrigen Senate haben eindeutige Namen.
 spruchkoerper\_az,String,"Der im Aktenzeichen angegebene Spruchkörper. Arabische Ziffern stehen für die Strafsenate, römische Ziffern für die Zivilsenate. Die Spezialsenate und großen Senate sind in dieser Variable nicht codiert (weil über die Registerzeichen eindeutig identifiziert) und weisen daher immer den Wert \enquote{NA} auf. Nutzen Sie für Analysen aller Senate bitte die Variablen \enquote{spruchkoerper\_db} oder \enquote{registerzeichen}."
 registerzeichen,String,Das amtliche Registerzeichen. Eine Erläuterung der Abkürzungen findet sich im Abschnitt \ref{register}.
@@ -16,9 +14,6 @@ verfahrensart,String,"Die Verfahrensart, auf die das Registerzeichen hinweist. S
 eingangsnummer,Integer,Eingangsnummer. Verfahren des gleichen Eingangsjahres erhalten vom Gericht eine fortlaufene Nummer (Ordinalzahl) in der Reihenfolge ihres Eingangs.
 eingangsjahr\_az,Integer,Eingangsjahr laut Aktenzeichen. Das Jahr in dem das Verfahren beim Gericht anhängig wurde. Das Format ist eine zweistellige Jahreszahl (YY).
 eingangsjahr\_iso,Integer,Eingangsjahr im Format YYYY-MM-DD (ISO-8601).
-zusatz\_az,String,"Der Zusatz zu einem Aktenzeichen, falls vorhanden."
-name,String,"Der Name der Entscheidung wie er in der amtlichen Datenbank angegeben ist. In den CSV-Dateien ist er identisch mit dem Datenbankeintrag, in den Dateinamen der PDF- und TXT-Dateien wurden bestimmte Sonderzeichen bereinigt um Kompatibilitätsprobleme zu vermeiden."
-kollision,Integer,"In wenigen Fällen sind am gleichen Tag mehrere Entscheidungen zum gleichen Aktenzeichen ergangen. Diese werden ab der zweiten Entscheidung pro Tag durch eine Kollisions-ID mit einer fortlaufenden Zahl ausdifferenziert. Für die erste Entscheidung ist der Wert der Variable \enquote{0}. Die zweite Entscheidung ist mit \enquote{1} identifiziert, die dritte mit \enquote{2} und so fort. \textbf{ACHTUNG:} diese Variable ist von dem Autor des Datensatzes berechnet und keine amtliche Angabe. Die Nutzung für die Erstellung der ECLI ist daher problematisch."
 aktenzeichen,String,Das amtliche Aktenzeichen im Format [senatsnummer] [registerzeichen] [eingangsnummer] / [eingangsjahr] [ggf. zusatz\_az]
 ecli,String,"(Nur CSV-Datei) Der European Case Law Identifier (ECLI) der Entscheidung. Jeder Entscheidung ist eine einzigartige ECLI zugewiesen. Die ECLI ist vor allem dann hilfreich, wenn dieser Datensatz mit anderen Datensätzen zusammengeführt und Duplikate vermieden werden sollen. Die ECLI wurde aus den strukturierten HTML-Daten des BFH extrahiert. Nicht für alle Entscheidungen vorhanden."
 zeichen,Integer,(Nur CSV-Datei) Die Anzahl Zeichen eines Dokumentes.
@@ -32,7 +27,7 @@ lizenz,String,Die Lizenz für den Gesamtdatensatz. In diesem Datensatz immer \en
 bfh\_id,String,
 veroeffentlichung,Datum,
 veroeffentlichungsjahr,Integer,
-slg,String,
+bfhe,String,
 titel,String,
 normen,String,
 vorinstanz,String,
