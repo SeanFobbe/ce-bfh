@@ -29,8 +29,9 @@ knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
 
 ```
 
+# Vorbereitung
 
-# Ergebnisse laden
+## Ergebnisse laden
 
 
 ```{r}
@@ -42,9 +43,22 @@ tar_load(files.txt)
 
 ```
 
+## Anzahl Tests
 
 
+```{r}
 
+Rfiles <- list.files("functions", pattern = "\\.R$", full.names = TRUE)
+code <- unlist(lapply(Rfiles, readLines))
+
+## Number of Expectations
+sum(stringi::stri_count(regex = "expect_", code))
+
+## Number of Tests
+sum(stringi::stri_count(regex = "test_that\\(", code))
+
+
+```
 
 # Pipeline visualisieren
 
