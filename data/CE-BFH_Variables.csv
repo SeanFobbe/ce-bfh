@@ -1,14 +1,14 @@
 varname,type,explanation
-doc\_id,String,(Nur CSV) Dateiname der extrahierten TXT-Datei.
-text,String,(Nur CSV) Volltext der Entscheidung. Die einzige editorische Änderung gegenüber den TXT-Dateien ist die Zusammenfügung von über Zeilengrenzen gebrochenen Wörtern.
-text_leitsatz,String,
-url\_pdf,String,(Nur CSV) Link zum Volltext der Entscheidung in der Datenbank.
-url\_html,String,
+doc\_id,String,"(Nur CSV) Dateiname der PDF- und TXT-Dateien, ohne Dateiendung."
+text,String,(Nur CSV) Volltext der Entscheidung. Aus den HTML-Dateien extrahiert.
+text_leitsatz,String,(Nur CSV) Text der Leitsätze der Entscheidung.
+url\_pdf,String,(Nur CSV) Link zum Volltext der Entscheidung als PDF in der amtlichen Datenbank des Gerichts.
+url\_html,String,(Nur CSV) Link zum Volltext der Entscheidung als HTML in der amtlichen Datenbank des Gerichts.
 gericht,String,Name des Gerichts. Es ist nur der Wert \enquote{BFH} vergeben. Dies ist der ECLI-Code für \enquote{Bundesfinanzhof}. Diese Variable dient vor allem zur einfachen und transparenten Verbindung der Daten mit anderen Datensätzen.
 datum,Date,Datum der Entscheidung im Format YYYY-MM-DD (ISO-8601).
 entscheidungsjahr,Integer,(Nur CSV) Jahr der Entscheidung im Format YYYY (ISO-8601).
-spruchkoerper\_db,String,Der Spruchkörper wie er in der amtlichen Datenbank des Bundesgerichtshofs eingetragen ist. Gekürzt auf eine für Dateinamen angemessene Länge und konvertiert in arabische Zahlen. Die übrigen Senate haben eindeutige Namen.
-spruchkoerper\_az,String,"Der im Aktenzeichen angegebene Spruchkörper. Arabische Ziffern stehen für die Strafsenate, römische Ziffern für die Zivilsenate. Die Spezialsenate und großen Senate sind in dieser Variable nicht codiert (weil über die Registerzeichen eindeutig identifiziert) und weisen daher immer den Wert \enquote{NA} auf. Nutzen Sie für Analysen aller Senate bitte die Variablen \enquote{spruchkoerper\_db} oder \enquote{registerzeichen}."
+spruchkoerper\_db,String,Der Spruchkörper wie er in der amtlichen Datenbank des Gerichts eingetragen ist.
+spruchkoerper\_az,String,Der im Aktenzeichen angegebene Spruchkörper. Die Senate sind mit römischen Ziffern nummeriert. Der Große Senat ist mit \enquote{GrS} gekennzeichnet.
 registerzeichen,String,Das amtliche Registerzeichen. Eine Erläuterung der Abkürzungen findet sich im Abschnitt \ref{register}.
 verfahrensart,String,"Die Verfahrensart, auf die das Registerzeichen hinweist. Siehe auch Abschnitt \ref{register}."
 eingangsnummer,Integer,Eingangsnummer. Verfahren des gleichen Eingangsjahres erhalten vom Gericht eine fortlaufene Nummer (Ordinalzahl) in der Reihenfolge ihres Eingangs.
@@ -24,12 +24,12 @@ version,Date,(Nur CSV-Datei) Die Versionsnummer des Datensatzes im Format YYYY-M
 doi\_concept,String,(Nur CSV-Datei) Der Digital Object Identifier (DOI) des Gesamtkonzeptes des Datensatzes. Dieser ist langzeit-stabil (persistent). Über diese DOI kann via www.doi.org immer die \textbf{aktuellste Version} des Datensatzes abgerufen werden. Prinzip F1 der FAIR-Data Prinzipien (\enquote{data are assigned globally unique and persistent identifiers}) empfiehlt die Dokumentation jeder Messung mit einem persistenten Identifikator. Selbst wenn die CSV-Dateien ohne Kontext weitergegeben werden kann ihre Herkunft so immer zweifelsfrei und maschinenlesbar bestimmt werden.
 doi\_version,String,(Nur CSV-Datei) Der Digital Object Identifier (DOI) der \textbf{konkreten Version} des Datensatzes. Dieser ist langzeit-stabil (persistent). Über diese DOI kann via www.doi.org immer diese konkrete Version des Datensatzes abgerufen werden. Prinzip F1 der FAIR-Data Prinzipien (\enquote{data are assigned globally unique and persistent identifiers}) empfiehlt die Dokumentation jeder Messung mit einem persistenten Identifikator. Selbst wenn die CSV-Dateien ohne Kontext weitergegeben werden kann ihre Herkunft so immer zweifelsfrei und maschinenlesbar bestimmt werden.
 lizenz,String,Die Lizenz für den Gesamtdatensatz. In diesem Datensatz immer \enquote{Creative Commons Zero 1.0 Universal}.
-bfh\_id,String,
-veroeffentlichung,Datum,
-veroeffentlichungsjahr,Integer,
-bfhe,String,
-titel,String,
-normen,String,
-vorinstanz,String,
-adv,Logical,Ob es sich um eine ??? (AdV)-Entscheidung handelt. Entweder TRUE oder FALSE.
+bfh\_id,String,Die vom BFH vergebene ID der Entscheidung in der amtlichen Datenbank. Die ID ist einzigartig.
+veroeffentlichung,Datum,Das Datum der Veröffentlichung der Entscheidung im Format YYYY-MM-DD (ISO-8601).
+veroeffentlichungsjahr,Integer,Das Jahr der Veröffentlichung der Entscheidung im Format YYYY (ISO-8601).
+bfhe,String,Ob die Entscheidung in der amtlichen Sammlung veröffentlicht wird (\enquote{V}) oder nicht (\enquote{NV}). Der BFH spricht hier auch von V-Entscheidungen und NV-Entscheidungen.
+titel,String,Der Titel der Entscheidung. Enthält eine kurze thematische und rechtliche Einordnung. Vom BFH zur Verfügung gestellt
+normen,String,"Die rechtlichen Normen, die von der Entscheidung betroffen sind. Vom BFH zur Verfügung gestellt"
+vorinstanz,String,Die Vorinstanz des Verfahrens. Vom BFH zur Verfügung gestellt.
+adv,Logical,Ob es sich um eine Entscheidung zur Aufhebung der Vollziehung (AdV) handelt. Entweder TRUE oder FALSE.
 pkh,Logical,Ob es sich um eine Prozesskostenhilfe (PKH)-Entscheidung handelt. Entweder TRUE oder FALSE.
