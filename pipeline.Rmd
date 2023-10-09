@@ -520,7 +520,7 @@ Die Verbesserungen der vorherigen Schritte werden in dieser Funktion zusammengef
 
 ```{targets tar.enhance.final}
 tar_target(dt.final,
-           f.finalize(x = dt.intermediate, 
+           f.finalize(dt.intermediate = dt.intermediate, 
                       vars.additional = vars_additional, 
                       varnames = variables.codebook$varname)) 
 
