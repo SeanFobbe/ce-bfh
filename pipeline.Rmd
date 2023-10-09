@@ -605,6 +605,16 @@ tar_target(latexdefs,
 ```
 
 
+### Zusammenfassungen linguistischer Kennwerte berechnen
+
+```{targets tar.report.lingstat.summ}
+tar_target(lingstats.summary,
+                f.lingstats_summary(dt.final,
+                                    germanvars = TRUE))
+
+```
+
+
 
 
 
