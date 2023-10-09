@@ -697,6 +697,95 @@ tar_target(zip.pdf.leitsatz,
 
 
 
+### ZIP erstellen: TXT-Dateien
+
+```{targets tar.zip.txt}
+tar_target(zip.txt,
+           f.tar_zip(x = files.txt,
+                     filename = paste(prefix.files,
+                                      "DE_TXT_Datensatz.zip",
+                                      sep = "_"),
+                     dir = "output",
+                     mode = "cherry-pick"),
+           format = "file")
+```
+
+
+### ZIP erstellen: CSV-Datei (voller Datensatz)
+
+
+```{targets tar.zip.csv.full}
+tar_target(zip.csv.final,
+                f.tar_zip(csv.final,
+                              filename = gsub("\\.csv", "\\.zip", basename(csv.final)),
+                              dir = "output",
+                              mode = "cherry-pick"),
+                format = "file")
+```
+
+
+
+### ZIP erstellen: CSV-Datei (nur Metadaten)
+
+
+```{targets tar.zip.csv.meta}
+tar_target(zip.csv.meta,
+                f.tar_zip(csv.meta,
+                              filename = gsub("\\.csv", "\\.zip", basename(csv.meta)),
+                              dir = "output",
+                              mode = "cherry-pick"),
+                format = "file")
+```
+
+
+
+## Kryptographische Hashes
+
+### Zu hashende ZIP-Archive definieren
+
+
+```{targets tar.hashes.all}
+tar_target(zip.all,
+           c(zip.pdf.all,
+             zip.pdf.leitsatz,
+             zip.pdf.benannt,
+			 zip.pdf.platzhalter,
+             zip.txt,
+			 zip.citations.az,
+             zip.csv.final,
+             zip.csv.meta,
+             zip.analysis,
+             zip.source))
+```
+
+### Kryptographische Hashes berechnen
+
+
+```{targets tar.hashes.calc}
+tar_target(hashes,
+           f.tar_multihashes(c(zip.all,
+                               report.codebook[1],
+                               report.robustness[1]),
+                             multicore = config$parallel$multihashes,
+                             cores = fullCores))
+```
+
+
+
+### CSV schreiben: Kryptographische Hashes
+
+
+```{targets tar.hashes.csv}
+tar_target(csv.hashes,
+           f.tar_fwrite(x = hashes,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_KryptographischeHashes.csv"))
+                        )
+           )
+```
+
+
 
 
 
