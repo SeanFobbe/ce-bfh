@@ -385,39 +385,39 @@ tar_target(files.html,
 
 
 
-<!-- ```{targets tar.download.pdf} -->
-<!-- tar_target(files.pdf, -->
-<!--                 f.download(url = dt.final$url_pdf, -->
-<!--                            filename = paste0(dt.final$doc_id, ".pdf"), -->
-<!--                            dir = "files/pdf", -->
-<!--                            sleep.min = 0.2, -->
-<!--                            sleep.max = 0.5, -->
-<!--                            retries = 3, -->
-<!--                            retry.sleep.min = 2, -->
-<!--                            retry.sleep.max = 5, -->
-<!--                            timeout = config$download$timeout, -->
-<!--                            debug.toggle = FALSE, -->
-<!--                            debug.files = 500), -->
-<!--                 format = "file") -->
+```{targets tar.download.pdf}
+tar_target(files.pdf,
+                f.download(url = dt.final$url_pdf,
+                           filename = paste0(dt.final$doc_id, ".pdf"),
+                           dir = "files/pdf",
+                           sleep.min = 0.2,
+                           sleep.max = 0.5,
+                           retries = 3,
+                           retry.sleep.min = 2,
+                           retry.sleep.max = 5,
+                           timeout = config$download$timeout,
+                           debug.toggle = FALSE,
+                           debug.files = 500),
+                format = "file")
 
-<!-- ``` -->
-
-
+```
 
 
-<!-- ## Convert Targets -->
 
 
-<!-- ```{targets tar.convert} -->
+## Convert Targets
 
-<!-- tar_target(files.txt, -->
-<!--                 f.tar_pdf_extract(x = files.pdf, -->
-<!--                                   outputdir = "files/txt", -->
-<!-- 								  multicore = config$parallel$extractPDF, -->
-<!--                                   cores = fullCores), -->
-<!--                 format = "file") -->
+
+```{targets tar.convert}
+
+tar_target(files.txt,
+                f.tar_pdf_extract(x = files.pdf,
+                                  outputdir = "files/txt",
+								  multicore = config$parallel$extractPDF,
+                                  cores = fullCores),
+                format = "file")
 					
-<!-- ```		 -->			
+```			
 
 
 
