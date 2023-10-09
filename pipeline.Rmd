@@ -544,6 +544,46 @@ tar_target(dt.meta,
 
 
 
+## Write Targets
+
+Dieser Abschnitt der Pipeline schreibt den Datensatz auf die Festplatte.
+
+
+
+### CSV schreiben: Voller Datensatz
+
+```{targets tar.write.final}
+tar_target(csv.final,
+           f.tar_fwrite(x = dt.final,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_DE_CSV_Datensatz.csv"))
+                        )
+           )
+```
+
+
+
+### CSV schreiben: Metadaten
+
+
+```{targets tar.write.meta}
+tar_target(csv.meta,
+           f.tar_fwrite(x = dt.meta,
+                        filename = file.path("output",
+                                             paste0(prefix.files,
+                                                    "_DE_CSV_Metadaten.csv"))
+                        )
+           )
+```
+
+
+
+
+
+
+
+
 
 ## Report Targets
 
