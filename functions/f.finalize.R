@@ -1,6 +1,12 @@
 #' f.finalize
 #'
 #' Finalize the data set
+#'
+#' @param dt.intermediate Data.table. The intermediate result.
+#' @param vars.additional Data.table. Additional variables calculated from the intermediate result.
+#' @param varnames String. The variable names listed in the Codebook.
+#'
+#' @return Data.table. The finalized data set. 
 
 
 
