@@ -14,10 +14,10 @@
 
 
 f.download_manifest_make <- function(sleep.min = 0.5,
-                                  sleep.max = 2,
-                                  verbose = FALSE,
-                                  debug.toggle = FALSE,
-                                  debug.pages = 20){
+                                     sleep.max = 2,
+                                     verbose = FALSE,
+                                     debug.toggle = FALSE,
+                                     debug.pages = 20){
 
 
 
@@ -106,7 +106,7 @@ f.extract_meta_bfh <- function(url,
 
 
         bfhe <- rvest::html_nodes(html, "[data-label='V/NV']")
-        bfhe <- rvest::html_text(slg, trim = TRUE)
+        bfhe <- rvest::html_text(bfhe, trim = TRUE)
 
         spruchkoerper_db <- rvest::html_nodes(html, "[data-label='Senat']")
         spruchkoerper_db <- rvest::html_text(spruchkoerper_db, trim = TRUE)
