@@ -1,0 +1,102 @@
+---
+title: "Codebook | Corpus der Entscheidungen des Bundesfinanzhofs (CE-BFH)"
+author: Seán Fobbe
+geometry: margin=3cm
+papersize: a4
+fontsize: 11pt
+output:
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    pandoc_args: --listings
+    includes:
+      in_header: ../tex/Preamble_DE.tex
+      before_body: [../temp/Definitions.tex, ../tex/Titlepage_Codebook.tex]
+bibliography: ../temp/packages.bib
+nocite: '@*'
+---
+
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
+                      dev = config$fig$format,
+                      dpi = config$fig$dpi,
+                      fig.align = config$fig$align,
+                      echo = FALSE,
+                      warning = FALSE,
+                      message = FALSE)
+
+```
+
+
+```{r, echo = FALSE}
+tar_load(latexdefs)
+tar_load(dt.meta)
+tar_load(files.pdf)
+tar_load(files.txt)
+tar_load(variables.codebook)
+tar_load(lingstats.summary)
+tar_load(az.brd)
+
+
+```
+
+
+
+
+
+
+
+
+# Kryptographische Signaturen
+
+
+## Zwei-Phasen-Signatur
+
+Die Integrität und Echtheit der einzelnen Archive des Datensatzes sind durch eine Zwei-Phasen-Signatur sichergestellt.
+
+In **Phase I** werden während der Kompilierung für jedes ZIP-Archiv, das Codebook und die Robustness Checks Hash-Werte in zwei verschiedenen Verfahren (SHA2-256 und SHA3-512) berechnet und in einer CSV-Datei dokumentiert.
+
+In **Phase II** werden diese CSV-Datei und der Compilation Report mit meinem persönlichen geheimen GPG-Schlüssel signiert. Dieses Verfahren stellt sicher, dass die Kompilierung von jedermann durchgeführt werden kann, insbesondere im Rahmen von Replikationen, die persönliche Gewähr für Ergebnisse aber dennoch vorhanden bleibt.
+
+
+## Persönliche GPG-Signatur
+
+Die während der Kompilierung des Datensatzes erstellte CSV-Datei mit den Hash-Prüfsummen und der Compilation Report sind mit meiner persönlichen GPG-Signatur versehen. Der mit dieser Version korrespondierende Public Key ist sowohl mit dem Datensatz als auch mit dem Source Code hinterlegt. Er hat folgende Kenndaten:
+ 
+ **Name:** Sean Fobbe (fobbe-data@posteo.de)
+ 
+ **Fingerabdruck:** FE6F B888 F0E5 656C 1D25  3B9A 50C4 1384 F44A 4E42
+
+
+
+
+
+\newpage
+
+
+```{r, results = "asis"}
+cat(readLines(tar_read(changelog)),
+    sep = "\n")
+
+```
+
+
+
+
+
+
+
+# Parameter für strenge Replikationen
+
+
+```{r}
+system2("openssl", "version", stdout = TRUE)
+
+sessionInfo()
+
+```
+
+
+# Literaturverzeichnis
