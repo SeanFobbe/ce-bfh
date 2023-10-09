@@ -513,33 +513,32 @@ tar_target(vars_additional,
 
 
 
-<!-- ### Finalen Datensatz erstellen -->
+### Finalen Datensatz erstellen
 
-<!-- Die Verbesserungen der vorherigen Schritte werden in dieser Funktion zusammengefügt um den finalen Datenatz herzustellen. -->
-
-
-<!-- ```{targets tar.enhance.final} -->
-<!-- tar_target(dt.final, -->
-<!--            f.finalize(x = dt.intermediate, -->
-<!--                       vars.additional = vars_additional, -->
-<!--                       varnames = variables.codebook$varname)) -->
-
-<!-- ``` -->
+Die Verbesserungen der vorherigen Schritte werden in dieser Funktion zusammengefügt um den finalen Datenatz herzustellen.
 
 
+```{targets tar.enhance.final}
+tar_target(dt.final,
+           f.finalize(x = dt.intermediate, 
+                      vars.additional = vars_additional, 
+                      varnames = variables.codebook$varname)) 
 
-
-<!-- ### Variante erstellen: Nur Metadaten -->
-
-<!-- Hier wird die Text-Variable entfernt, um eine deutlich platzsparendere Variante des Datensatzes zu erstellen. Enthalten sind nur noch die Metadaten. -->
+ ``` 
 
 
 
-<!-- ```{targets tar.enhance.meta} -->
-<!-- tar_target(dt.meta, -->
-<!--                 dt.final[, !"text"]) -->
 
-<!-- ``` -->
+### Variante erstellen: Nur Metadaten
+
+Hier wird die Text-Variable entfernt, um eine deutlich platzsparendere Variante des Datensatzes zu erstellen. Enthalten sind nur noch die Metadaten.
+
+
+```{targets tar.enhance.meta}
+tar_target(dt.meta,
+                dt.final[, !"text"])
+
+```
 
 
 
