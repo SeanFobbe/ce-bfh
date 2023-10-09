@@ -77,7 +77,7 @@ g  <- igraph::graph.data.frame(edgelist,
 
 ggraph(g,
        'sugiyama') + 
-    geom_edge_diagonal(colour = "#7e0731")+
+    geom_edge_diagonal(size = 2, colour = "#7e0731")+
     geom_node_point(size = 2,
                     color = "white")+
     geom_node_text(aes(label = name),
