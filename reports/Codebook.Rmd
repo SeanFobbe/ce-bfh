@@ -835,7 +835,7 @@ ggplot(data = freqtable.nosum) +
                  y = N),
              stat = "identity",
              fill = "#7e0731") +
-    scale_x_discrete(breaks = seq(2000, 2020, 5))+
+    scale_x_discrete(breaks = seq(2010, 2020, 2))+
     theme_bw() +
     labs(
         title = paste(prefix.figuretitle,
