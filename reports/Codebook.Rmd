@@ -564,6 +564,56 @@ ggplot(data = dt.bgh.meta)+
 
 
 
+# Inhalt des Korpus
+
+## Zusammenfassung
+
+```{r}
+
+dt.summary.docvars <- dt.bgh.meta[,
+                                  lapply(.SD, function(x)unclass(summary(na.omit(x)))),
+                                  .SDcols = c("entscheidungsjahr",
+                                              "eingangsjahr_iso",
+                                              "eingangsnummer")]
+
+
+dt.unique.docvars <- dt.bgh.meta[,
+                                 lapply(.SD, function(x)length(unique(na.omit(x)))),
+                                 .SDcols = c("entscheidungsjahr",
+                                             "eingangsjahr_iso",
+                                             "eingangsnummer")]
+
+
+dt.stats.docvars <- rbind(dt.unique.docvars,
+                          dt.summary.docvars)
+
+dt.stats.docvars <- transpose(dt.stats.docvars,
+                              keep.names = "names")
+
+
+setnames(dt.stats.docvars, c("Variable",
+                             "Anzahl",
+                             "Min",
+                             "Quart1",
+                             "Median",
+                             "Mean",
+                             "Quart3",
+                             "Max"))
+
+
+
+kable(dt.stats.docvars,
+      digits = 2,
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE)
+
+
+```
+
+\vspace{0.5cm}
+
+
 
 
 
