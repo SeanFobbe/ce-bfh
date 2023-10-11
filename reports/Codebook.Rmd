@@ -751,7 +751,7 @@ kable(freqtable,
 
 
 
-```{r, CE-BFH_08_Barplot_Registerzeichen, fig.height = 14, fig.width = 10}
+```{r, CE-BFH_07_Barplot_Registerzeichen, fig.height = 14, fig.width = 10}
 
 freqtable <- f.fast.freqtable(dt.meta,
                                  varlist = "registerzeichen",
@@ -817,7 +817,7 @@ kable(freqtable,
 
 
 
-```{r, CE-BFH_11_Barplot_Entscheidungsjahr, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_08_Barplot_Entscheidungsjahr, fig.height = 6, fig.width = 9}
 
 freqtable <- f.fast.freqtable(dt.meta,
                               varlist = "entscheidungsjahr",
@@ -888,7 +888,7 @@ freqtable.nosum <- freqtable[-.N]
 
 
 
-```{r, CE-BFH_12_Barplot_EingangsjahrISO, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_09_Barplot_EingangsjahrISO, fig.height = 6, fig.width = 9}
 ggplot(data = freqtable.nosum) +
     geom_bar(aes(x = eingangsjahr_iso,
                  y = N),
@@ -936,7 +936,7 @@ kable(freqtable,
 # Dateigrößen
 
 
-```{r, CE-BFH_13_Density_Dateigroessen_PDF, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_10_Density_Dateigroessen_PDF, fig.height = 6, fig.width = 9}
 
 
 pdf.MB <- file.size(files.pdf) / 10^6
@@ -972,7 +972,7 @@ ggplot(data = dt.plot,
 
 
 
-```{r, CE-BFH_14_Density_Dateigroessen_TXT, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_11_Density_Dateigroessen_TXT, fig.height = 6, fig.width = 9}
 
 txt.MB <- file.size(files.txt) / 10^6
 
@@ -1004,7 +1004,7 @@ ggplot(data = dt.plot,
 ```
 
 
-```{r, CE-BFH_15_Density_Dateigroessen_HTML, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_12_Density_Dateigroessen_HTML, fig.height = 6, fig.width = 9}
 
 html.MB <- file.size(files.html) / 10^6
 
