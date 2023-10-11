@@ -111,24 +111,31 @@ ggraph(g,
 ## Download: Fehlende HTML-Dateien
 
 ```{r}
-setdiff(dt.download.manifest.final$url_html,
-        basename(files.html))
+
+setdiff(basename(dt.download.manifest.final$url_html),
+        tools::file_path_sans_ext(basename(files.html)))
+
 ```
 
 
 ## Download: Fehlende PDF-Dateien
 
 ```{r}
-setdiff(dt.download.final$doc_id,
-        basename(files.pdf))
+
+setdiff(dt.final$doc_id,
+        tools::file_path_sans_ext(basename(files.pdf)))
+
+
 ```
 
 
 ## Konvertierung: Fehlende TXT-Dateien
 
 ```{r}
+
 setdiff(tools::file_path_sans_ext(basename(files.pdf)),
         tools::file_path_sans_ext(basename(files.txt)))
+
 ```
 
 
