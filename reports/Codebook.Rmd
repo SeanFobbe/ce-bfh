@@ -44,6 +44,26 @@ tar_load(az.brd)
 
 
 
+# Einführung
+
+ Der **Bundesfinanzhof (BFH)** ist einer der fünf obersten Gerichtshöfe des Bundes und steht an der Spitze der Finanzgerichtsbarkeit der Bundesrepublik Deutschland (Art. 95 Abs. 1 GG, §§ 2, 10 f. FGO). Der BFH ist die höchste Instanz in Steuer- und Zollsachen und entscheidet über Revisionen gegen Urteile der Finanzgerichte, gegen urteilsgleiche Entscheidungen und Beschwerden gegen andere Entscheidungen der Finanzgerichte (§ 36 FGO).\footnote{Der Finanzrechtsweg ist vergleichsweise kurz: in erster Instanz entscheiden die Finanzgerichte (§ 35 FGO) und es steht im Anschluss nur noch die Anrufung des BFH offen (§ 36 FGO).} Er wurde mit dem \enquote{Gesetz über den  Bundesfinanzhof} vom 29. Juni 1950 errichtet und hat seinen Sitz in München (§ 2 FGO).
+
+Im Jahr 2022 sind am Bundesfinanzhof 11 Senate, bestehend aus ca. 60 Richter:innen.\footnote{\url{https://www.bundesfinanzhof.de/de/gericht/organisation/}.} Zudem besteht ein Großer Senat, dem Richter:innen aller Senate angehören. Präsident:in und Vizepräsident:in vertreten das Gericht nach Außen. Entscheidungen der Senate ergehen in einer Besetzung von 5 Richter:innen, Beschlüsse außerhalb der mündlichen Verhandlung können von 3 Richter:innen getroffen werden (§ 10 Abs. 3 FGO). Der Große Senat besteht aus Gerichtspräsident:in und einer Richter:in jedes Senates, in dem der Vorsitz nicht von der Gerichtspräsident:in geführt wird (§ 11 Abs. 5 FGO), d.h. aktuell 11 Mitgliedern. Zu Beginn jeden Jahres bestimmt das Präsidium des Gerichts die thematische Geschäftsverteilung zwischen den Senaten. 
+
+Wieso dieser Datensatz? Die quantitative Analyse von juristischen Texten, insbesondere denen des BGH, ist in den deutschen Rechtswissenschaften ein noch junges und kaum bearbeitetes Feld.\footnote{Besonders positive Ausnahmen finden sich unter: \url{https://www.quantitative-rechtswissenschaft.de/}} Zu einem nicht unerheblichen Teil liegt dies auch daran, dass die Anzahl an frei nutzbaren Datensätzen außerordentlich gering ist.
+ 
+Die meisten hochwertigen Datensätze lagern (fast) unerreichbar in kommerziellen Datenbanken und sind wissenschaftlich gar nicht oder nur gegen Entgelt zu nutzen. Frei verfügbare Datenbanken wie \emph{Opinio Iuris}\footnote{\url{https://opinioiuris.de/}} und \emph{openJur}\footnote{\url{https://openjur.de/}} verbieten ausdrücklich das maschinelle Auslesen der Rohdaten. Wissenschaftliche Initiativen wie der Juristische Referenzkorpus (JuReKo) sind nach jahrelanger Arbeit hinter verschlossenen Türen verschwunden.
+ 
+In einem funktionierenden Rechtsstaat muss die Rechtsprechung öffentlich, transparent und nachvollziehbar sein. Im 21. Jahrhundert bedeutet dies auch, dass sie systematischer Überprüfung mittels quantitativen Analysen zugänglich sein muss. Der Erstellung und Aufbereitung des Datensatzes liegen daher die Prinzipien der allgemeinen Verfügbarkeit durch Urheberrechtsfreiheit, strenge Transparenz und vollständige wissenschaftliche Reproduzierbarkeit zugrunde. Die FAIR-Prinzipien (Findable, Accessible, Interoperable and Reusable) für freie wissenschaftliche Daten inspirieren sowohl die Konstruktion, als auch die Art der Publikation.\footnote{Wilkinson, M., Dumontier, M., Aalbersberg, I. et al. The FAIR Guiding Principles for Scientific Data Management and Stewardship. Sci Data 3, 160018 (2016). \url{https://doi.org/10.1038/sdata.2016.18}}
+
+
+
+
+
+
+
+
+
 
 
 
