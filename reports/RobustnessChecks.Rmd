@@ -170,6 +170,67 @@ str(dt.final)
 
 
 
+# Frequenztabellen erstellen
+
+
+## Vorbereitung
+
+
+```{r}
+
+varlist  <-  c("gericht",
+               "entscheidungsjahr",
+               "spruchkoerper_db",
+               "spruchkoerper_az",
+               "registerzeichen",
+               "verfahrensart",
+               "eingangsjahr_az",
+               "eingangsjahr_iso",
+               "version",
+               "doi_concept",
+               "doi_version",
+               "lizenz",
+               "veroeffentlichungsjahr",
+               "bfhe",
+               "adv",
+               "pkh")
+               
+
+
+## Präfix definieren
+
+prefix <- paste0(config$project$shortname,
+                 "_01_Frequenztabelle_var-")
+
+```
+
+## Frequenztabellen berechnen
+
+
+```{r, results = "asis"}
+
+f.fast.freqtable(dt.bgh.final,
+                 varlist = varlist,
+                 sumrow = TRUE,
+                 output.list = FALSE,
+                 output.kable = TRUE,
+                 output.csv = TRUE,
+                 outputdir = dir.analysis,
+                 prefix = prefix,
+                 align = c("p{5cm}",
+                           rep("r", 4)))
+
+```
+
+
+
+
+
+
+
+
+
+
 ```{r, results = "asis"}
 cat(readLines(tar_read(changelog)),
     sep = "\n")
