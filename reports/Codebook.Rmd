@@ -300,6 +300,51 @@ PDF & \textbf{Traditionelle juristische Forschung}. Die PDF-Dokumente wie sie vo
 
 
 
+# Variablen
+\label{variablen}
+
+
+## Datenstruktur 
+
+```{r}
+str(dt.meta)
+```
+
+
+## Hinweise
+
+
+- **Doppelte Codierung der Spruchkörper** --- Für viele Urteile sind die Spruchkörper doppelt enthalten, einmal aus der Datenbank in menschenlesbarer Form (Variable \enquote{spruchkoerper\_db}), einmal durch das Aktenzeichen (Variable \enquote{spruchkoerper\_az}). Nicht wenige Aktenzeichen enthalten keine separate und einheitliche Angabe des Spruchkörpers, weil sich diese schon aus dem Registerzeichen ergibt, z.B. für Aktenkontrollen in Haftprüfungsverfahren oder Kartellsachen. Die Variable \enquote{spruchkoerper\_db} ermöglicht hier eine einfache Selektion bestimmter Spruchkörper anhand einer einheitlichen Variable, ohne im Detail erst jedes passende Registerzeichen suchen zu müssen.
+- **Fehlende Werte** sind immer mit \enquote{NA} codiert.
+- **Strings** können grundsätzlich alle in UTF-8 definierten Zeichen (insbesondere Buchstaben, Zahlen und Sonderzeichen) enthalten.
+- Alle Variablen sind in exakt der gleichen Reihenfolge wie im Datensatz gelistet. Der Datensatz wird automatisiert darauf getestet, ob alle Variablen im Datensatz auch in diesem Codebook dokumentiert sind.
+
+
+
+## Erläuterung der Variablen
+
+
+```{r}
+kable(variables.codebook,
+      format = "latex",
+      align = 'P{3.5cm}P{3cm}p{8cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      escape = FALSE,
+      col.names = c("Variable",
+                    "Typ",
+                    "Erläuterung"))  %>% kable_styling(latex_options = "repeat_header")
+```
+
+
+
+
+\newpage
+
+
+
+
+
 # Kryptographische Signaturen
 
 
