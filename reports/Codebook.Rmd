@@ -615,6 +615,70 @@ kable(dt.stats.docvars,
 
 
 
+## Nach Typ der Entscheidung
+
+
+```{r, CE-BFH_05_Barplot_Entscheidungstyp, fig.height = 6, fig.width = 9}
+
+freqtable <- f.fast.freqtable(dt.meta,
+                                 varlist = "bfhe",
+                                 sumrow = TRUE,
+                                 output.list = TRUE,
+                                 output.kable = FALSE,
+                                 output.csv = FALSE,
+                                 align = c("p{5cm}"))[[1]][,exactpercent:=NULL]
+
+freqtable.nosum <- freqtable.etyp[-.N][,lapply(.SD, as.numeric)]
+
+
+
+ggplot(data = freqtable.nosum) +
+    geom_bar(aes(x = reorder(bfhe,
+                             -N),
+                 y = N),
+             stat = "identity",
+             fill = "#7e0731",
+             color = "black",
+             width = 0.5) +
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Entscheidungen in amtlicher Sammlung"),
+        caption = caption,
+        x = "Typ der Entscheidung",
+        y = "Entscheidungen"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+```
+
+\vspace{0.5cm}
+
+
+```{r}
+
+kable(freqtable,
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Typ",
+                    "Entscheidungen",
+                    "% Gesamt",
+                    "% Kumulativ"))  %>% kable_styling(latex_options = "repeat_header")
+
+```
+
+
+
+
+
 
 
 # Kryptographische Signaturen
