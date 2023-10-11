@@ -61,6 +61,56 @@ In einem funktionierenden Rechtsstaat muss die Rechtsprechung öffentlich, trans
 
 
 
+# Nutzung
+
+Die Daten sind in offenen, interoperablen und weit verbreiteten Formaten (CSV, TXT, PDF) veröffentlicht. Sie lassen sich grundsätzlich mit allen modernen Programmiersprachen (z.B. Python oder R), sowie mit grafischen Programmen nutzen.
+
+ **Wichtig:** Nicht vorhandene Werte sind sowohl in den Dateinamen als auch in der CSV-Datei mit "NA" codiert.
+
+
+## CSV-Dateien
+
+Am einfachsten ist es die **CSV-Dateien** einzulesen. CSV\footnote{Das CSV-Format ist in RFC 4180 definiert, siehe \url{https://tools.ietf.org/html/rfc4180}} ist ein einfaches und maschinell gut lesbares Tabellen-Format. In diesem Datensatz sind die Werte komma-separiert. Jede Spalte entspricht einer Variable, jede Zeile einer Entscheidung. Die Variablen sind unter Punkt \ref{variablen} genauer erläutert.
+
+Zum Einlesen empfehle ich für **R** das package **data.table** (via CRAN verfügbar). Dessen Funktion **fread()** ist etwa zehnmal so schnell wie die normale **read.csv()**-Funktion in Base-R. Sie erkennt auch den Datentyp von Variablen sicherer. Ein Beispiel:
+
+
+```{r eval = FALSE, echo = TRUE}
+library(data.table)
+dt.bgh <- fread("filename.csv")
+```
+
+
+
+## TXT-Dateien
+
+Die **TXT-Dateien** inklusive Metadaten können zum Beispiel mit **R** und dem package **readtext** (via CRAN verfügbar) eingelesen werden. Ein Vorschlag:
+
+```{r eval = FALSE, echo = TRUE}
+library(readtext)
+df.bgh <- readtext("./*.txt",
+                    docvarsfrom = "filenames", 
+                    docvarnames = c("gericht",
+                                    "bfhe",
+                                    "datum",
+                                    "spruchkoerper_az",
+                                    "registerzeichen",
+                                    "eingangsnummer",
+                                    "eingangsjahr_az",
+                                    "zusatz_az",
+                                    "bfh_id",
+                                    "kollision"),
+                    dvsep = "_", 
+                    encoding = "UTF-8")
+```
+
+
+
+
+
+
+
+
 
 
 
