@@ -628,7 +628,7 @@ freqtable <- f.fast.freqtable(dt.meta,
                                  output.csv = FALSE,
                                  align = c("p{5cm}"))[[1]][,exactpercent:=NULL]
 
-freqtable.nosum <- freqtable.etyp[-.N]
+freqtable.nosum <- freqtable[-.N]
 
 
 
