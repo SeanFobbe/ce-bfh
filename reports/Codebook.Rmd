@@ -111,6 +111,152 @@ df.bgh <- readtext("./*.txt",
 
 
 
+# Konstruktion
+
+
+
+## Beschreibung des Datensatzes
+
+Dieser Datensatz ist eine digitale Zusammenstellung von möglichst allen begründeten Entscheidungen, die auf der amtlichen Internetpräsenz des Bundesfinanzhofs (BFH) am jeweiligen Stichtag veröffentlicht waren. Die Stichtage für jede Version entsprechen exakt der Versionsnummer.
+
+Zusätzlich zu den aufbereiteten maschinenlesbaren Formaten (HTML und CSV) sind die PDF-Daten enthalten, damit Analyst:innen gegebenenfalls eine unabhängige Konvertierung vornehmen können. Die PDF-Rohdaten wurden inhaltlich nicht verändert und nur die Dateinamen angepasst, um die Lesbarkeit für Mensch und Maschine zu verbessern.
+
+Speziell an Praktiker:innen richten sich die PDF-Sammlungen aller in der amtlichen Sammlung abgedruckten Entscheidungen (V-Entscheidungen).
+
+
+
+## Datenquellen
+
+\begin{centering}
+\begin{longtable}{P{5cm}p{9cm}}
+
+\toprule
+
+ Datenquelle & Fundstelle \\
+
+\midrule
+
+ Primäre Datenquelle & \url{https://www.bundesfinanzhof.de}\\
+ Source Code & \url{\softwareversionurldoi}\\
+ Registerzeichen & \url{\aktenzeichenurldoi}\\
+
+\bottomrule
+
+\end{longtable}
+\end{centering}
+
+
+Die Tabelle der Registerzeichen und der ihnen zugeordneten Verfahrensarten stammt aus dem folgenden Datensatz: "Seán Fobbe (2021). Aktenzeichen der Bundesrepublik Deutschland (AZ-BRD). Version 1.0.1. Zenodo. DOI: 10.5281/zenodo.4569564."
+
+
+
+
+
+## Sammlung der Daten
+
+Die Daten wurden unter Beachtung des Robot Exclusion Standard (RES) gesammelt. Der Abruf geschieht ausschließlich über TLS-verschlüsselte Verbindungen. Die Entscheidungen sind laut dem Gericht anonymisiert, aber ungekürzt.
+
+
+
+
+```{r, CE-BFH_00_Pipeline_Graph, fig.width = 12, fig.height = 18, fig.pos = "p", fig.cap = "Der vollständige Prozess der Datensatz-Kompilierung."}
+
+edgelist <- tar_network(targets_only = TRUE)$edges
+setDT(edgelist)
+
+g  <- igraph::graph.data.frame(edgelist,
+                               directed = TRUE)
+
+
+ggraph(g,
+       'sugiyama') + 
+    geom_edge_diagonal(colour = "grey")+
+    geom_node_point()+
+    geom_node_text(aes(label = name),
+                   size = 2,
+                   repel = TRUE)+
+    theme_void()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Vollständiger Prozess der Datensatz-Kompilierung"),
+        caption = caption
+    )+
+    theme(
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+```
+
+
+
+## Source Code und Compilation Report
+
+Der gesamte Source Code --- sowohl für die Erstellung des Datensatzes, als auch für dieses Codebook --- ist öffentlich einsehbar und dauerhaft erreichbar im wissenschaftlichen Archiv des CERN unter dieser Addresse hinterlegt: \softwareversionurldoi
+
+Mit jeder Kompilierung des vollständigen Datensatzes wird auch ein umfangreicher **Compilation Report** in einem attraktiv designten PDF-Format erstellt (ähnlich diesem Codebook). Der Compilation Report enthält den kommentierten Source Code für die Daten-Pipeline, dokumentiert relevante Rechenergebnisse, gibt sekundengenaue Zeitstempel an und ist mit einem klickbaren Inhaltsverzeichnis versehen. Er ist zusammen mit dem Source Code hinterlegt. Wenn Sie sich für Details der Herstellung interessieren, lesen Sie diesen bitte zuerst.
+
+
+
+## Grenzen des Datensatzes
+
+Nutzer:innen sollten folgende wichtige Grenzen beachten:
+ 
+
+- Der Datensatz enthält nur das, was das Gericht auch tatsächlich veröffentlicht, nämlich begründete Entscheidungen (\emph{publication bias}). 
+- Es kann aufgrund technischer Grenzen bzw. Fehler sein, dass manche --- im Grunde verfügbare --- Entscheidungen nicht oder nicht korrekt abgerufen werden (\emph{automation bias}).
+- Es werden HTML- und PDF-Dateien abgerufen (\emph{file type bias}). Der Text der Entscheidungen in der CSV-Datei stammt aus den HTML-Dateien. Die PDF-Dateien sind beigefügt, falls bei der Extraktion fehler auftreten sollten, sind in der Regel aber für den Gebrauch in der traditionellen Rechtswissenschaft und -praxis gedacht.
+- Erst ab dem 1. Januar 2010 sind begründete Entscheidungen des Bundesfinanzhofs einigermaßen vollständig veröffentlicht (\emph{temporal bias}). Die Frequenztabellen geben hierzu genauer Auskunft.
+
+
+
+
+## Urheberrechtsfreiheit von Rohdaten und Datensatz 
+
+An den Entscheidungstexten und amtlichen Leitsätzen besteht gem. § 5 Abs. 1 UrhG kein Urheberrecht, da sie amtliche Werke sind. § 5 UrhG ist auf amtliche Datenbanken analog anzuwenden (BGH, Beschluss vom 28.09.2006, I ZR 261/03, \enquote{Sächsischer Ausschreibungsdienst}).
+
+Alle eigenen Beiträge (z.B. durch Zusammenstellung und Anpassung der Metadaten) und damit den gesamten Datensatz stelle ich gemäß einer \emph{CC0 1.0 Universal Public Domain Lizenz} vollständig urheberrechtsfrei.
+
+
+
+
+## Metadaten
+
+
+### Allgemein
+
+Die Metadaten in den Dateinamen sind größtenteils unverändert von den jeweiligen Datenbankeinträgen aus der amtlichen Datenbank des Bundesfinanzhofs entnommen. Berechnet und hinzugefügt wurden durch den Autor des Datensatzes eine Reihe weitere Variablen, sowie in den Dateinamen der PDF/TXT-Dateien Unter- und Trennstriche, um die Maschinenlesbarkeit zu erleichtern. Der volle Satz an Metadaten ist nur in den CSV-Dateien enthalten. Alle hinzugefügten Metadaten sind vollständig maschinenlesbar dokumentiert. Sie sind entweder im Source Code enthalten, mit dem Source Code zusammen dokumentiert oder über dauerhaft stabile Identifikatoren (z.B. DOI) zitiert.
+ 
+Die Dateinamen der PDF- und TXT-Dateien enthalten Gerichtsname, die Bezeichnung als V- oder NV-entscheidung,  Datum, das offizielle Aktenzeichen, einen Zusatz zum Aktenzeichen und die vom BFH in der Datenbank genutzte einzigartige ID.
+
+
+
+### Schema für die Dateinamen
+
+\begin{verbatim}
+ [gericht]_[bfhe]_[datum]_[spruchkoerper_az]_
+ [registerzeichen]_[eingangsnummer]_[eingangsjahr_az]_[bfh_id]
+\end{verbatim}
+
+
+### Beispiel eines Dateinamens
+
+\begin{verbatim}
+ BFH_V_2023-07-11_X_R_17_22_STRE202310190.pdf
+\end{verbatim}
+
+
+## Qualitätsprüfung
+
+Die Inhalte der Variablen wurden  strikt validiert. Die möglichen Werte der jeweiligen Variablen wurden zudem durch Frequenztabellen und Visualisierungen auf ihre Plausibilität geprüft. Insgesamt werden zusammen mit jeder Kompilierung über 30 automatisierte Tests zur Qualitätsprüfung durchgeführt. Alle Ergebnisse der Qualitätsprüfungen sind aggregiert im Robustness Checks Report, im Compilation Report und einzeln im Archiv \enquote{ANALYSE} zusammen mit dem Datensatz veröffentlicht.
+
+
+## Grafische Darstellung
+
+Die Robenfarbe der Richter:innen des Bundesfinanzhofs ist \enquote{karmesinrot}. Der Hex-Wert hierfür ist vermutlich \#7e0731. Das ist besonders bei der Erstellung thematisch passender Diagrammen hilfreich. Alle im Compilation Report und diesem Codebook präsentierten Diagramme sind in diesem karmesinrot gehalten.
+
+
 
 
 
