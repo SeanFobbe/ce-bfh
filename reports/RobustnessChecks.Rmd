@@ -204,6 +204,8 @@ prefix <- paste0(config$project$shortname,
 
 ```
 
+
+
 ## Frequenztabellen berechnen
 
 
