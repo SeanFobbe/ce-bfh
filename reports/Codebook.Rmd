@@ -628,7 +628,7 @@ freqtable <- f.fast.freqtable(dt.meta,
                                  output.csv = FALSE,
                                  align = c("p{5cm}"))[[1]][,exactpercent:=NULL]
 
-freqtable.nosum <- freqtable.etyp[-.N][,lapply(.SD, as.numeric)]
+freqtable.nosum <- freqtable.etyp[-.N]
 
 
 
@@ -674,6 +674,140 @@ kable(freqtable,
                     "% Kumulativ"))  %>% kable_styling(latex_options = "repeat_header")
 
 ```
+
+
+
+
+\newpage
+
+
+## Nach Spruchkörper (Aktenzeichen)
+
+
+
+
+```{r, CE-BFH_06_Barplot_Spruchkoerper_AZ, fig.height = 6, fig.width = 9}
+
+freqtable <- f.fast.freqtable(dt.meta,
+                                 varlist = "spruchkoerper_az",
+                                 sumrow = TRUE,
+                                 output.list = TRUE,
+                                 output.kable = FALSE,
+                                 output.csv = FALSE,
+                                 align = c("p{5cm}"))[[1]][,exactpercent:=NULL]
+
+freqtable.nosum <- freqtable[-.N]
+
+
+ggplot(data = freqtable.nosum) +
+    geom_bar(aes(x = reorder(spruchkoerper_az,
+                             -N),
+                 y = N),
+             stat = "identity",
+             fill = "#7e0731",
+             color = "black",
+             width = 0.5) +
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Entscheidungen je Senat (Aktenzeichen)"),
+        caption = caption,
+        x = "Senat",
+        y = "Entscheidungen"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+```
+
+\vspace{0.5cm}
+
+
+```{r}
+kable(freqtable,
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Senat",
+                    "Entscheidungen",
+                    "% Gesamt",
+                    "% Kumulativ"))  %>% kable_styling(latex_options = "repeat_header")
+
+```
+
+
+
+
+\newpage
+
+
+## Nach Registerzeichen
+
+
+
+```{r, CE-BFH_08_Barplot_Registerzeichen, fig.height = 14, fig.width = 10}
+
+freqtable <- f.fast.freqtable(dt.meta,
+                                 varlist = "registerzeichen",
+                                 sumrow = TRUE,
+                                 output.list = TRUE,
+                                 output.kable = FALSE,
+                                 output.csv = FALSE,
+                                 align = c("p{5cm}"))[[1]][,exactpercent:=NULL]
+
+freqtable.nosum <- freqtable[-.N]
+
+
+
+ggplot(data = freqtable.nosum) +
+    geom_bar(aes(x = reorder(registerzeichen,
+                             N),
+                 y = N),
+             stat = "identity",
+             fill = "#7e0731",
+             color = "black") +
+    scale_y_log10(breaks = trans_breaks("log10", function(x) 10^x),
+                  labels = trans_format("log10", math_format(10^.x)))+
+    coord_flip()+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Entscheidungen je Registerzeichen"),
+        caption = caption,
+        x = "Registerzeichen",
+        y = "Entscheidungen"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+```
+
+\vspace{0.5cm}
+
+
+```{r}
+kable(freqtable,
+      format = "latex",
+      align = 'P{3cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Registerzeichen",
+                    "Entscheidungen",
+                    "% Gesamt",
+                    "% Kumulativ"))  %>% kable_styling(latex_options = "repeat_header")
+```
+
+
 
 
 
