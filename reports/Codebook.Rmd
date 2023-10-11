@@ -50,7 +50,7 @@ tar_load(az.brd)
 
 Im Jahr 2022 sind am Bundesfinanzhof 11 Senate, bestehend aus ca. 60 Richter:innen.\footnote{\url{https://www.bundesfinanzhof.de/de/gericht/organisation/}.} Zudem besteht ein Großer Senat, dem Richter:innen aller Senate angehören. Präsident:in und Vizepräsident:in vertreten das Gericht nach Außen. Entscheidungen der Senate ergehen in einer Besetzung von 5 Richter:innen, Beschlüsse außerhalb der mündlichen Verhandlung können von 3 Richter:innen getroffen werden (§ 10 Abs. 3 FGO). Der Große Senat besteht aus Gerichtspräsident:in und einer Richter:in jedes Senates, in dem der Vorsitz nicht von der Gerichtspräsident:in geführt wird (§ 11 Abs. 5 FGO), d.h. aktuell 11 Mitgliedern. Zu Beginn jeden Jahres bestimmt das Präsidium des Gerichts die thematische Geschäftsverteilung zwischen den Senaten. 
 
-Wieso dieser Datensatz? Die quantitative Analyse von juristischen Texten, insbesondere denen des BGH, ist in den deutschen Rechtswissenschaften ein noch junges und kaum bearbeitetes Feld.\footnote{Besonders positive Ausnahmen finden sich unter: \url{https://www.quantitative-rechtswissenschaft.de/}} Zu einem nicht unerheblichen Teil liegt dies auch daran, dass die Anzahl an frei nutzbaren Datensätzen außerordentlich gering ist.
+Wieso dieser Datensatz? Die quantitative Analyse von juristischen Texten, insbesondere denen des BFH, ist in den deutschen Rechtswissenschaften ein noch junges und kaum bearbeitetes Feld.\footnote{Besonders positive Ausnahmen finden sich unter: \url{https://www.quantitative-rechtswissenschaft.de/}} Zu einem nicht unerheblichen Teil liegt dies auch daran, dass die Anzahl an frei nutzbaren Datensätzen außerordentlich gering ist.
  
 Die meisten hochwertigen Datensätze lagern (fast) unerreichbar in kommerziellen Datenbanken und sind wissenschaftlich gar nicht oder nur gegen Entgelt zu nutzen. Frei verfügbare Datenbanken wie \emph{Opinio Iuris}\footnote{\url{https://opinioiuris.de/}} und \emph{openJur}\footnote{\url{https://openjur.de/}} verbieten ausdrücklich das maschinelle Auslesen der Rohdaten. Wissenschaftliche Initiativen wie der Juristische Referenzkorpus (JuReKo) sind nach jahrelanger Arbeit hinter verschlossenen Türen verschwunden.
  
@@ -77,7 +77,7 @@ Zum Einlesen empfehle ich für **R** das package **data.table** (via CRAN verfü
 
 ```{r eval = FALSE, echo = TRUE}
 library(data.table)
-dt.bgh <- fread("filename.csv")
+dt <- fread("filename.csv")
 ```
 
 
@@ -88,20 +88,20 @@ Die **TXT-Dateien** inklusive Metadaten können zum Beispiel mit **R** und dem p
 
 ```{r eval = FALSE, echo = TRUE}
 library(readtext)
-df.bgh <- readtext("./*.txt",
-                    docvarsfrom = "filenames", 
-                    docvarnames = c("gericht",
-                                    "bfhe",
-                                    "datum",
-                                    "spruchkoerper_az",
-                                    "registerzeichen",
-                                    "eingangsnummer",
-                                    "eingangsjahr_az",
-                                    "zusatz_az",
-                                    "bfh_id",
-                                    "kollision"),
-                    dvsep = "_", 
-                    encoding = "UTF-8")
+df <- readtext("./*.txt",
+               docvarsfrom = "filenames", 
+               docvarnames = c("gericht",
+                               "bfhe",
+                               "datum",
+                               "spruchkoerper_az",
+                               "registerzeichen",
+                               "eingangsnummer",
+                               "eingangsjahr_az",
+                               "zusatz_az",
+                               "bfh_id",
+                               "kollision"),
+               dvsep = "_", 
+               encoding = "UTF-8")
 ```
 
 
@@ -447,7 +447,7 @@ kable(lingstats.summary,
 
 
 ```{r, CE-BFH_01_Density_Zeichen, fig.height = 6, fig.width = 9}
-ggplot(data = dt.bgh.meta)+
+ggplot(data = dt.meta)+
     geom_density(aes(x = zeichen),
                  fill = "#7e0731")+
     scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
@@ -476,7 +476,7 @@ ggplot(data = dt.bgh.meta)+
 ## Verteilung Tokens
 
 ```{r,  CE-BFH_02_Density_Tokens, fig.height = 6, fig.width = 9}
-ggplot(data = dt.bgh.meta)+
+ggplot(data = dt.meta)+
     geom_density(aes(x = tokens),
                  fill = "#7e0731")+
     scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
@@ -504,7 +504,7 @@ ggplot(data = dt.bgh.meta)+
 ## Verteilung Typen
 
 ```{r, CE-BFH_03_Density_Typen, fig.height = 6, fig.width = 9}
-ggplot(data = dt.bgh.meta)+
+ggplot(data = dt.meta)+
     geom_density(aes(x = typen),
                  fill = "#7e0731")+
     scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
@@ -533,7 +533,7 @@ ggplot(data = dt.bgh.meta)+
 ## Verteilung Sätze
 
 ```{r, CE-BFH_04_Density_Saetze, fig.height = 6, fig.width = 9}
-ggplot(data = dt.bgh.meta)+
+ggplot(data = dt.meta)+
     geom_density(aes(x = saetze),
                  fill = "#7e0731")+
     scale_x_log10(breaks = trans_breaks("log10", function(x) 10^x),
@@ -570,18 +570,18 @@ ggplot(data = dt.bgh.meta)+
 
 ```{r}
 
-dt.summary.docvars <- dt.bgh.meta[,
-                                  lapply(.SD, function(x)unclass(summary(na.omit(x)))),
-                                  .SDcols = c("entscheidungsjahr",
-                                              "eingangsjahr_iso",
-                                              "eingangsnummer")]
+dt.summary.docvars <- dt.meta[,
+                              lapply(.SD, function(x)unclass(summary(na.omit(x)))),
+                              .SDcols = c("entscheidungsjahr",
+                                          "eingangsjahr_iso",
+                                          "eingangsnummer")]
 
 
-dt.unique.docvars <- dt.bgh.meta[,
-                                 lapply(.SD, function(x)length(unique(na.omit(x)))),
-                                 .SDcols = c("entscheidungsjahr",
-                                             "eingangsjahr_iso",
-                                             "eingangsnummer")]
+dt.unique.docvars <- dt.meta[,
+                             lapply(.SD, function(x)length(unique(na.omit(x)))),
+                             .SDcols = c("entscheidungsjahr",
+                                         "eingangsjahr_iso",
+                                         "eingangsnummer")]
 
 
 dt.stats.docvars <- rbind(dt.unique.docvars,
