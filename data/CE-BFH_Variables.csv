@@ -1,7 +1,7 @@
 varname,type,explanation
 doc\_id,String,"(Nur CSV) Dateiname der PDF- und TXT-Dateien, ohne Dateiendung."
 text,String,(Nur CSV) Volltext der Entscheidung. Aus den HTML-Dateien extrahiert.
-text_leitsatz,String,(Nur CSV) Text der Leitsätze der Entscheidung.
+text\_leitsatz,String,(Nur CSV) Text der Leitsätze der Entscheidung.
 url\_pdf,String,(Nur CSV) Link zum Volltext der Entscheidung als PDF in der amtlichen Datenbank des Gerichts.
 url\_html,String,(Nur CSV) Link zum Volltext der Entscheidung als HTML in der amtlichen Datenbank des Gerichts.
 gericht,String,Name des Gerichts. Es ist nur der Wert \enquote{BFH} vergeben. Dies ist der ECLI-Code für \enquote{Bundesfinanzhof}. Diese Variable dient vor allem zur einfachen und transparenten Verbindung der Daten mit anderen Datensätzen.
