@@ -343,6 +343,42 @@ kable(variables.codebook,
 
 
 
+# Registerzeichen
+ 
+\label{register}
+
+
+Die Tabelle der Registerzeichen und der ihnen zugeordneten Verfahrensarten stammt aus dem folgenden Datensatz: \enquote{Seán Fobbe (2021). Aktenzeichen der Bundesrepublik Deutschland (AZ-BRD). Version 1.0.1. Zenodo. DOI: 10.5281/zenodo.4569564.}
+
+Die im Datensatz enthaltenen Registerzeichen wurden jeweils um die runden Klammern bereinigt, um Probleme bei der Nutzung unter Windows zu vermeiden.
+
+
+\vspace{0.5cm}
+
+
+\ra{1.2}
+
+
+```{r}
+kbl(az.brd[stelle == "BFH" & position == "hauptzeichen",
+           .(zeichen_original,bedeutung)],
+    format = "latex",
+    align = c("P{3cm}",
+              "p{11cm}"),
+    booktabs = TRUE,
+    longtable = TRUE,
+    col.names = c("Registerzeichen",
+                  "Verfahrensart")) 
+
+```
+
+
+
+
+
+
+\newpage
+
 
 
 # Kryptographische Signaturen
