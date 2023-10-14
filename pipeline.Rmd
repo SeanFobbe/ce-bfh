@@ -746,6 +746,22 @@ tar_target(zip.txt,
 ```
 
 
+### ZIP erstellen: HTML-Dateien
+
+```{targets tar.zip.html}
+tar_target(zip.html,
+           f.tar_zip(x = files.html,
+                     filename = paste(prefix.files,
+                                      "DE_HTML_Datensatz.zip",
+                                      sep = "_"),
+                     dir = "output",
+                     mode = "cherry-pick"),
+           format = "file")
+```
+
+
+
+
 ### ZIP erstellen: CSV-Datei (voller Datensatz)
 
 
@@ -783,6 +799,7 @@ tar_target(zip.all,
            c(zip.pdf.all,
              zip.pdf.bfhe,
              zip.txt,
+			 zip.html,
              zip.csv.final,
              zip.csv.meta,
 			 zip.analysis,
