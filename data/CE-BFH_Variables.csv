@@ -1,4 +1,4 @@
-varname,group,freqtable,type,explanation
+varname,group,freqtable,type,description
 aktenzeichen,1_id,0,String,Das amtliche Aktenzeichen im Format [senatsnummer] [registerzeichen] [eingangsnummer] / [eingangsjahr] [ggf. zusatz\_az]. Quelle: BFH-Datenbank.
 bfh\_id,1_id,0,String,Die vom BFH vergebene ID der Entscheidung in der amtlichen Datenbank. Die ID ist einzigartig. Quelle: BFH-Datenbank.
 doc\_id,1_id,0,String,"(Nur CSV) Dateiname der PDF- und TXT-Dateien, ohne Dateiendung. Quelle: Kompositum verschiedener Variablen des Datensatzes."
