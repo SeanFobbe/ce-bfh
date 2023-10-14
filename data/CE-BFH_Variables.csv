@@ -4,7 +4,7 @@ bfh\_id,1_id,0,String,Die vom BFH vergebene ID der Entscheidung in der amtlichen
 doc\_id,1_id,0,String,"(Nur CSV) Dateiname der PDF- und TXT-Dateien, ohne Dateiendung. Quelle: Kompositum verschiedener Variablen des Datensatzes."
 ecli,1_id,0,String,"(Nur CSV-Datei) Der European Case Law Identifier (ECLI) der Entscheidung. Jeder Entscheidung ist eine einzigartige ECLI zugewiesen. Die ECLI ist vor allem dann hilfreich, wenn dieser Datensatz mit anderen Datensätzen zusammengeführt und Duplikate vermieden werden sollen.  Nicht für alle Entscheidungen vorhanden. Quelle: BFH-Datenbank, aus den HTML-Dateien extrahiert"
 gericht,1_id,1,String,Name des Gerichts. Es ist nur der Wert \enquote{BFH} vergeben. Dies ist der ECLI-Code für \enquote{Bundesfinanzhof}. Diese Variable dient vor allem zur einfachen und transparenten Verbindung der Daten mit anderen Datensätzen. Quelle: Autor des Datensatzes.
-text,2_text,0,String,(Nur CSV) Volltext der Entscheidung. Quelle: BFH-Datenbank aus den HTML-Dateien extrahiert
+text,2_text,0,String,"(Nur CSV) Volltext der Entscheidung. Achtung: wenige Entscheidungen (ca. 20) haben keinen Text, weil es Parallelentscheidungen sind. Quelle: BFH-Datenbank aus den HTML-Dateien extrahiert"
 text\_leitsatz,2_text,0,String,(Nur CSV) Text der Leitsätze der Entscheidung. Quelle: BFH-Datenbank aus den HTML-Dateien extrahiert.
 url\_html,2_text,0,String,(Nur CSV) Link zum Volltext der Entscheidung als HTML in der amtlichen Datenbank des Gerichts. Quelle: BFH-Datenbank.
 url\_pdf,2_text,0,String,(Nur CSV) Link zum Volltext der Entscheidung als PDF in der amtlichen Datenbank des Gerichts. Quelle: BFH-Datenbank.
