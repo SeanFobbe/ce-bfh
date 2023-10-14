@@ -59,6 +59,9 @@ f.finalize <- function(dt.intermediate,
                               dt.final$bfh_id)
 
 
+    ## Set NA zeichen to 0
+
+    dt.final$zeichen <- ifelse(is.na(dt.final$zeichen), 0, dt.final$zeichen)
     
 
     ## Test: Check variables
