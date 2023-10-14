@@ -311,7 +311,7 @@ str(dt.meta)
 ```
 
 
-## Hinweise
+## Allgemeine Hinweise
 
 
 - **Doppelte Codierung der Spruchkörper** --- Für viele Urteile sind die Spruchkörper doppelt enthalten, einmal aus der Datenbank in menschenlesbarer Form (Variable \enquote{spruchkoerper\_db}), einmal durch das Aktenzeichen (Variable \enquote{spruchkoerper\_az}). Nicht wenige Aktenzeichen enthalten keine separate und einheitliche Angabe des Spruchkörpers, weil sich diese schon aus dem Registerzeichen ergibt, z.B. für Aktenkontrollen in Haftprüfungsverfahren oder Kartellsachen. Die Variable \enquote{spruchkoerper\_db} ermöglicht hier eine einfache Selektion bestimmter Spruchkörper anhand einer einheitlichen Variable, ohne im Detail erst jedes passende Registerzeichen suchen zu müssen.
@@ -321,20 +321,110 @@ str(dt.meta)
 
 
 
-## Erläuterung der Variablen
+## ID-Variablen
+
+ID-Variablen stellen verschiedene Identifikatoren für die Entscheidung zur Verfügung, beispielsweise Aktenzeichen oder ECLI.
 
 
 ```{r}
-kable(variables.codebook,
+
+kable(variables.codebook[group == "1_id", .(varname, type, description)],
       format = "latex",
       align = 'P{3.5cm}P{3cm}p{8cm}',
       booktabs = TRUE,
       longtable = TRUE,
       escape = FALSE,
       col.names = c("Variable",
-                    "Typ",
-                    "Erläuterung"))  %>% kable_styling(latex_options = "repeat_header")
+                    "Type",
+                    "Description"))  %>% kable_styling(latex_options = "repeat_header")
+
 ```
+
+## Text-Variablen
+
+Text-Variablen enthalten den Volltext der Entscheidung, Teilstücke davon (z.B. Leitsätze), den Umfang des Volltextes (Zeichen, Tokens, Typen, Sätze) und dessen Quelle (URLs zu Volltexten).
+
+
+```{r}
+
+kable(variables.codebook[group == "2_text", .(varname, type, description)],
+      format = "latex",
+      align = 'P{3.5cm}P{3cm}p{8cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      escape = FALSE,
+      col.names = c("Variable",
+                    "Type",
+                    "Description"))  %>% kable_styling(latex_options = "repeat_header")
+
+```
+
+
+
+## Thematische Variablen
+
+Thematische Variablen geben Auskunft über eine grobe thematische Zuordnung der Entscheidung, beispielsweise zu Registerzeichen, Verfahrensart, Normen, Vorinstanz.
+
+
+```{r}
+
+kable(variables.codebook[group == "3_thematic", .(varname, type, description)],
+      format = "latex",
+      align = 'P{3.5cm}P{3cm}p{8cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      escape = FALSE,
+      col.names = c("Variable",
+                    "Type",
+                    "Description"))  %>% kable_styling(latex_options = "repeat_header")
+
+```
+
+
+
+## Temporale Variablen
+
+Temporale Variablen bieten Informationen zu wichtigen Zeitpunkten, wie Verkündung der Entscheidung, Veröffentlichung der Entscheidung oder Eingang des Verfahrens.
+
+
+
+```{r}
+
+kable(variables.codebook[group == "4_temporal", .(varname, type, description)],
+      format = "latex",
+      align = 'P{3.5cm}P{3cm}p{8cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      escape = FALSE,
+      col.names = c("Variable",
+                    "Type",
+                    "Description"))  %>% kable_styling(latex_options = "repeat_header")
+
+```
+
+## Meta-Variablen
+
+Meta-Variablen beziehen sich auf den Datensatz selbst. Sie dokumentieren Versionsnummer, verschiedene DOIs und die Lizenz des Datensatzes. Streng genommen sind sie innerhalb des Datensatzes Konstanten (weil der Inhalt immer gleich ist) und nur im Vergleich zwischen Datensätzen echte Variablen.
+
+
+
+```{r}
+
+kable(variables.codebook[group == "9_meta", .(varname, type, description)],
+      format = "latex",
+      align = 'P{3.5cm}P{3cm}p{8cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      escape = FALSE,
+      col.names = c("Variable",
+                    "Type",
+                    "Description"))  %>% kable_styling(latex_options = "repeat_header")
+
+```
+
+
+
+
 
 
 
