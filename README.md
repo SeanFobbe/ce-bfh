@@ -23,7 +23,7 @@ Primäre Endprodukte des Skripts sind folgende ZIP-Archive:
 - Alle Analyse-Ergebnisse (Tabellen als CSV, Grafiken als PDF und PNG)
 
 
-Alle Ergebnisse werden im Ordner `output` abgelegt. Zusätzlich werden für alle ZIP-Archive kryptographische Signaturen (SHA2-256 und SHA3-512) berechnet und in einer CSV-Datei hinterlegt. 
+Alle Ergebnisse werden im Ordner `output/` abgelegt. Zusätzlich werden für alle ZIP-Archive kryptographische Signaturen (SHA2-256 und SHA3-512) berechnet und in einer CSV-Datei hinterlegt. 
 
 
 
