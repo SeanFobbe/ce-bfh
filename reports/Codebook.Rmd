@@ -1074,6 +1074,25 @@ ggplot(data = freqtable.nosum) +
 ```
 
 
+\vspace{0.5cm}
+
+
+```{r}
+kable(freqtable.nosum[,cumulpercent:=NULL],
+      format = "latex",
+      align = 'P{4cm}',
+      booktabs = TRUE,
+      longtable = TRUE,
+      col.names = c("Normen",
+                    "Entscheidungen",
+                    "% Gesamt",
+                    "% Kumulativ"))  %>% kable_styling(latex_options = "repeat_header")
+```
+
+
+
+
+
 
 # Dateigrößen
 
