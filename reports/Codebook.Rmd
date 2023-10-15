@@ -443,6 +443,8 @@ Die Tabelle der Registerzeichen und der ihnen zugeordneten Verfahrensarten stamm
 
 Die im Datensatz enthaltenen Registerzeichen wurden jeweils um die runden Klammern bereinigt, um Probleme bei der Nutzung unter Windows zu vermeiden.
 
+Die Bedeutung des Registerzeichens \enquote{ER-S} ist mir nicht klar, aber möglicherweise ist es eine Kombination aus den Registerzeichen \enquote{E}, \enquote{R} und \enquote{S}. Ich arbeite an der Aufklärung.
+
 
 \vspace{0.5cm}
 
