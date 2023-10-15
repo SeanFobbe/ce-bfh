@@ -1023,6 +1023,55 @@ kable(freqtable,
 
 
 
+## Nach Normen
+
+
+
+```{r}
+
+normen.split <- stringi::stri_split(str = dt.meta$normen, regex = "\\|")
+normen  <- unlist(normen.split)
+
+dt.normen <- data.table(normen)
+
+freqtable <- f.fast.freqtable(dt.normen,
+                              varlist = "normen",
+                              sumrow = TRUE,
+                              output.list = TRUE,
+                              output.kable = FALSE,
+                              output.csv = FALSE,
+                              align = c("p{5cm}"))[[1]][,exactpercent:=NULL]
+## Reduce to Top 50
+freqtable.nosum <- freqtable[-.N][order(-N)][1:50]
+
+```
+
+
+
+```{r, CE-BFH_10_Barplot_Normen, fig.height = 6, fig.width = 9}
+ggplot(data = freqtable.nosum) +
+    geom_bar(aes(x = reorder(normen, N),
+                 y = N),
+             stat = "identity",
+             fill = "#7e0731") +
+    coord_flip()+
+    theme_bw() +
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Entscheidungen mit Bezug zu den 50 wichtigsten Normen"),
+        caption = caption,
+        x = "Normen",
+        y = "Entscheidungen"
+    )+
+    theme(
+        text = element_text(size = 14),
+        plot.title = element_text(size = 14,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+```
 
 
 
