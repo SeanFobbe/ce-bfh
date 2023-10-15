@@ -844,7 +844,7 @@ kable(freqtable,
 
 
 
-```{r, CE-BFH_07_Barplot_Registerzeichen, fig.height = 10, fig.width = 10}
+```{r, CE-BFH_07_Barplot_Registerzeichen, fig.height = 6, fig.width = 9}
 
 freqtable <- f.fast.freqtable(dt.meta,
                                  varlist = "registerzeichen",
