@@ -319,6 +319,7 @@ str(dt.meta)
 - **Strings** können grundsätzlich alle in UTF-8 definierten Zeichen (insbesondere Buchstaben, Zahlen und Sonderzeichen) enthalten.
 - Die **Reihenfolge** der Variablen entspricht der im CSV-Datensatz. Der Datensatz wird automatisiert darauf getestet, ob alle Variablen im Datensatz auch in diesem Codebook dokumentiert sind.
 
+\newpage
 
 
 ## ID-Variablen
