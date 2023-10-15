@@ -1085,7 +1085,7 @@ kable(freqtable.nosum[,cumulpercent:=NULL],
       longtable = TRUE,
       col.names = c("Normen",
                     "Entscheidungen",
-                    "% Gesamt"q))  %>% kable_styling(latex_options = "repeat_header")
+                    "% Gesamt"))  %>% kable_styling(latex_options = "repeat_header")
 ```
 
 
