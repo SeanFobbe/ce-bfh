@@ -29,7 +29,7 @@ knitr::opts_chunk$set(fig.path = file.path("..", "analysis/"),
 
 ```
 
-# Vorbereitung
+# Überblick
 
 ## Ergebnisse laden
 
@@ -44,7 +44,7 @@ tar_load(files.txt)
 
 ```
 
-## Anzahl Tests
+## Anzahl automatisierter Tests bestimmen
 
 
 ```{r}
@@ -52,14 +52,27 @@ tar_load(files.txt)
 Rfiles <- list.files("functions", pattern = "\\.R$", full.names = TRUE)
 code <- unlist(lapply(Rfiles, readLines))
 
-## Number of Expectations
-sum(stringi::stri_count(regex = "expect_", code))
-
-## Number of Tests
-sum(stringi::stri_count(regex = "test_that\\(", code))
-
 
 ```
+
+
+### Tests
+
+
+```{r}
+
+sum(stringi::stri_count(regex = "test_that\\(", code))
+
+```
+
+### Expectations
+
+```{r}
+
+sum(stringi::stri_count(regex = "expect_", code))
+
+```
+
 
 
 
