@@ -62,14 +62,15 @@ f.finalize <- function(dt.intermediate,
     ## Set NA zeichen to 0
     dt.final$zeichen <- ifelse(is.na(dt.final$zeichen), 0, dt.final$zeichen)
 
+    
     ## Clean var "normen"
-
     normen <- gsub(" *, *\n +", "|", dt.final$normen)
     normen <- gsub("\n", "", normen)    
     normen <- gsub(" +", " ", normen)
     normen <- gsub("\\| ", "|", normen)
     dt.final$normen <- normen
 
+    
     ## Test: Check variables
     
     varnames <- gsub("\\\\", "", varnames) # Remove LaTeX escape characters
