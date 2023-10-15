@@ -1058,7 +1058,7 @@ ggplot(data = freqtable.nosum) +
     theme_bw() +
     labs(
         title = paste(prefix.figuretitle,
-                      "| 50 wichtigste Normen"),
+                      "| Die 50 wichtigsten Normen"),
         caption = caption,
         x = "Normen",
         y = "Entscheidungen"
