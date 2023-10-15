@@ -1048,7 +1048,7 @@ freqtable.nosum <- freqtable[-.N][order(-N)][1:50]
 
 
 
-```{r, CE-BFH_10_Barplot_Normen, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_10_Barplot_Normen, fig.height = 14, fig.width = 9}
 ggplot(data = freqtable.nosum) +
     geom_bar(aes(x = reorder(normen, N),
                  y = N),
@@ -1058,7 +1058,7 @@ ggplot(data = freqtable.nosum) +
     theme_bw() +
     labs(
         title = paste(prefix.figuretitle,
-                      "| Entscheidungen mit Bezug zu den 50 wichtigsten Normen"),
+                      "| 50 wichtigste Normen"),
         caption = caption,
         x = "Normen",
         y = "Entscheidungen"
@@ -1085,7 +1085,7 @@ kable(freqtable.nosum[,cumulpercent:=NULL],
       longtable = TRUE,
       col.names = c("Normen",
                     "Entscheidungen",
-                    "% Gesamt"))  %>% kable_styling(latex_options = "repeat_header")
+                    "% Gesamt"q))  %>% kable_styling(latex_options = "repeat_header")
 ```
 
 
