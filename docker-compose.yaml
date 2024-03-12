@@ -9,3 +9,5 @@ services:
     volumes:
       - .:/ce-bfh
       - ./etc/gitconfig:/etc/gitconfig
+    environment:
+      - TZ=Europe/Berlin
