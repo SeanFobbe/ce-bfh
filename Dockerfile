@@ -1,24 +1,29 @@
-FROM rocker/r-ver:4.2.2
+# syntax=docker/dockerfile:1
 
-#RUN sudo apt-get remove -y rstudio-server # only if tidyverse or verse base images used
+# Build Arguments
+ARG R_VERSION="4.4.0"
+ARG R_CRAN_MIRROR="https://packagemanager.posit.co/cran/__linux__/jammy/2024-06-13"
 
-# TeX layer
-RUN apt-get update && apt-get install -y pandoc pandoc-citeproc texlive-science texlive-latex-extra texlive-lang-german
+# Base Layer
+FROM rocker/r-ver:${R_VERSION}
 
-# System dependency layer
-COPY etc/requirements-system.txt .
-RUN apt-get update && apt-get -y install $(cat requirements-system.txt)
+# LaTeX Layer
+RUN apt-get update && apt-get install -y \
+    pandoc \
+    pandoc-citeproc \
+    texlive-science \
+    texlive-latex-extra \
+    texlive-lang-german
 
-# Python layer
-COPY etc/requirements-python.txt .
-RUN pip install -r requirements-python.txt
+# System Dependency Layer
+COPY etc/requirements-system.txt /
+RUN apt-get update && apt-get -y install $(cat /requirements-system.txt)
 
-# R layer
-COPY etc/requirements-R.txt .
-RUN R --no-save -e 'install.packages(readLines("requirements-R.txt"))'
+# R Layer
+COPY etc/requirements-R.txt /
+RUN /rocker_scripts/setup_R.sh ${R_CRAN_MIRROR} && \
+    Rscript -e 'install.packages(readLines("/requirements-R.txt"))'
 
-
-
+# Config Layers
 WORKDIR /ce-bfh
-
-CMD "R"
+CMD R
