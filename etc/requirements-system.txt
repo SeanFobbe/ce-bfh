@@ -1,8 +1,8 @@
 git
 pip
-wget
 python3
 libatlas3-base
+libtbb-dev
 libopenblas-base
 libxml2-dev
 libcurl4-openssl-dev
@@ -17,11 +17,3 @@ libjpeg-dev
 libgif-dev
 librsvg2-dev
 libglpk-dev
-libleptonica-dev
-imagemagick
-make
-automake
-ca-certificates
-g++
-libtool
-pkg-config
