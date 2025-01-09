@@ -26,7 +26,7 @@ f.download_manifest_make <- function(sleep.min = 0.5,
     offset.url <- f.linkextract("https://www.bundesfinanzhof.de/de/entscheidungen/entscheidungen-online/")
     offset.url <- grep("search-form", offset.url, value = TRUE)
     
-    offset.raw <- gsub(".*Boffset%5D=([0-9]+)#search-form.*", "\\1", offset.url)        
+    offset.raw <- gsub(".*Bpage%5D=([0-9]+)#search-form.*", "\\1", offset.url)        
     offset.max <- max(as.integer(offset.raw))
     
     offset.descending <- seq(0, 9900, 10)
