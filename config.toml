@@ -29,7 +29,7 @@ aktenzeichen = "10.5281/zenodo.4569564" # checked
 
 toggle = false   # Ob Debugging aktiv ist; Möglichkeiten sind "true" oder "false"; Der Debugging-Modus reduziert den Such-Umfang auf den in der Variable "debug.scope" angegebenen Umfang Seiten
 pages = 20      # Die Anzahl der zufällig ausgewählten Seiten, die im Debugging-Modus berücksichtigt werden sollen (jede Seite enthält idR 10 Entscheidungen). Muss mindestens 10 betragen.
-
+cleanrun = false # Löscht vor jedem Run alle gespeicherten Zwischen- und Endergebnisse (Hinweis: ist unabhängig von debug.toggle, aber idR für Debugging nützlich)
 
 
 [cores]
