@@ -2,8 +2,11 @@ version: "3.7"
 
 services:
   ce-bfh:
+    build:
+      dockerfile: Dockerfile
+      context: .  
     container_name: ce-bfh
-    image: ce-bfh:4.2.2
+    image: ce-bfh
     tty: true
     tmpfs: /tmp
     volumes:
