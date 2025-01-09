@@ -8,6 +8,7 @@
 - NEU: Option für Clean Runs in Konfiguration eingefügt (löscht alle Daten vor dem eigentlichen Run)
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
+- Vereinheitlichung der Komponenten für PDF-Extraktion, linguistische Statistiken und Berechnung kryptographischer Hashes
 - Vereinfachung der Run-Skripte und stärkere Integration mit Docker Compose
 - Erweiterung des Lösch-Skriptes
 - Docker Zeitzone auf Berlin eingestellt
