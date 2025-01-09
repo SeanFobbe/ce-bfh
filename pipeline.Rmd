@@ -638,7 +638,7 @@ tarchetypes::tar_render(report.quality,
 ```{targets tar.report.codebook}
 tarchetypes::tar_render(report.codebook,
                         file.path("reports",
-                                  "Codebook.Rmd"),
+                                  "codebook.Rmd"),
                         output_file = file.path("../output",
                                                 paste0(config$project$shortname,
                                                        "_",
