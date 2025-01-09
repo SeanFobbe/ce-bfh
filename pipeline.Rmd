@@ -151,7 +151,6 @@ tar_option_set(packages = c("tarchetypes",
 							"testthat",     # Unit Tests
                             "fs",           # Verbessertes File Handling
                             "zip",          # Verbessertes ZIP Handling
-                            "mgsub",        # Vektorisiertes Gsub
                             "httr",         # HTTP-Werkzeuge
                             "rvest",        # HTML/XML-Extraktion
                             "knitr",        # Professionelles Reporting
