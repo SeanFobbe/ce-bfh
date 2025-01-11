@@ -31,7 +31,7 @@ Alle Ergebnisse werden im Ordner `output/` abgelegt. Zusätzlich werden für all
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
-- 6 GB Speicherplatz auf Festplatte
+- 4 GB Speicherplatz auf Festplatte
 - Multi-core CPU empfohlen (8 cores/16 threads für die Referenzdatensätze). 
 
 
@@ -70,7 +70,7 @@ $ bash docker-build-image.sh
 Falls Sie zuvor den Datensatz schon einmal kompiliert haben (ob erfolgreich oder erfolglos), können Sie mit folgendem Befehl alle Arbeitsdaten im Ordner löschen:
 
 ```
-$ Rscript delete_all_data.R
+$ Rscript delete_all_data.sh
 ```
 
 Den vollständigen Datensatz kompilieren Sie mit folgendem Skript:
@@ -132,14 +132,16 @@ Die folgende Struktur erläutert die wichtigsten Bestandteile des Projekts. Wäh
 ├── CHANGELOG.md               # Alle Änderungen
 ├── config.toml                # Zentrale Konfigurations-Datei
 ├── data                       # Datensätze, auf denen die Pipeline aufbaut
-├── delete_all_data.R          # Löscht den Datensatz und Zwischenergebnisse
+├── delete_all_data.sh         # Löscht den Datensatz und Zwischenergebnisse
 ├── docker-build-image.sh      # Docker Image erstellen
 ├── docker-compose.yaml        # Konfiguration für Docker
+├── docker-delete_all_data.sh  # Löscht den Datensatz und Zwischenergebnisse via Docker
 ├── Dockerfile                 # Definition des Docker Images
-├── docker-run-project.sh      # Docker Image und Datensatz kompilieren
+├── docker-run-project.sh      # Docker Image erstellen und Datensatz vie Docker kompilieren
 ├── etc                        # Konfigurations-Dateien
 ├── functions                  # Wichtige Schritte der Pipeline
 ├── gpg                        # Persönlicher Public GPG-Key für Seán Fobbe
+├── LICENSE                    # Lizenz für Source Code
 ├── pipeline.Rmd               # Zentrale Definition der Pipeline
 ├── README.md                  # Bedienungsanleitung
 ├── reports                    # Markdown-Dateien
