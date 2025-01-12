@@ -12,6 +12,7 @@
 #' TODO
 #'
 #' - ADD Letter Senates (e.g. GrS)
+#' - ADD extract metadata from aktenzeichen directly
 
 #' Example citation blocks BFH
 #' 
@@ -106,11 +107,21 @@ f.citation_extraction_bfh <- function(dt.final){
 
     ## Select Metadata    
     dt.meta <- dt.final[, !"text"]
-    
+    dt.meta <- dt.meta[!duplicated(dt.meta$aktenzeichen)]
 
+    ## Select vertices without metadata
+    edge.vertices <- unique(c(dt$source, dt$target))
+    meta.vertices <- dt.meta$aktenzeichen
+    nometa.vertices <- setdiff(edge.vertices, meta.vertices)
+    dt.nometa <- data.table(aktenzeichen = nometa.vertices)
+
+    ## Create table with all vertices with and without metadata
+    dt.fullmeta <- rbind(dt.meta, dt.nometa, fill = TRUE)
+    
     ## Create Graph Object
     g  <- igraph::graph_from_data_frame(dt,
-                                        directed = TRUE)
+                                        directed = TRUE,
+                                        vertices = dt.fullmeta)
 
     
     ## Convert Parallel Edges to Weights
@@ -118,55 +129,9 @@ f.citation_extraction_bfh <- function(dt.final){
     g <- igraph::simplify(g, edge.attr.comb = list(weight = "sum"))
 
 
-
-    ## Extract vertex names
-    g.names <- igraph::vertex_attr(g, "name")
-
-    ## Create limited metadata table
-    dt.final$graphkey <-  ifelse(is.na(dt.final$band),
-                                 dt.final$aktenzeichen,
-                                 paste0("BFHE ", dt.final$band, ", ", dt.final$seite))
-    
-    
-    dt.meta <- dt.final[,.(graphkey,
-                           entscheidungsjahr,
-                           spruchkoerper_typ,
-                           spruchkoerper_az,
-                           registerzeichen,
-                           verfahrensart,
-                           eingangsnummer,
-                           eingangsjahr_az,
-                           eingangsjahr_iso,
-                           band,
-                           aktenzeichen,
-                           aktenzeichen_alle,
-                           praesi,
-                           v_praesi)]
-
-
-    dt.meta <-  unique(dt.meta, by = "graphkey")
-
-    
-    ## Match metadata to graph
-    match <- match(g.names, dt.meta$graphkey)
-    dt.graphmeta <- dt.meta[match]
-
-    
-    ## Set Vertex Attributes (all)
-    varnames <- names(dt.graphmeta)
-    
-    for(i in varnames){
-    g <- igraph::set_vertex_attr(graph = g,
-                                 name = i,
-                                 value = unname(unlist(dt.graphmeta[, ..i])))
-
-    }
-
-
-    
     ## Add BFHE attribute
     g <- igraph::set_vertex_attr(graph = g,
-                                 name = "bverfge",
+                                 name = "bfhe",
                                  value = grepl("BFHE",
                                                igraph::vertex_attr(g, "name"))
                                  )
