@@ -159,7 +159,7 @@ Die Daten wurden unter Beachtung des Robot Exclusion Standard (RES) gesammelt. D
 
 
 
-```{r, CE-BFH_00_Pipeline_Graph, fig.width = 12, fig.height = 18, fig.pos = "p", fig.cap = "Der vollständige Prozess der Datensatz-Kompilierung."}
+```{r, CE-BFH_Pipeline_Graph, fig.width = 12, fig.height = 18, fig.pos = "p", fig.cap = "Der vollständige Prozess der Datensatz-Kompilierung."}
 
 edgelist <- tar_network(targets_only = TRUE)$edges
 setDT(edgelist)
@@ -539,7 +539,7 @@ kable(lingstats.summary,
 ## Verteilung Zeichen
 
 
-```{r, CE-BFH_01_Density_Zeichen, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Density_Zeichen, fig.height = 6, fig.width = 9}
 ggplot(data = dt.meta)+
     geom_density(aes(x = zeichen),
                  fill = "#7e0731")+
@@ -568,7 +568,7 @@ ggplot(data = dt.meta)+
 
 ## Verteilung Tokens
 
-```{r,  CE-BFH_02_Density_Tokens, fig.height = 6, fig.width = 9}
+```{r,  CE-BFH_Density_Tokens, fig.height = 6, fig.width = 9}
 ggplot(data = dt.meta)+
     geom_density(aes(x = tokens),
                  fill = "#7e0731")+
@@ -596,7 +596,7 @@ ggplot(data = dt.meta)+
 
 ## Verteilung Typen
 
-```{r, CE-BFH_03_Density_Typen, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Density_Typen, fig.height = 6, fig.width = 9}
 ggplot(data = dt.meta)+
     geom_density(aes(x = typen),
                  fill = "#7e0731")+
@@ -625,7 +625,7 @@ ggplot(data = dt.meta)+
 
 ## Verteilung Sätze
 
-```{r, CE-BFH_04_Density_Saetze, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Density_Saetze, fig.height = 6, fig.width = 9}
 ggplot(data = dt.meta)+
     geom_density(aes(x = saetze),
                  fill = "#7e0731")+
@@ -711,7 +711,7 @@ kable(dt.stats.docvars,
 ## Nach Typ der Entscheidung
 
 
-```{r, CE-BFH_05_Barplot_Entscheidungstyp, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Barplot_Entscheidungstyp, fig.height = 6, fig.width = 9}
 
 freqtable <- f.fast.freqtable(dt.meta,
                                  varlist = "bfhe",
@@ -779,7 +779,7 @@ kable(freqtable,
 
 
 
-```{r, CE-BFH_06_Barplot_Spruchkoerper_AZ, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Barplot_Spruchkoerper_AZ, fig.height = 6, fig.width = 9}
 
 freqtable <- f.fast.freqtable(dt.meta,
                                  varlist = "spruchkoerper_az",
@@ -844,7 +844,7 @@ kable(freqtable,
 
 
 
-```{r, CE-BFH_07_Barplot_Registerzeichen, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Barplot_Registerzeichen, fig.height = 6, fig.width = 9}
 
 freqtable <- f.fast.freqtable(dt.meta,
                                  varlist = "registerzeichen",
@@ -910,7 +910,7 @@ kable(freqtable,
 
 
 
-```{r, CE-BFH_08_Barplot_Entscheidungsjahr, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Barplot_Entscheidungsjahr, fig.height = 6, fig.width = 9}
 
 freqtable <- f.fast.freqtable(dt.meta,
                               varlist = "entscheidungsjahr",
@@ -981,7 +981,7 @@ freqtable.nosum <- freqtable[-.N]
 
 
 
-```{r, CE-BFH_09_Barplot_EingangsjahrISO, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Barplot_EingangsjahrISO, fig.height = 6, fig.width = 9}
 ggplot(data = freqtable.nosum) +
     geom_bar(aes(x = eingangsjahr_iso,
                  y = N),
@@ -1048,7 +1048,7 @@ freqtable.nosum <- freqtable[-.N][order(-N)][1:50]
 
 
 
-```{r, CE-BFH_10_Barplot_Normen, fig.height = 14, fig.width = 9}
+```{r, CE-BFH_Barplot_Normen, fig.height = 14, fig.width = 9}
 ggplot(data = freqtable.nosum) +
     geom_bar(aes(x = reorder(normen, N),
                  y = N),
@@ -1096,7 +1096,7 @@ kable(freqtable.nosum[,cumulpercent:=NULL],
 # Dateigrößen
 
 
-```{r, CE-BFH_11_Density_Dateigroessen_PDF, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Density_Dateigroessen_PDF, fig.height = 6, fig.width = 9}
 
 
 pdf.MB <- file.size(files.pdf) / 10^6
@@ -1132,7 +1132,7 @@ ggplot(data = dt.plot,
 
 
 
-```{r, CE-BFH_12_Density_Dateigroessen_TXT, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Density_Dateigroessen_TXT, fig.height = 6, fig.width = 9}
 
 txt.MB <- file.size(files.txt) / 10^6
 
@@ -1164,7 +1164,7 @@ ggplot(data = dt.plot,
 ```
 
 
-```{r, CE-BFH_13_Density_Dateigroessen_HTML, fig.height = 6, fig.width = 9}
+```{r, CE-BFH_Density_Dateigroessen_HTML, fig.height = 6, fig.width = 9}
 
 html.MB <- file.size(files.html) / 10^6
 
