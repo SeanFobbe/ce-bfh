@@ -150,7 +150,10 @@ f.citation_extraction_bfh <- function(dt.final){
     stopifnot(length(g.names) == length(g.senat))
 
     ## Extract Registerzeichen
-    g.regz <- stringi::stri_extract_all(g.names, regex = " (AR|B|E|GrS|K|PKH|R|S) ")
+    g.regz <- stringi::stri_match_first(g.names, regex = " (AR|B|E|GrS|K|PKH|R|S) *[0-9]+")
+    g.regz <- do.call(rbind, g.regz)
+    g.regz <- g.regz[,2]
+    
     g.regz <- unlist(g.regz)
     g.regz <- trimws(g.regz)
 
@@ -184,3 +187,14 @@ f.citation_extraction_bfh <- function(dt.final){
 ## library(igraph)
 ## tar_load(dt.final)  
 
+
+
+
+## Multiple AKtenzeichen
+    ## test <- lapply(g.regz, length)
+    ## test <- unlist(test)
+    ## index <- which(test > 2)
+    ## g.regz[index]
+
+    ## g.names[10685]
+    
