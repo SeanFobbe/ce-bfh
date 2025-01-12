@@ -12,6 +12,7 @@
 - Vereinfachung der Run-Skripte und stärkere Integration mit Docker Compose
 - Erweiterung des Lösch-Skriptes
 - Docker Zeitzone auf Berlin eingestellt
+- Entfernung der Nummerierung von Diagrammen
 - Entfernung der Tesseract Dependencies
 - Entfernung der Python Toolchain
 - Aktualisierung des Public GPG Keys im Repository
