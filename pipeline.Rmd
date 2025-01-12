@@ -829,6 +829,7 @@ tar_target(zip.all,
 			 zip.html,
              zip.csv.final,
              zip.csv.meta,
+			 zip.graphml,
 			 zip.analysis,
              zip.source))
 ```
