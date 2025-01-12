@@ -32,7 +32,7 @@ f.citation_extraction_bfh <- function(dt.final){
                        "\\d{2}") # Jahr
 
     
-    ## Extract BVerfG citations to Aktenzeichen targets
+    ## Extract BFH citations to Aktenzeichen targets
     target.az <- stringi::stri_extract_all(dt.final$text,
                                            regex = regex.az)
     
