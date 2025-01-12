@@ -151,11 +151,7 @@ f.citation_extraction_bfh <- function(dt.final){
 
     ## Extract Registerzeichen
     g.regz <- stringi::stri_match_first(g.names, regex = " (AR|B|E|GrS|K|PKH|R|S) *[0-9]+")
-    g.regz <- do.call(rbind, g.regz)
     g.regz <- g.regz[,2]
-    
-    g.regz <- unlist(g.regz)
-    g.regz <- trimws(g.regz)
 
     
     ## Extract BFHE
