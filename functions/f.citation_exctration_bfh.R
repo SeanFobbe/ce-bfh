@@ -9,10 +9,13 @@
 # Draws and expands Coupette, Juristische Netzwerkforschung (Mohr Siebeck 2019), 241-244
 
 
+#' TODO
+#'
+#' - ADD Letter Senates (e.g. GrS)
+
 #' Example citation blocks BFH
 #' 
-#' - "BVerfGE 79, 240 <243>; 149, 1 <10 Rn. 21>; 157, 223 <250 Rn. 70>),"
-#' - "(vgl. BVerfGE 152, 345 <371 Rn. 65 f.> m.w.N.)"
+#' (Senatsurteile vom 13.01.2015 - VII R 35/12, BFHE 248, 287, Rz 26 und 28 und vom 10.11.2015 - VII R 40/14, Rz 11; Senatsbeschlüsse vom 31.01.2019 - VII B 115/18, Rz 10 und vom 31.01.2019 - VII B 147/18, Rz 14). 
 
 
 
@@ -37,31 +40,28 @@ f.citation_extraction_bfh <- function(dt.final){
     regex.bfhe.blocks <- "BFHE[\\s\\d\\[\\];,\\.<>Rnfu-]+"
     
     target.bfhe.blocks <- stringi::stri_extract_all(dt.final$text,
-                                                            regex = regex.bfhe.blocks,
-                                                            case_insensitive = TRUE)
+                                                    regex = regex.bfhe.blocks,
+                                                    case_insensitive = TRUE)
     
     target.bfhe.blocks <- lapply(target.bfhe.blocks, paste0, collapse = " ")
     target.bfhe.blocks <- lapply(target.bfhe.blocks, # Fix case typos
-                                    gsub,
-                                    pattern = "BFH",
-                                    replacement = "BFH",
-                                    ignore.case = TRUE)
+                                 gsub,
+                                 pattern = "BFH",
+                                 replacement = "BFH",
+                                 ignore.case = TRUE)
 
     ## Extract individual Bfhe citations from blocks
     regex.bfhe.cite <- paste0("(BFHE|;)\\s*", # hooks
-                                 "\\d{1,3},\\s*", # Volume
-                                 "\\d{1,3}") # Page
+                              "\\d{1,3},\\s*", # Volume
+                              "\\d{1,3}") # Page
 
 
     target.bfhe <- stringi::stri_extract_all(target.bfhe.blocks,
-                                                regex = regex.bfhe.cite)
+                                             regex = regex.bfhe.cite)
 
     
     ## Define source Aktenzeichen
-    source <- ifelse(is.na(dt.final$band),
-                     dt.final$aktenzeichen,
-                     paste0("BFHE ", dt.final$band, ", ", dt.final$seite))
-
+    source <- dt.final$aktenzeichen
        
     
     ## Combine source Aktenzeichen and target Aktenzeichen
@@ -98,12 +98,14 @@ f.citation_extraction_bfh <- function(dt.final){
     dt$source <- gsub("([A-Z])(\\d)", "\\1 \\2", dt$source)
     dt$target <- gsub("([A-Z])(\\d)", "\\1 \\2", dt$target)
 
-    dt$source <- gsub("(\\d)B", "\\1 B", dt$source)
-    dt$target <- gsub("(\\d)B", "\\1 B", dt$target)
-    
+
 
     ## Remove self-citations    
     dt <- dt[!(dt$source == dt$target)]
+
+
+    ## Select Metadata    
+    dt.meta <- dt.final[, !"text"]
     
 
     ## Create Graph Object
