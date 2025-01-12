@@ -799,6 +799,23 @@ tar_target(zip.csv.meta,
 ```
 
 
+### ZIP erstellen: GraphML
+
+```{targets tar.zip.graphml}
+tar_target(zip.graphml,
+           f.tar_zip(graphml_citations,
+                     filename = paste(prefix.files,
+                                      "DE_GraphML_Zitationsnetzwerk.zip",
+                                      sep = "_"),
+                     dir = "output",
+                     mode = "cherry-pick"),
+           format = "file")
+```
+
+
+
+
+
 
 ## Kryptographische Hashes
 
