@@ -531,7 +531,8 @@ tar_target(dt.meta,
 
 ```{targets tar.citations}
 tar_target(igraph_citations,
-           f.citation_extraction_bfh(dt.final = dt.final))
+           f.citation_extraction_bfh(dt.final = dt.final,
+                                     az.brd = az.brd))
 
 ```
 
