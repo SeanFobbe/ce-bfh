@@ -75,6 +75,31 @@ sum(stringi::stri_count(regex = "expect_", code))
 
 
 
+# Variablen
+
+## Anzahl Variablen
+
+```{r}
+length(dt.final)
+```
+
+
+## Alle Namen der Variablen
+
+```{r}
+names(dt.final)
+```
+
+
+## Beispiel-Werte
+
+```{r}
+str(dt.final)
+```
+
+
+
+
 
 # Pipeline visualisieren
 
@@ -152,32 +177,19 @@ setdiff(tools::file_path_sans_ext(basename(files.pdf)),
 ```
 
 
+# Dokumente mit geringem oder fehlendem Inhalt
 
-
-
-# Variablen
-
-## Anzahl Variablen
 
 ```{r}
-length(dt.final)
+dt.final[nchar(dt.final$text) < 200, .(doc_id, text)]
+
 ```
 
 
-## Alle Namen der Variablen
-
 ```{r}
-names(dt.final)
+dt.final[is.na(dt.final$text), .(doc_id, text)]
+
 ```
-
-
-## Beispiel-Werte
-
-```{r}
-str(dt.final)
-```
-
-
 
 
 
