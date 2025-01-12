@@ -938,7 +938,7 @@ kable(meta[order(-seconds)],
 
 # Warnungen
 
-
+- Die Warnung "NA is replaced by empty string" tritt immer dann auf, wenn es sich um Parallelentscheidungen mit fehlendem Text handelt. Bei den vom BFH veröffentlichten Entscheidungen handelt es sich dabei um ein bekanntes und unproblematisches Phänomen.
 
 ```{r, pipline-warnings, results = 'asis'}
 
