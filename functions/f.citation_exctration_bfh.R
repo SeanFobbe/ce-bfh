@@ -166,7 +166,7 @@ f.citation_extraction_bfh <- function(dt.final){
     ## Add Vertex Attributes
     g <- igraph::set_vertex_attr(g, "registerzeichen", index = igraph::V(g), g.regz)
     g <- igraph::set_vertex_attr(g, "spruchkoeper_az", index = igraph::V(g), g.senat)
-    g <- igraph::set_vertex_attr(g, "bfhe", index = igraph::V(g), g.bfhe)
+    g <- igraph::set_vertex_attr(g, "bfhe-alternative", index = igraph::V(g), g.bfhe)
     g <- igraph::set_vertex_attr(g, "band", index = igraph::V(g), g.band)
     
 
