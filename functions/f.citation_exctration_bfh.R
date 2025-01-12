@@ -20,7 +20,8 @@
 
 
 
-f.citation_extraction_bfh <- function(dt.final){
+f.citation_extraction_bfh <- function(dt.final,
+                                      az.brd){
 
 
     ## Create full Aktenzeichen search REGEX, example: "VII S 28/08"
@@ -153,6 +154,11 @@ f.citation_extraction_bfh <- function(dt.final){
     g.regz <- stringi::stri_match_first(g.names, regex = " (AR|B|E|GrS|K|PKH|R|S) *[0-9]+")
     g.regz <- g.regz[,2]
 
+    ## Code Verfahrensart
+    g.verfahrensart <- f.var_verfahrensart(g.regz,
+                                           az.brd = az.brd,
+                                           gericht = "BFH")
+    
     
     ## Extract BFHE
     g.bfhe <- grepl("BFHE", g.names, ignore.case = TRUE)
@@ -164,6 +170,7 @@ f.citation_extraction_bfh <- function(dt.final){
 
     ## Add Vertex Attributes
     g <- igraph::set_vertex_attr(g, "registerzeichen", index = igraph::V(g), g.regz)
+    g <- igraph::set_vertex_attr(g, "verfahrensart", index = igraph::V(g), g.verfahrensart)
     g <- igraph::set_vertex_attr(g, "spruchkoerper_az", index = igraph::V(g), g.senat)
     g <- igraph::set_vertex_attr(g, "bfhe-alternative", index = igraph::V(g), g.bfhe)
     g <- igraph::set_vertex_attr(g, "band", index = igraph::V(g), g.band)
