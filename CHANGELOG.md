@@ -6,6 +6,7 @@
 - LIZENZÄNDERUNG: Source Code jetzt unter GNU General Public License Version 3 (GPLv3) oder später lizenziert
 - Docker Image auf R 4.4.0 aktualisiert (wegen CVE-2024-27322)
 - NEU: Option für Clean Runs in Konfiguration eingefügt (löscht alle Daten vor dem eigentlichen Run)
+- NEU: Test auf geringen oder fehlenden Text-Inhalt
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
 - Vereinheitlichung der Komponenten für PDF-Extraktion, linguistische Statistiken und Berechnung kryptographischer Hashes
