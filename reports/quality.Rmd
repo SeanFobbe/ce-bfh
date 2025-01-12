@@ -179,6 +179,8 @@ setdiff(tools::file_path_sans_ext(basename(files.pdf)),
 
 # Dokumente mit geringem oder fehlendem Inhalt
 
+Dokumente mit geringem oder fehlendem Inhalt treten vor allem dann auf, wenn es sich um Parallelentscheidungen ohne Text handelt.
+
 
 ```{r}
 dt.final[nchar(dt.final$text) < 200, .(doc_id, text)]
