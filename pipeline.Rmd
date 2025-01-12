@@ -527,6 +527,15 @@ tar_target(dt.meta,
 ```
 
 
+## Zitate extrahieren
+
+```{targets tar.citations}
+tar_target(igraph_citations,
+           f.citation_extraction_bfh(dt.final = dt.final))
+
+```
+
+
 
 
 
