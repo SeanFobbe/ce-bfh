@@ -1,5 +1,5 @@
 ---
-title: "Robustness Checks | Corpus der Entscheidungen des Bundesfinanzhofs (CE-BFH)"
+title: "Qualitätskontrolle | Corpus der Entscheidungen des Bundesfinanzhofs (CE-BFH)"
 author: Seán Fobbe
 geometry: margin=3cm
 papersize: a4
