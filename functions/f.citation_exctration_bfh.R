@@ -87,6 +87,10 @@ f.citation_extraction_bfh <- function(dt.final){
     
     ## Combine Tables
     dt <- rbind(dt.az, dt.bfhe)    
+
+    ## Clean Underscores
+    dt$source <- gsub(" ", " ", dt$source)
+    dt$target <- gsub(" ", " ", dt$target)
     
     ## Clean whitespace
     dt$source <- gsub("\\s+", " ", dt$source)
@@ -99,9 +103,7 @@ f.citation_extraction_bfh <- function(dt.final){
     dt$source <- gsub("([A-Z])(\\d)", "\\1 \\2", dt$source)
     dt$target <- gsub("([A-Z])(\\d)", "\\1 \\2", dt$target)
 
-    ## Clean Underscores
-    dt$source <- gsub(" ", "_", dt$source)
-    dt$target <- gsub(" ", "_", dt$target)
+
 
 
     ## Remove self-citations    
@@ -141,7 +143,7 @@ f.citation_extraction_bfh <- function(dt.final){
     
 
 
-    ## Extract Vertex names
+    ## Select vertex names
     g.names <- igraph::vertex_attr(g, "name")
     
     ## Extract Senate   
@@ -150,17 +152,24 @@ f.citation_extraction_bfh <- function(dt.final){
     stopifnot(length(g.names) == length(g.senat))
 
     ## Extract Registerzeichen
-    g.regz <- gsub("[IVX ]*([A-Za-z]+) *[0-9]+/[0-9]+", "\\1", g.names)
+    g.regz <- stringi::stri_extract_all(g.names, regex = " (AR|B|E|GrS|K|PKH|R|S) ")
+    g.regz <- unlist(g.regz)
+    g.regz <- trimws(g.regz)
 
+    
     ## Extract BFHE
     g.bfhe <- grepl("BFHE", g.names, ignore.case = TRUE)
-    
+
+    ## Extract band
+    g.band <- stringi::stri_match_all(g.names, regex = "BFHE ([0-9]+)\\s*,")
+    g.band <- do.call(rbind, g.band)
+    g.band <- as.integer(g.band[,2])
 
     ## Add Vertex Attributes
     g <- igraph::set_vertex_attr(g, "registerzeichen", index = igraph::V(g), g.regz)
     g <- igraph::set_vertex_attr(g, "senat", index = igraph::V(g), g.senat)
-    g <- igraph::set_vertex_attr(g, "BFHE", index = igraph::V(g), g.bfhe)
-
+    g <- igraph::set_vertex_attr(g, "bfhe", index = igraph::V(g), g.bfhe)
+    g <- igraph::set_vertex_attr(g, "band", index = igraph::V(g), g.band)
     
 
     return(g)
