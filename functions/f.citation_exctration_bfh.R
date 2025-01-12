@@ -12,7 +12,7 @@
 #' TODO
 #'
 #' - ADD Letter Senates (e.g. GrS)
-#' - ADD extract metadata from aktenzeichen directly
+
 
 #' Example citation blocks BFH
 #' 
