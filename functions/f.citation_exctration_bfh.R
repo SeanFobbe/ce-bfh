@@ -99,6 +99,9 @@ f.citation_extraction_bfh <- function(dt.final){
     dt$source <- gsub("([A-Z])(\\d)", "\\1 \\2", dt$source)
     dt$target <- gsub("([A-Z])(\\d)", "\\1 \\2", dt$target)
 
+    ## Clean Underscores
+    dt$source <- gsub(" ", "_", dt$source)
+    dt$target <- gsub(" ", "_", dt$target)
 
 
     ## Remove self-citations    
@@ -137,6 +140,28 @@ f.citation_extraction_bfh <- function(dt.final){
                                  )
     
 
+
+    ## Extract Vertex names
+    g.names <- igraph::vertex_attr(g, "name")
+    
+    ## Extract Senate   
+    g.senat <- stringi::stri_extract_all(g.names, regex = "^[IXV]{1,4}")
+    g.senat <- unlist(g.senat)
+    stopifnot(length(g.names) == length(g.senat))
+
+    ## Extract Registerzeichen
+    g.regz <- gsub("[IVX ]*([A-Za-z]+) *[0-9]+/[0-9]+", "\\1", g.names)
+
+    ## Extract BFHE
+    g.bfhe <- grepl("BFHE", g.names, ignore.case = TRUE)
+    
+
+    ## Add Vertex Attributes
+    g <- igraph::set_vertex_attr(g, "registerzeichen", index = igraph::V(g), g.regz)
+    g <- igraph::set_vertex_attr(g, "senat", index = igraph::V(g), g.senat)
+    g <- igraph::set_vertex_attr(g, "BFHE", index = igraph::V(g), g.bfhe)
+
+    
 
     return(g)
     
