@@ -714,7 +714,7 @@ Beachten Sie auch bitte folgende Punkte:
 \ra{1.1}
 ```{r}
 
-g <- igraph.citations.cleaned
+g <- igraph_citations
 
 
 dt.g <- data.table(Metric = c("Number of Nodes",
