@@ -776,7 +776,7 @@ Dieser Datensatz enthält sowohl zitierte Aktenzeichen (Aktenzeichen-zu-Aktenzei
 
 Aktenzeichen sind verhältnismäßig einfach zu erfassen. Die Funktion *f.citation_network.R* erstellt erstellt eine komplexe REGEX, die jeweils die relevanten Registerzeichen in die Suche aufnimmt. Der Source Code ist zu komplex um ihn hier im Detail zu besprechen, sehen Sie sich bei Interesse bitte die Funktion genauer an.
 
-Um konkrete Entscheidungen zu zitieren müsste zusätzlich zum Aktenzeichen noch das Datum berücksichtigt werden. Weil dies die REGEX deutlich komplizierter macht, ist dieser Schritt noch in Arbeit. Im Datensatz sind allerdings `r round(uniqueN(dt.meta$aktenzeichen)/dt.meta[,.N] * 100, digits = 2)` % aller ausgehenden Aktenzeichen einzigartig (unabhängig vom Datum), sodass das Aktenzeichen eine gute Näherung darstellt.
+Um konkrete Entscheidungen zu zitieren müsste zusätzlich zum Aktenzeichen noch das Datum berücksichtigt werden. Weil dies die REGEX deutlich komplizierter macht, ist dieser Schritt noch in Arbeit. Im Hauptdatensatz sind allerdings `r round(uniqueN(dt.meta$aktenzeichen)/dt.meta[,.N] * 100, digits = 2)` % aller ausgehenden Aktenzeichen einzigartig (unabhängig vom Datum), sodass das Aktenzeichen eine gute Näherung darstellt.
 
 
 
