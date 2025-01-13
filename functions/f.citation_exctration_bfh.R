@@ -27,7 +27,7 @@ f.citation_extraction_bfh <- function(dt.final,
     ## Create full Aktenzeichen search REGEX, example: "VII S 28/08"
     regex.az.number <- paste0("[IXV]{1,4}", # Senatsnummer
                               "\\s*",
-                              "(AR|B|E|K|PKH|R|S)", # Registerzeichen
+                              "(AR|B|E|K|PKH|R|S|ER-S)", # Registerzeichen
                               "\\s*",
                               "\\d{1,4}/", # Eingangsnummer
                               "\\d{2}") # Jahr
