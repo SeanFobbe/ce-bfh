@@ -25,17 +25,30 @@ f.citation_extraction_bfh <- function(dt.final,
 
 
     ## Create full Aktenzeichen search REGEX, example: "VII S 28/08"
-    regex.az <- paste0("[IXV]{1,4}", # Senatsnummer
-                       "\\s*",
-                       "(AR|B|E|GrS|K|PKH|R|S)", # Registerzeichen
-                       "\\s*",
-                       "\\d{1,4}/", # Eingangsnummer
-                       "\\d{2}") # Jahr
+    regex.az.number <- paste0("[IXV]{1,4}", # Senatsnummer
+                              "\\s*",
+                              "(AR|B|E|K|PKH|R|S)", # Registerzeichen
+                              "\\s*",
+                              "\\d{1,4}/", # Eingangsnummer
+                              "\\d{2}") # Jahr
 
     
     ## Extract BFH citations to Aktenzeichen targets
-    target.az <- stringi::stri_extract_all(dt.final$text,
-                                           regex = regex.az)
+    target.az.number <- stringi::stri_extract_all(dt.final$text,
+                                                  regex = regex.az.number)
+    
+    
+    ## Create GrS Aktenzeichen search REGEX, example: "GrS 4/78"
+    regex.az.letter <- paste0("GrS", # Registerzeichen
+                              "\\s*",
+                              "\\d{1,4}/", # Eingangsnummer
+                              "\\d{2}") # Jahr
+
+    
+    ## Extract BFH citations to Aktenzeichen targets
+    target.az.letter <- stringi::stri_extract_all(dt.final$text,
+                                                  regex = regex.az.letter)
+
     
 
     ## Extract BFHE citation blocks
@@ -66,12 +79,17 @@ f.citation_extraction_bfh <- function(dt.final,
     source <- dt.final$aktenzeichen
        
     
-    ## Combine source Aktenzeichen and target Aktenzeichen
-    bind <- mapply(cbind, source, target.az)
+    ## [Number Senates] Combine source Aktenzeichen and target Aktenzeichen
+    bind <- mapply(cbind, source, target.az.number)
     bind <- lapply(bind, as.data.table)
-    dt.az <- rbindlist(bind)
+    dt.az.number <- rbindlist(bind)
     setnames(dt.az, new = c("source", "target"))
 
+    ## [Letter Senates] Combine source Aktenzeichen and target Aktenzeichen
+    bind <- mapply(cbind, source, target.az.letter)
+    bind <- lapply(bind, as.data.table)
+    dt.az.letter <- rbindlist(bind)
+    setnames(dt.az, new = c("source", "target"))
 
     ## Combine source Aktenzeichen and target BFHE
     bind <- mapply(cbind, source, target.bfhe)
@@ -79,16 +97,16 @@ f.citation_extraction_bfh <- function(dt.final,
     dt.bfhe <- rbindlist(bind)
     setnames(dt.bfhe, new = c("source", "target"))
 
-    ## Remove non-citations
-    dt.az <- dt.az[!is.na(target)]
-    dt.bfhe <- dt.bfhe[!is.na(target)]
-
+   
     ## Clean BFHE hooks
     dt.bfhe$target <-  gsub(";", "BFHE", dt.bfhe$target)
     
     ## Combine Tables
-    dt <- rbind(dt.az, dt.bfhe)    
+    dt <- rbind(dt.az.number, dt.az.letter, dt.bfhe)    
 
+    ## Remove non-citations
+    dt <- dt[!is.na(target)]
+    
     ## Clean Underscores
     dt$source <- gsub(" ", " ", dt$source)
     dt$target <- gsub(" ", " ", dt$target)
