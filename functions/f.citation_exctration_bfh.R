@@ -83,13 +83,13 @@ f.citation_extraction_bfh <- function(dt.final,
     bind <- mapply(cbind, source, target.az.number)
     bind <- lapply(bind, as.data.table)
     dt.az.number <- rbindlist(bind)
-    setnames(dt.az, new = c("source", "target"))
+    setnames(dt.az.number, new = c("source", "target"))
 
     ## [Letter Senates] Combine source Aktenzeichen and target Aktenzeichen
     bind <- mapply(cbind, source, target.az.letter)
     bind <- lapply(bind, as.data.table)
     dt.az.letter <- rbindlist(bind)
-    setnames(dt.az, new = c("source", "target"))
+    setnames(dt.az.letter, new = c("source", "target"))
 
     ## Combine source Aktenzeichen and target BFHE
     bind <- mapply(cbind, source, target.bfhe)
