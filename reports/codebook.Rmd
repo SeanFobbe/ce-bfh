@@ -39,7 +39,7 @@ tar_load(files.html)
 tar_load(variables.codebook)
 tar_load(lingstats.summary)
 tar_load(az.brd)
-
+tar_load(igraph_citations)
 ```
 
 
@@ -819,6 +819,118 @@ Die Extraktion mit regulären Ausdrücken hat Grenzen. Insbesondere folgende Pro
 
 
 
+
+## Visualisierungen des Zitationsnetzwerks
+
+
+```{r, CE-BFH_Zitatationsnetzwerk_Graph_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+
+index <- which(igraph::V(igraph_citations)$senat == "I")
+
+g <- igraph::subgraph(igraph_citations, index)
+
+
+ggraph(g, "sugiyama") + 
+    geom_edge_diagonal(width = 0.05,
+                       colour = "black")+
+    geom_node_point(size = 0.5,
+                    color = "black")+
+    theme_void()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 1. Senats des Bundesfinanzhofs"),
+        caption = caption
+    )+
+    theme(
+        plot.title = element_text(size = 14,
+                                  face = "bold",
+                                  color = "black"),                        
+        plot.background = element_rect(fill = "white"),
+        plot.caption = element_text(color = "black"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+#ggsave("test.png", dev = "png", width = 28, height = 16, dpi = 150)
+
+```
+
+
+
+```{r, CE-BFH_Zitationsnetzwerk_Knotengrad, fig.width = 9, fig.height = 6}
+
+
+g <- igraph_citations
+degree.all <- data.table(prop = degree_distribution(g, mode = "all"))
+degree.all$degree <- 1:length(degree.all$prop)
+
+
+
+ggplot(data = degree.all) +
+    geom_bar(aes(x = degree,
+                 y = prop),
+             stat = "identity",
+             fill = "black",
+             color = "black",
+             width = 0.5) +
+    theme_bw() +
+    coord_cartesian(xlim = c(1, 10^2))+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Knotengrade bis 100 im Zitationsnetzwerk"),
+        caption = caption,
+        x = "Knotengrad",
+        y = "Anteil"
+    )+
+    theme(
+        text = element_text(size = 13),
+        plot.title = element_text(size = 13,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+```
+
+
+
+```{r, CE-BFH_Zitationsnetzwerk_Eingangsgrad, fig.width = 9, fig.height = 6}
+
+
+g <- igraph_citations
+degree.in <- data.table(prop = degree_distribution(g, mode = "in"))
+degree.in$degree <- 1:length(degree.in$prop)
+
+
+
+ggplot(data = degree.in) +
+    geom_bar(aes(x = degree,
+                 y = prop),
+             stat = "identity",
+             fill = "black",
+             color = "black",
+             width = 0.5) +
+    theme_bw() +
+    coord_cartesian(xlim = c(1, 10^2))+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Verteilung der Eingangsgrade bis 100 im Zitationsnetzwerk"),
+        caption = caption,
+        x = "Eingangsgrad",
+        y = "Anteil"
+    )+
+    theme(
+        text = element_text(size = 13),
+        plot.title = element_text(size = 13,
+                                  face = "bold"),
+        legend.position = "none",
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+
+
+```
 
 
 
