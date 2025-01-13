@@ -765,8 +765,9 @@ Hinweis: die Variable \enquote{bfhe} gibt an, ob die das Aktenzeichen in der BFH
 
 Folgende Metadaten-Variablen sind enthalten:
 
-`r sort(vertex_attr_names(igraph_citations))`
-
+```{r}
+sort(vertex_attr_names(igraph_citations))
+```
 
 
 ## Methodik Aktenzeichen
