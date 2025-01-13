@@ -818,7 +818,7 @@ Die Extraktion mit regulären Ausdrücken hat Grenzen. Insbesondere folgende Pro
 - Einfügung von Entscheidungsnamen wie in BVerfGE 42, 143: \enquote{BVerfGE 7, 198 (205ff) - Lüth -; 18, 85 (92f); 30, 173 (187f, 196f) - Mephisto -; 32, 311 (316)}  --- das Beispiel stammt aus Coupette (2019: 246)
 
 
-
+\newpage
 
 ## Visualisierungen des Zitationsnetzwerks
 
