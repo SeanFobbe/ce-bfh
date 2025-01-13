@@ -759,7 +759,7 @@ kable(dt.g.split,
 
 Die Knoten des Netzwerks sind mit Metadaten aus dem Hauptdatensatz angereichert. Deshalb sind grundsätzlich nur im Hauptdatensatz vorhandene Aktenzeichen (d.h. solche die in der BFH-Datenbank veröffentlicht sind) mit allen Metadaten verbunden. 
 
-Für alle anderen Zitate konnte ich nur solche Metadaten hinterlegen, die sich aus dem Aktenzeichen (Registerzeichen, Senatsnummer) oder dem BFH-Zitat (BFH ja/nein, Nummer des Bandes) und mit REGEX zu extrahieren waren.
+Für alle anderen Zitate konnte ich nur solche Metadaten hinterlegen, die aus dem Aktenzeichen (Registerzeichen, Senatsnummer) oder dem BFH-Zitat (BFH ja/nein, Nummer des Bandes) mit REGEX zu extrahieren waren.
 
 Hinweis: die Variable \enquote{bfhe} gibt an, ob die das Aktenzeichen in der BFH-Datenbank als V- oder NV-Entscheidung markiert ist. Die Variable \enquote{bfhe-alternative} dagegen ist TRUE/FALSE und gibt an, ob das Zitat (d.h. der Name des Knotens) die Zeichenkette \enquote{BFHE} enthält.
 
