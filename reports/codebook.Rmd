@@ -835,7 +835,7 @@ Die Extraktion mit regulären Ausdrücken hat Grenzen. Insbesondere folgende Pro
 ## Visualisierungen des Zitationsnetzwerks
 
 
-```{r, CE-BFH_Zitatationsnetzwerk_Graph_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+```{r, CE-BFH_Zitatationsnetzwerk_Senat-1_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
 
 index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "I")
 
@@ -865,6 +865,39 @@ ggraph(g, "sugiyama") +
 #ggsave("test.png", dev = "png", width = 28, height = 16, dpi = 150)
 
 ```
+
+
+```{r, CE-BFH_Zitatationsnetzwerk_Senat-6_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 6. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+
+index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "VI")
+
+g <- igraph::subgraph(igraph_citations, index)
+
+
+ggraph(g, "sugiyama") + 
+    geom_edge_diagonal(width = 0.05,
+                       colour = "black")+
+    geom_node_point(size = 0.5,
+                    color = "black")+
+    theme_void()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 6. Senats des Bundesfinanzhofs"),
+        caption = caption
+    )+
+    theme(
+        plot.title = element_text(size = 14,
+                                  face = "bold",
+                                  color = "black"),                        
+        plot.background = element_rect(fill = "white"),
+        plot.caption = element_text(color = "black"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+
+```
+
 
 
 
