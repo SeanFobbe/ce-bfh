@@ -679,6 +679,147 @@ ggplot(data = dt.meta)+
 
 
 
+# Zitationsnetzwerk des Bundesfinanzhofs (Beta)
+
+## Überblick
+
+Der Datensatz enthält zusätzlich eine spezialisierte Variante, die Zitate des BFH aus den Entscheidungstexten zu seiner eigenen Rechtsprechung extrahiert und in strukturierter Form aufbereitet.
+
+Diese Variante ist noch in der Beta-Testphase. Folgende Rechtsprechungszitate sind enthalten:
+
+- Zitate von Aktenzeichen zu Aktenzeichen
+- Zitate von Aktenzeichen zu BFHE
+
+**Achtung:** Zitierende Entscheidungen können nur solche sein, für die im Korpus der Volltext dokumentiert ist (d.h. normalerweise ab 2010). Zitierte Entscheidungen können aus der gesamten Rechtsprechung stammen (d.h. aus allen Jahren).
+
+Zitate unter Angabe des Aktenzeichens sind weniger genau als Zitate zu konkreten Entscheidungen (bei denen Datum und ggf. Kollisionsziffer nötig sind). Sie stellen aber eine gute Näherung dar. Die Auflösung der Zitate auf Entscheidungsebene ist geplant und wird in Zukunft mitveröffentlicht.
+
+BFHE-Zitate können exakt einer zitierten Entscheidung zugeordnet werden. Die Quell-Dokumente sind jedoch nur mit dem Aktenzeichen hinterlegt, um eine Konkordanz mit dem Rest des Datensatzes herzustellen. Die Auflösung von Quell-Dokumenten nach BFHE ist mir leider derzeit nicht möglich, da ich aktuell keine Entsprechungstabelle zwischen amtlichen Sammlungen und Aktenzeichen/Datum-Zitaten habe.
+
+
+## Technische Hinweise
+
+Das Zitationsnetzwerk wird als GraphML-Datei angeboten und kann z.B. einfach in graphische Software wie Gephi\footnote{\url{https://gephi.github.io/}} importiert und ohne Programmierkenntnisse genutzt werden. Formal handelt sich um einen gewichteten, gerichteten Graphen (Digraph). Die Anzahl der Knoten gibt die Anzahl der BFHE-Entscheidungen und Aktenzeichen mit eingehenden und/oder ausgehenden Zitaten an. Die Anzahl der Kanten gibt die Anzahl der Knoten-Paare mit mindestens einem Zitat an. Die Gewichte der Kanten geben die Anzahl der Zitate zwischen Knoten an. Die Ausgangsstärke gibt die Summe aller einfachen Zitate an.
+
+Beachten Sie auch bitte folgende Punkte:
+
+- Das gesamte Netzwerk ist sehr groß und die Analyse ist daher ohne weitere Einschränkungen rechenintensiv und anspruchsvoll. In der Regel sollten Sie das Netzwerk auf die für Sie interessanten Teile reduzieren.
+- Zur Reduktion des Netzwerks auf eine handliche Größe stelle ich v.a. zwei Variablen bereit: den Senat und das Registerzeichen.
+- Die Extraktion mit *regular expressions* ist nicht perfekt. Es kann daher sein, dass Zitate fehlen, wenn sie nicht als solche erkannt wurden, wegen Tippfehlern, ungewöhnlichem Textumfeld etc. Es ist aktuell unklar wieviele Zitate fehlen könnten, weil es keinen Goldstandard zum Abgleich gibt. Wenn Ihnen größere Fehlbestände auffallen, melden Sie sich bitte.
+- Sie können über die Variable \enquote{bfh-alternative} alle BFHE-Zitate auswählen (TRUE) oder nur Aktenzeichen-Zitate betrachten (FALSE)
+
+
+\bigskip
+
+\ra{1.1}
+```{r}
+
+g <- igraph.citations.cleaned
+
+
+dt.g <- data.table(Metric = c("Number of Nodes",
+                              "Number of Edges",
+                              "Strength (Out)",
+                              "Mean Degree",
+                              "Max Degree",
+                              "Min Degree",
+                              "Mean In-Degree",
+                              "Max In-Degree",
+                              "Min In-Degree",
+                              "Mean Out-Degree",
+                              "Max Out-Degree",
+                              "Min Out-Degree"),
+                   Value = c(igraph::vcount(g),
+                             igraph::ecount(g),
+                             sum(igraph::strength(g, mode = "out")),
+                             mean(igraph::degree(g, mode = "all")),
+                             max(igraph::degree(g, mode = "all")),
+                             min(igraph::degree(g, mode = "all")),
+                             mean(igraph::degree(g, mode = "in")),
+                             max(igraph::degree(g, mode = "in")),
+                             min(igraph::degree(g, mode = "in")),
+                             mean(igraph::degree(g, mode = "out")),
+                             max(igraph::degree(g, mode = "out")),
+                             min(igraph::degree(g, mode = "out"))
+                             )
+                   )
+
+dt.g.split <- cbind(dt.g[1:6], dt.g[7:12])
+
+kable(dt.g.split,
+      digits = 2,
+      format.args = list(big.mark = ","),
+      format = "latex",
+      booktabs = TRUE,
+      longtable = TRUE)
+
+
+```
+
+
+## Methodik Aktenzeichen
+
+Dieser Datensatz enthält sowohl zitierte Aktenzeichen (Aktenzeichen-zu-Aktenzeichen-Zitate), als auch Zitate von Aktenzeichen zu BFHE-Zitate (Aktenzeichen-zu-Sammlung-Zitate). 
+
+Aktenzeichen sind verhältnismäßig einfach zu erfassen. Die Funktion *f.citation_network.R* erstellt erstellt eine komplexe REGEX, die jeweils die relevanten Registerzeichen in die Suche aufnimmt. Der Source Code ist zu komplex um ihn hier im Detail zu besprechen, sehen Sie sich bei Interesse bitte die Funktion genauer an.
+
+Um konkrete Entscheidungen zu zitieren müsste zusätzlich zum Aktenzeichen noch das Datum berücksichtigt werden. Weil dies die REGEX deutlich komplizierter macht, ist dieser Schritt noch in Arbeit. Im Datensatz sind allerdings `r round(uniqueN(dt.meta$aktenzeichen)/dt.meta[,.N] * 100, digits = 2)` % aller ausgehenden Aktenzeichen einzigartig (unabhängig vom Datum), sodass das Aktenzeichen eine gute Näherung darstellt.
+
+
+
+## Methodik BFHE
+
+Die Zitate zu den amtlichen Sammlungen BGHZ und BGHSt werden aus dem Volltext in einem Zwei-Stufen-Verfahren extrahiert, ähnlich wie in Coupette, *Juristische Netzwerkforschung* (Mohr Siebeck 2019), S. 241--244.
+
+### Erste Stufe
+
+In der **ersten Stufe** werden die Zitierblöcke lokalisiert und aus dem Volltext gesammelt. Es wird die starke Annahme getroffen, dass Zitierblöcke mit \enquote{BFHE} (ignoriert Groß- und Kleinschreibung) eingeleitet werden und nur Whitespace, Zahlen, gewisse Sonderzeichen und gewisse Buchstaben enthalten. 
+
+Zitierblöcke enden in der Regel mit einer runden Klammer, die in der REGEX nicht enthalten ist, um sie als Grenzzeichen zu nutzen. Auch Gleichheitszeichen (=) sind nicht enthalten, damit die REGEX vor einem Hinweis auf einen alternative Abdruck abbricht.
+
+Die konkreten regular expressions (REGEX) sind die folgenden:
+
+```{r echo = TRUE, eval = FALSE}
+"BFHE[\\s\\d\\[\\];,\\.<>Rnfu-]+" # BGHZ
+```
+
+
+### Zweite Stufe
+
+In der **zweiten Stufe** werden aus allen Zitierblöcken die einzelnen Zitate extrahiert, standardisiert und mit der Ausgangsentscheidung verbunden. Die Extraktion trifft die starke Annahme, dass eine Entscheidung der amtlichen Sammlungen entweder mit \enquote{BFHE} oder bei einem Mehrfachzitat in einem Zitierblock mit einem Semikolon eingeleitet wird. Folgende REGEX kommen dabei zum Einsatz:
+
+
+```{r echo = TRUE}
+# BGHZ
+regex.cite <- paste0("(BFHE|;)\\s*", # hooks
+                     "\\d{1,3},\\s*", # Volume
+                     "\\d{1,3}") # Page
+
+print(regex.cite)
+
+```
+
+Damit findet man zwei Varianten von Einzelzitaten:
+
+- \enquote{BFHE 248, 287}
+- \enquote{; 248, 287}
+
+Die Einzelzitate werden anschließend bereinigt und standardisiert. Zum Ende hin werden Selbstzitate entfernt und Metadaten hinzugefügt.
+
+
+
+### Grenzen
+
+Die Extraktion mit regulären Ausdrücken hat Grenzen. Insbesondere folgende Probleme führen zur Nichterkennung von Zitaten:
+
+- Tippfehler (außer Groß- und Kleinschreibung)
+- Unregelmäßge Zitierweise
+- Verkürzte Schreibweisen, beispielsweise BVerfGE 60, 162: \enquote{BVerfGE 3, 19 (27), 383 (394); 4, 375 (381 f.);} --- das Beispiel stammt aus Coupette (2019: 246)
+- Einfügung von Entscheidungsnamen wie in BVerfGE 42, 143: \enquote{BVerfGE 7, 198 (205ff) - Lüth -; 18, 85 (92f); 30, 173 (187f, 196f) - Mephisto -; 32, 311 (316)}  --- das Beispiel stammt aus Coupette (2019: 246)
+
+
+
+
 
 
 
