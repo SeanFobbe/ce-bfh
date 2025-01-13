@@ -832,8 +832,10 @@ Die Extraktion mit regulären Ausdrücken hat Grenzen. Insbesondere folgende Pro
 
 \newpage
 
+## Visualisierungen des Zitationsnetzwerks
 
-```{r, CE-BFH_Zitatationsnetzwerk_Senat-1_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats."}
+
+```{r, CE-BFH_Zitatationsnetzwerk_Senat-1_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png"}
 
 index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "I")
 
@@ -864,7 +866,7 @@ ggraph(g, "sugiyama") +
 
 ```
 
-```{r, CE-BFH_Zitatationsnetzwerk_Senat-6_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 6. Senats."}
+```{r, CE-BFH_Zitatationsnetzwerk_Senat-6_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png"}
 
 index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "VI")
 
