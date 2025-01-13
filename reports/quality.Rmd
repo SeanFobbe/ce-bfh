@@ -143,11 +143,11 @@ ggraph(g,
 
 \newpage
 
-# Visualisierungen des Zitatationsnetzwerks
+# Visualisierungen des Zitationsnetzwerks
 
 ## 1. Senat
 
-```{r, CE-BFH_Zitatationsnetzwerk_Senat-1_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+```{r, CE-BFH_Zitationsnetzwerk_Senat-1_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
 
 index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "I")
 
@@ -182,7 +182,7 @@ ggraph(g, "sugiyama") +
 
 ## 2. Senat
 
-```{r, CE-BFH_Zitatationsnetzwerk_Senat-2_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 2. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+```{r, CE-BFH_Zitationsnetzwerk_Senat-2_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 2. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
 
 index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "II")
 
@@ -216,7 +216,7 @@ ggraph(g, "sugiyama") +
 
 ## 3. Senat
 
-```{r, CE-BFH_Zitatationsnetzwerk_Senat-3_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 3. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+```{r, CE-BFH_Zitationsnetzwerk_Senat-3_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 3. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
 
 index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "III")
 
