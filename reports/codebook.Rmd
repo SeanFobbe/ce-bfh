@@ -782,7 +782,7 @@ Um konkrete Entscheidungen zu zitieren müsste zusätzlich zum Aktenzeichen noch
 
 ## Methodik BFHE
 
-Die Zitate zu den amtlichen Sammlungen BGHZ und BGHSt werden aus dem Volltext in einem Zwei-Stufen-Verfahren extrahiert, ähnlich wie in Coupette, *Juristische Netzwerkforschung* (Mohr Siebeck 2019), S. 241--244.
+Die Zitate zu der amtlichen Sammlung BFHE werden aus dem Volltext in einem Zwei-Stufen-Verfahren extrahiert, ähnlich wie in Coupette, *Juristische Netzwerkforschung* (Mohr Siebeck 2019), S. 241--244.
 
 ### Erste Stufe
 
@@ -793,7 +793,7 @@ Zitierblöcke enden in der Regel mit einer runden Klammer, die in der REGEX nich
 Die konkreten regular expressions (REGEX) sind die folgenden:
 
 ```{r echo = TRUE, eval = FALSE}
-"BFHE[\\s\\d\\[\\];,\\.<>Rnfu-]+" # BGHZ
+"BFHE[\\s\\d\\[\\];,\\.<>Rnfu-]+"
 ```
 
 
@@ -803,7 +803,6 @@ In der **zweiten Stufe** werden aus allen Zitierblöcken die einzelnen Zitate ex
 
 
 ```{r echo = TRUE}
-# BGHZ
 regex.cite <- paste0("(BFHE|;)\\s*", # hooks
                      "\\d{1,3},\\s*", # Volume
                      "\\d{1,3}") # Page
