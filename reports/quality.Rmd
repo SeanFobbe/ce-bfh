@@ -162,7 +162,7 @@ ggraph(g, "sugiyama") +
     theme_void()+
     labs(
         title = paste(prefix.figuretitle,
-                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 1. Senats des Bundesfinanzhofs"),
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 1. Senats des Bundesfinanzhofs [Körperschaftsteuer, Außensteuerrecht, Doppelbesteuerung]"),
         caption = caption
     )+
     theme(
@@ -197,7 +197,7 @@ ggraph(g, "sugiyama") +
     theme_void()+
     labs(
         title = paste(prefix.figuretitle,
-                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 2. Senats des Bundesfinanzhofs"),
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 2. Senats des Bundesfinanzhofs [Erbschaftsteuer, Grunderwerbsteuer, Grundsteuer]"),
         caption = caption
     )+
     theme(
@@ -231,7 +231,7 @@ ggraph(g, "sugiyama") +
     theme_void()+
     labs(
         title = paste(prefix.figuretitle,
-                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 3. Senats des Bundesfinanzhofs"),
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 3. Senats des Bundesfinanzhofs [Einzelgewerbetreibende, Kindergeld, Investititionszulagen]"),
         caption = caption
     )+
     theme(
