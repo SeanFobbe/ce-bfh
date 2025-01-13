@@ -140,6 +140,109 @@ ggraph(g,
 
 ```
 
+# Visualisierungen des Zitatationsnetzwerks
+
+## 1. Senat
+
+```{r, CE-BFH_Zitatationsnetzwerk_Senat-1_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+
+index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "I")
+
+g <- igraph::subgraph(igraph_citations, index)
+
+
+ggraph(g, "sugiyama") + 
+    geom_edge_diagonal(width = 0.05,
+                       colour = "#7e0731")+
+    geom_node_point(size = 0.1,
+                    color = "white")+
+    theme_void()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 1. Senats des Bundesfinanzhofs"),
+        caption = caption
+    )+
+    theme(
+        plot.title = element_text(size = 14,
+                                  face = "bold",
+                                  color = "white"),                        
+        plot.background = element_rect(fill = "black"),
+        plot.caption = element_text(color = "white"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+```
+
+
+
+## 2. Senat
+
+```{r, CE-BFH_Zitatationsnetzwerk_Senat-2_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 2. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+
+index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "II")
+
+g <- igraph::subgraph(igraph_citations, index)
+
+
+ggraph(g, "sugiyama") + 
+    geom_edge_diagonal(width = 0.05,
+                       colour = "#7e0731")+
+    geom_node_point(size = 0.1,
+                    color = "white")+
+    theme_void()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 2. Senats des Bundesfinanzhofs"),
+        caption = caption
+    )+
+    theme(
+        plot.title = element_text(size = 14,
+                                  face = "bold",
+                                  color = "white"),                        
+        plot.background = element_rect(fill = "black"),
+        plot.caption = element_text(color = "white"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+```
+
+
+## 3. Senat
+
+```{r, CE-BFH_Zitatationsnetzwerk_Senat-3_karmesinrot, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 3. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
+
+index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "III")
+
+g <- igraph::subgraph(igraph_citations, index)
+
+
+ggraph(g, "sugiyama") + 
+    geom_edge_diagonal(width = 0.05,
+                       colour = "#7e0731")+
+    geom_node_point(size = 0.1,
+                    color = "white")+
+    theme_void()+
+    labs(
+        title = paste(prefix.figuretitle,
+                      "| Das interne Zitationsnetzwerk (Aktenzeichen und BFHE) des 3. Senats des Bundesfinanzhofs"),
+        caption = caption
+    )+
+    theme(
+        plot.title = element_text(size = 14,
+                                  face = "bold",
+                                  color = "white"),                        
+        plot.background = element_rect(fill = "black"),
+        plot.caption = element_text(color = "white"),
+        plot.margin = margin(10, 20, 10, 10)
+    )
+
+
+```
+
+
+
 
 
 # Vollständigkeit von Download und Konvertierung
