@@ -169,7 +169,7 @@ f.citation_extraction_bfh <- function(dt.final,
     stopifnot(length(g.names) == length(g.senat))
 
     ## Extract Registerzeichen
-    g.regz <- stringi::stri_match_first(g.names, regex = " (AR|B|E|GrS|K|PKH|R|S) *[0-9]+")
+    g.regz <- stringi::stri_match_first(g.names, regex = " (AR|B|E|GrS|K|PKH|R|S|ER-S) *[0-9]+")
     g.regz <- g.regz[,2]
 
     ## Code Verfahrensart
