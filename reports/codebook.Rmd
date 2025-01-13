@@ -825,7 +825,7 @@ Die Extraktion mit regulären Ausdrücken hat Grenzen. Insbesondere folgende Pro
 
 ```{r, CE-BFH_Zitatationsnetzwerk_Graph_schwarzweiss, fig.width = 28, fig.height = 16, dpi = 150, dev = "png", fig.cap = "Das interne Zitationsnetzwerk (Aktenzeichen) des 1. Senats des Bundesfinanzhofs (Sugiyama Layout)."}
 
-index <- which(igraph::V(igraph_citations)$senat == "I")
+index <- which(igraph::V(igraph_citations)$spruchkoerper_az == "I")
 
 g <- igraph::subgraph(igraph_citations, index)
 
