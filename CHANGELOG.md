@@ -4,9 +4,10 @@
 
 - Vollständige Aktualisierung der Daten
 - LIZENZÄNDERUNG: Source Code jetzt unter GNU General Public License Version 3 (GPLv3) oder später lizenziert
-- Docker Image auf R 4.4.0 aktualisiert (wegen CVE-2024-27322)
+- NEU: Zitationsnetzwerk des BFH von Aktenzeichen-zu-Aktenzeichen und Aktenzeichen-zu-BFHE als GraphML mit vielen Metadaten
 - NEU: Option für Clean Runs in Konfiguration eingefügt (löscht alle Daten vor dem eigentlichen Run)
 - NEU: Test auf geringen oder fehlenden Text-Inhalt
+- Docker Image auf R 4.4.0 aktualisiert (wegen CVE-2024-27322)
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
 - Überarbeitung der Dokumentation zu den Varianten des Datensatzes
