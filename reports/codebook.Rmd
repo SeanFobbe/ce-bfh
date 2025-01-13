@@ -898,7 +898,7 @@ ggraph(g, "sugiyama") +
 
 ```
 
-
+\newpage
 
 
 ```{r, CE-BFH_Zitationsnetzwerk_Knotengrad, fig.width = 9, fig.height = 6}
