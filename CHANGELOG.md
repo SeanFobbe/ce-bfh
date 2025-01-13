@@ -9,6 +9,7 @@
 - NEU: Test auf geringen oder fehlenden Text-Inhalt
 - Expliziter R Package Version Lock für 2024-06-13 (CRAN Date)
 - Überarbeitung des Dockerfiles
+- Überarbeitung der Dokumentation zu den Varianten des Datensatzes
 - Vereinheitlichung der Komponenten für PDF-Extraktion, linguistische Statistiken und Berechnung kryptographischer Hashes
 - Vereinfachung der Run-Skripte und stärkere Integration mit Docker Compose
 - Erweiterung des Lösch-Skriptes
