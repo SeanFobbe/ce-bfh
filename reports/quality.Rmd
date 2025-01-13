@@ -141,6 +141,8 @@ ggraph(g,
 
 ```
 
+\newpage
+
 # Visualisierungen des Zitatationsnetzwerks
 
 ## 1. Senat
@@ -176,6 +178,7 @@ ggraph(g, "sugiyama") +
 ```
 
 
+\newpage
 
 ## 2. Senat
 
@@ -209,6 +212,7 @@ ggraph(g, "sugiyama") +
 
 ```
 
+\newpage
 
 ## 3. Senat
 
