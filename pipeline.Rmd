@@ -954,24 +954,6 @@ kable(meta[order(type, name)],
 
 
 \newpage
-# Laufzeit einzelner Targets
-
-Der Zeitpunkt an dem die Targets berechnet wurden und ihre jeweilige Laufzeit in Sekunden.
-
-
-```{r, pipeline-timing}
-kable(meta[order(-seconds)],
-      format = "latex",
-      align = "r",
-      booktabs = TRUE,
-      longtable = TRUE) %>% kable_styling(latex_options = "repeat_header")
-
-
-```
-
-
-
-\newpage
 
 # Laufzeit aller Targets
 
@@ -993,6 +975,24 @@ runtime.sum / 60
 ## Stunden
 runtime.sum / 3600
 ```
+
+
+\newpage
+# Laufzeit einzelner Targets
+
+Der Zeitpunkt an dem die Targets berechnet wurden und ihre jeweilige Laufzeit in Sekunden.
+
+
+```{r, pipeline-timing}
+kable(meta[order(-seconds)],
+      format = "latex",
+      align = "r",
+      booktabs = TRUE,
+      longtable = TRUE) %>% kable_styling(latex_options = "repeat_header")
+
+
+```
+
 
 
 
