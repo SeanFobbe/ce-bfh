@@ -9,10 +9,6 @@
 # Draws and expands Coupette, Juristische Netzwerkforschung (Mohr Siebeck 2019), 241-244
 
 
-#' TODO
-#'
-#' - ADD Letter Senates (e.g. GrS)
-
 
 #' Example citation blocks BFH
 #' 
