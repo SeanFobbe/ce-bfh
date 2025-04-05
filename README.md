@@ -47,7 +47,7 @@ In der Standard-Einstellung wird das Skript vollautomatisch die maximale Anzahl 
 Kopieren Sie bitte den gesamten Source Code in einen leeren Ordner (!), beispielsweise mit:
 
 ```
-$ git clone https://github.com/seanfobbe/ce-bfh
+$ git clone https://codeberg.org/seanfobbe/ce-bfh
 ```
 
 Verwenden Sie immer einen separaten und *leeren* Ordner für die Kompilierung. Die Skripte löschen innerhalb von bestimmten Unterordnern (`files/`, `temp/`, `analysis` und `output/`) alle Dateien die den Datensatz verunreinigen könnten --- aber auch nur dort.
@@ -168,4 +168,4 @@ Volltexte regulärer Publikationen  —  https://zenodo.org/communities/sean-fob
 
 ## Kontakt
 
-Fehler gefunden? Anregungen? Kommentieren Sie gerne im Issue Tracker auf GitHub oder schreiben Sie mir eine E-Mail an [fobbe-data@posteo.de](fobbe-data@posteo.de)
+Fehler gefunden? Anregungen? Kommentieren Sie gerne im Issue Tracker auf Codeberg oder schreiben Sie mir eine E-Mail an [fobbe-data@posteo.de](fobbe-data@posteo.de)
